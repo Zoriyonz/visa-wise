@@ -1,0 +1,4545 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-05",
+    "data_as_of": "2026-05-04",
+    "sources": [
+      "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility.html",
+      "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+      "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/provincial-nominees.html",
+      "https://www.uscis.gov/working-in-the-united-states/permanent-workers",
+      "https://www.uscis.gov/working-in-the-united-states/temporary-workers",
+      "https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin/2026/visa-bulletin-for-may-2026.html",
+      "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/check-processing-times.html"
+    ],
+    "disclaimer": "This data is for informational purposes only and does not constitute legal advice. Immigration law is complex and subject to frequent change. Users should consult a licensed immigration attorney or regulated consultant (RCIC in Canada) before making immigration decisions. Processing times, draw scores, and visa bulletin dates change frequently and must be verified against official government sources before reliance.",
+    "maintenance_notes": {
+      "crs_draw_scores": "Update after every Express Entry draw (approximately biweekly)",
+      "visa_bulletin": "Update monthly when new bulletin is released (typically mid-month for following month)",
+      "processing_times": "Update monthly from IRCC and USCIS published tools",
+      "pnp_streams": "Review quarterly; streams open/close frequently",
+      "policy_changes": "Monitor IRCC and USCIS announcements continuously"
+    }
+  },
+  "canada": {
+    "hard_disqualifiers": [
+      {
+        "id": "ca_criminal_history",
+        "field": "criminal_history",
+        "operator": "eq",
+        "value": true,
+        "effect": "disqualifies_all_pathways",
+        "error_message": "Criminal history triggers inadmissibility under IRPA s.36. A criminal rehabilitation application or Temporary Resident Permit may be required before any immigration application can proceed.",
+        "discretionary_note": "Criminal inadmissibility is complex. Minor offenses may be overcome through criminal rehabilitation (if 5+ years since completion of sentence) or deemed rehabilitation (if 10+ years). Each case is assessed individually by an officer.",
+        "confidence": "high"
+      },
+      {
+        "id": "ca_prior_removal",
+        "field": "prior_removal",
+        "operator": "eq",
+        "value": true,
+        "effect": "disqualifies_all_pathways",
+        "error_message": "A prior removal order from Canada creates an inadmissibility that must be resolved (via Authorization to Return to Canada) before any new application can be submitted.",
+        "discretionary_note": "An Authorization to Return to Canada (ARC) may be obtainable depending on the type of removal order and time elapsed. Departure orders that were complied with within 30 days do not require an ARC.",
+        "confidence": "high"
+      }
+    ],
+    "crs_points_table": {
+      "last_updated": "2026-05",
+      "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
+      "max_score": 1200,
+      "note_job_offer_points_removed": "As of March 25, 2025, IRCC removed all job offer points from CRS. Job offers classified under Major Group 00 (200 points) and all other skilled occupations (50 points) no longer contribute to CRS score. Job offers still matter for FSW/FST eligibility criteria and some PNP streams.",
+      "section_a_core_human_capital": {
+        "max_with_spouse": 460,
+        "max_without_spouse": 500,
+        "age": {
+          "max_with_spouse": 100,
+          "max_without_spouse": 110,
+          "brackets": [
+            {
+              "age": "17_or_less",
+              "with_spouse": 0,
+              "without_spouse": 0
+            },
+            {
+              "age": "18",
+              "with_spouse": 90,
+              "without_spouse": 99
+            },
+            {
+              "age": "19",
+              "with_spouse": 95,
+              "without_spouse": 105
+            },
+            {
+              "age": "20-29",
+              "with_spouse": 100,
+              "without_spouse": 110
+            },
+            {
+              "age": "30",
+              "with_spouse": 95,
+              "without_spouse": 105
+            },
+            {
+              "age": "31",
+              "with_spouse": 90,
+              "without_spouse": 99
+            },
+            {
+              "age": "32",
+              "with_spouse": 85,
+              "without_spouse": 94
+            },
+            {
+              "age": "33",
+              "with_spouse": 80,
+              "without_spouse": 88
+            },
+            {
+              "age": "34",
+              "with_spouse": 75,
+              "without_spouse": 83
+            },
+            {
+              "age": "35",
+              "with_spouse": 70,
+              "without_spouse": 77
+            },
+            {
+              "age": "36",
+              "with_spouse": 65,
+              "without_spouse": 72
+            },
+            {
+              "age": "37",
+              "with_spouse": 60,
+              "without_spouse": 66
+            },
+            {
+              "age": "38",
+              "with_spouse": 55,
+              "without_spouse": 61
+            },
+            {
+              "age": "39",
+              "with_spouse": 50,
+              "without_spouse": 55
+            },
+            {
+              "age": "40",
+              "with_spouse": 45,
+              "without_spouse": 50
+            },
+            {
+              "age": "41",
+              "with_spouse": 35,
+              "without_spouse": 39
+            },
+            {
+              "age": "42",
+              "with_spouse": 25,
+              "without_spouse": 28
+            },
+            {
+              "age": "43",
+              "with_spouse": 15,
+              "without_spouse": 17
+            },
+            {
+              "age": "44",
+              "with_spouse": 5,
+              "without_spouse": 6
+            },
+            {
+              "age": "45_or_more",
+              "with_spouse": 0,
+              "without_spouse": 0
+            }
+          ]
+        },
+        "education": {
+          "max_with_spouse": 140,
+          "max_without_spouse": 150,
+          "brackets": [
+            {
+              "level": "less_than_secondary",
+              "with_spouse": 0,
+              "without_spouse": 0
+            },
+            {
+              "level": "secondary",
+              "with_spouse": 28,
+              "without_spouse": 30
+            },
+            {
+              "level": "one_year_post_secondary",
+              "with_spouse": 84,
+              "without_spouse": 90
+            },
+            {
+              "level": "two_year_post_secondary",
+              "with_spouse": 91,
+              "without_spouse": 98
+            },
+            {
+              "level": "bachelors",
+              "with_spouse": 112,
+              "without_spouse": 120
+            },
+            {
+              "level": "two_or_more_degrees",
+              "with_spouse": 119,
+              "without_spouse": 128
+            },
+            {
+              "level": "masters",
+              "with_spouse": 126,
+              "without_spouse": 135
+            },
+            {
+              "level": "phd",
+              "with_spouse": 140,
+              "without_spouse": 150
+            }
+          ]
+        },
+        "first_official_language": {
+          "max_per_ability_with_spouse": 32,
+          "max_per_ability_without_spouse": 34,
+          "max_total_with_spouse": 128,
+          "max_total_without_spouse": 136,
+          "brackets_per_ability": [
+            {
+              "clb": "less_than_4",
+              "with_spouse": 0,
+              "without_spouse": 0
+            },
+            {
+              "clb": "4_or_5",
+              "with_spouse": 6,
+              "without_spouse": 6
+            },
+            {
+              "clb": "6",
+              "with_spouse": 8,
+              "without_spouse": 9
+            },
+            {
+              "clb": "7",
+              "with_spouse": 16,
+              "without_spouse": 17
+            },
+            {
+              "clb": "8",
+              "with_spouse": 22,
+              "without_spouse": 23
+            },
+            {
+              "clb": "9",
+              "with_spouse": 29,
+              "without_spouse": 31
+            },
+            {
+              "clb": "10_or_more",
+              "with_spouse": 32,
+              "without_spouse": 34
+            }
+          ]
+        },
+        "second_official_language": {
+          "max_per_ability": 6,
+          "max_total_with_spouse": 22,
+          "max_total_without_spouse": 24,
+          "brackets_per_ability": [
+            {
+              "clb": "4_or_less",
+              "points": 0
+            },
+            {
+              "clb": "5_or_6",
+              "points": 1
+            },
+            {
+              "clb": "7_or_8",
+              "points": 3
+            },
+            {
+              "clb": "9_or_more",
+              "points": 6
+            }
+          ]
+        },
+        "canadian_work_experience": {
+          "max_with_spouse": 70,
+          "max_without_spouse": 80,
+          "brackets": [
+            {
+              "years": "0",
+              "with_spouse": 0,
+              "without_spouse": 0
+            },
+            {
+              "years": "1",
+              "with_spouse": 35,
+              "without_spouse": 40
+            },
+            {
+              "years": "2",
+              "with_spouse": 46,
+              "without_spouse": 53
+            },
+            {
+              "years": "3",
+              "with_spouse": 56,
+              "without_spouse": 64
+            },
+            {
+              "years": "4",
+              "with_spouse": 63,
+              "without_spouse": 72
+            },
+            {
+              "years": "5_or_more",
+              "with_spouse": 70,
+              "without_spouse": 80
+            }
+          ]
+        }
+      },
+      "section_b_spouse_factors": {
+        "max_total": 40,
+        "education": {
+          "max": 10,
+          "brackets": [
+            {
+              "level": "less_than_secondary",
+              "points": 0
+            },
+            {
+              "level": "secondary",
+              "points": 2
+            },
+            {
+              "level": "one_year_post_secondary",
+              "points": 6
+            },
+            {
+              "level": "two_year_post_secondary",
+              "points": 7
+            },
+            {
+              "level": "bachelors",
+              "points": 8
+            },
+            {
+              "level": "two_or_more_degrees",
+              "points": 9
+            },
+            {
+              "level": "masters",
+              "points": 10
+            },
+            {
+              "level": "phd",
+              "points": 10
+            }
+          ]
+        },
+        "language_per_ability": {
+          "max_per_ability": 5,
+          "max_total": 20,
+          "brackets": [
+            {
+              "clb": "4_or_less",
+              "points": 0
+            },
+            {
+              "clb": "5_or_6",
+              "points": 1
+            },
+            {
+              "clb": "7_or_8",
+              "points": 3
+            },
+            {
+              "clb": "9_or_more",
+              "points": 5
+            }
+          ]
+        },
+        "canadian_work_experience": {
+          "max": 10,
+          "brackets": [
+            {
+              "years": "0",
+              "points": 0
+            },
+            {
+              "years": "1",
+              "points": 5
+            },
+            {
+              "years": "2",
+              "points": 7
+            },
+            {
+              "years": "3",
+              "points": 8
+            },
+            {
+              "years": "4",
+              "points": 9
+            },
+            {
+              "years": "5_or_more",
+              "points": 10
+            }
+          ]
+        }
+      },
+      "section_c_skill_transferability": {
+        "max_total": 100,
+        "max_per_subsection": 50,
+        "education_language_combo": {
+          "max": 50,
+          "grid": [
+            {
+              "education": "secondary_or_less",
+              "clb_7_to_8": 0,
+              "clb_9_plus": 0
+            },
+            {
+              "education": "one_year_post_secondary_or_more",
+              "clb_7_to_8": 13,
+              "clb_9_plus": 25
+            },
+            {
+              "education": "two_or_more_credentials_one_3yr_plus",
+              "clb_7_to_8": 25,
+              "clb_9_plus": 50
+            },
+            {
+              "education": "masters_or_professional",
+              "clb_7_to_8": 25,
+              "clb_9_plus": 50
+            },
+            {
+              "education": "phd",
+              "clb_7_to_8": 25,
+              "clb_9_plus": 50
+            }
+          ]
+        },
+        "education_canadian_work_combo": {
+          "max": 50,
+          "grid": [
+            {
+              "education": "secondary_or_less",
+              "ca_work_1yr": 0,
+              "ca_work_2yr_plus": 0
+            },
+            {
+              "education": "one_year_post_secondary_or_more",
+              "ca_work_1yr": 13,
+              "ca_work_2yr_plus": 25
+            },
+            {
+              "education": "two_or_more_credentials_one_3yr_plus",
+              "ca_work_1yr": 25,
+              "ca_work_2yr_plus": 50
+            },
+            {
+              "education": "masters_or_professional",
+              "ca_work_1yr": 25,
+              "ca_work_2yr_plus": 50
+            },
+            {
+              "education": "phd",
+              "ca_work_1yr": 25,
+              "ca_work_2yr_plus": 50
+            }
+          ]
+        },
+        "foreign_work_language_combo": {
+          "max": 50,
+          "grid": [
+            {
+              "foreign_work": "0",
+              "clb_7_to_8": 0,
+              "clb_9_plus": 0
+            },
+            {
+              "foreign_work": "1_or_2_years",
+              "clb_7_to_8": 13,
+              "clb_9_plus": 25
+            },
+            {
+              "foreign_work": "3_plus_years",
+              "clb_7_to_8": 25,
+              "clb_9_plus": 50
+            }
+          ]
+        },
+        "foreign_work_canadian_work_combo": {
+          "max": 50,
+          "grid": [
+            {
+              "foreign_work": "0",
+              "ca_work_1yr": 0,
+              "ca_work_2yr_plus": 0
+            },
+            {
+              "foreign_work": "1_or_2_years",
+              "ca_work_1yr": 13,
+              "ca_work_2yr_plus": 25
+            },
+            {
+              "foreign_work": "3_plus_years",
+              "ca_work_1yr": 25,
+              "ca_work_2yr_plus": 50
+            }
+          ]
+        },
+        "trade_certificate_language_combo": {
+          "max": 50,
+          "grid": [
+            {
+              "has_certificate": true,
+              "clb_5_to_6": 25,
+              "clb_7_plus": 50
+            }
+          ]
+        }
+      },
+      "section_d_additional_points": {
+        "max_total": 600,
+        "factors": [
+          {
+            "factor": "provincial_territorial_nomination",
+            "points": 600
+          },
+          {
+            "factor": "french_nclc7_plus_english_clb4_or_less",
+            "points": 25
+          },
+          {
+            "factor": "french_nclc7_plus_english_clb5_plus",
+            "points": 50
+          },
+          {
+            "factor": "post_secondary_canada_1_or_2_year",
+            "points": 15
+          },
+          {
+            "factor": "post_secondary_canada_3_year_plus",
+            "points": 30
+          },
+          {
+            "factor": "sibling_in_canada_citizen_or_pr",
+            "points": 15
+          }
+        ]
+      }
+    },
+    "pathways": [
+      {
+        "id": "fsw",
+        "name": "Federal Skilled Worker Program",
+        "country": "CA",
+        "category": "economic",
+        "description": "Canada's primary economic immigration program for skilled workers with foreign work experience. Applicants must meet minimum criteria on the FSW 67-point grid (assessing education, language, work experience, age, arranged employment, and adaptability) and then compete on CRS score in the Express Entry pool.",
+        "hard_requirements": [
+          {
+            "field": "total_work_years",
+            "operator": "gte",
+            "value": 1,
+            "disqualifies_if_false": true,
+            "error_message": "FSW requires at least 1 year of continuous full-time skilled work experience (TEER 0, 1, 2, or 3) within the last 10 years."
+          },
+          {
+            "field": "noc_teer_level",
+            "operator": "in",
+            "value": [
+              "teer0",
+              "teer1",
+              "teer2",
+              "teer3"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "FSW requires work experience in a TEER 0, 1, 2, or 3 occupation."
+          },
+          {
+            "field": "english_level",
+            "operator": "in",
+            "value": [
+              "intermediate",
+              "proficient",
+              "advanced",
+              "native"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "FSW requires a minimum CLB 7 in all four abilities (English or French)."
+          },
+          {
+            "field": "education_level",
+            "operator": "not_in",
+            "value": [
+              "less_than_secondary"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "FSW requires at least a secondary school credential."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility. See hard_disqualifiers."
+          },
+          {
+            "field": "prior_removal",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Prior removal from Canada requires resolution before applying."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "age",
+            "weight": 0.8,
+            "favorable_values": [
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29
+            ],
+            "points": 110
+          },
+          {
+            "field": "education_level",
+            "weight": 0.7,
+            "favorable_values": [
+              "masters",
+              "phd"
+            ],
+            "points": 150
+          },
+          {
+            "field": "english_level",
+            "weight": 0.9,
+            "favorable_values": [
+              "advanced",
+              "native"
+            ],
+            "points": 136
+          },
+          {
+            "field": "french_level",
+            "weight": 0.6,
+            "favorable_values": [
+              "proficient",
+              "advanced",
+              "native"
+            ],
+            "points": 50
+          },
+          {
+            "field": "total_work_years",
+            "weight": 0.5,
+            "favorable_values": [
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "points": 50
+          },
+          {
+            "field": "destination_work_years",
+            "weight": 0.7,
+            "favorable_values": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "points": 80
+          },
+          {
+            "field": "education_country",
+            "weight": 0.3,
+            "favorable_values": [
+              "canada"
+            ],
+            "points": 30
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 67,
+          "close": 60,
+          "note": "This is the FSW 67-point grid threshold, separate from CRS. To receive an ITA, candidates also need a competitive CRS score."
+        },
+        "gaps": [
+          {
+            "condition": "english_level in ['none', 'basic']",
+            "gap_title": "Language proficiency below minimum",
+            "gap_detail": "FSW requires minimum CLB 7 in all four English abilities (IELTS 6.0 in all bands). Consider intensive English preparation and retaking IELTS/CELPIP.",
+            "fixable": true,
+            "fix_timeframe": "3-12 months"
+          },
+          {
+            "condition": "crs_score < 480",
+            "gap_title": "CRS score below competitive range",
+            "gap_detail": "Recent general Express Entry draws have had CRS cut-offs around 529. Consider improving language scores, pursuing a Canadian credential, learning French, or applying for Provincial Nomination (+600 CRS points).",
+            "fixable": true,
+            "fix_timeframe": "6-18 months"
+          },
+          {
+            "condition": "credential_recognized eq 'no'",
+            "gap_title": "Educational credential not recognized",
+            "gap_detail": "An Educational Credential Assessment (ECA) from a designated organization (WES, IQAS, etc.) is required. Apply for an ECA before submitting your Express Entry profile.",
+            "fixable": true,
+            "fix_timeframe": "2-4 months"
+          }
+        ],
+        "action_steps": [
+          "Obtain an Educational Credential Assessment (ECA) from a designated organization",
+          "Take an approved English test (IELTS General or CELPIP) and/or French test (TEF or TCF)",
+          "Create an Express Entry profile online at IRCC",
+          "If your CRS score is competitive, wait for an Invitation to Apply (ITA)",
+          "Submit complete PR application within 60 days of ITA",
+          "Provide police certificates, medical exams, and proof of funds"
+        ],
+        "timeline": {
+          "optimistic_months": 6,
+          "realistic_months": 8,
+          "pessimistic_months": 14,
+          "notes": "6 months is IRCC's service standard post-ITA. Total timeline includes ECA processing (2-3 months), language testing, and time in pool awaiting ITA."
+        },
+        "location_recommendations": [
+          "Any province or territory (no geographic restriction under FSW)"
+        ],
+        "filing_costs_usd": {
+          "government_fees": 1085,
+          "estimated_legal_fees": 3000,
+          "notes": "Government fees include CAD $850 processing + CAD $515 RPRF. Additional costs: ECA (~CAD $200-300), language tests (~CAD $300-400), medical exam (~CAD $200-450), police certificates (varies). All amounts approximate in USD."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "IRCC has not held a general all-program draw since April 2024. FSW candidates are primarily selected via category-based draws (French, healthcare, etc.) or through PNP nominations. CEC-specific draws dominate current selections.",
+          "last_draw_score": null,
+          "draw_frequency": "No general draws held recently. Category-based draws approximately biweekly.",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "cec",
+        "name": "Canadian Experience Class",
+        "country": "CA",
+        "category": "economic",
+        "description": "For skilled workers who have gained at least 1 year of Canadian work experience within the last 3 years. CEC candidates are managed through the Express Entry system and are currently favored in IRCC's draw strategy with frequent CEC-specific draws.",
+        "hard_requirements": [
+          {
+            "field": "destination_work_years",
+            "operator": "gte",
+            "value": 1,
+            "disqualifies_if_false": true,
+            "error_message": "CEC requires at least 1 year of skilled work experience in Canada within the last 3 years."
+          },
+          {
+            "field": "noc_teer_level",
+            "operator": "in",
+            "value": [
+              "teer0",
+              "teer1",
+              "teer2",
+              "teer3"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "CEC requires Canadian work experience in a TEER 0, 1, 2, or 3 occupation."
+          },
+          {
+            "field": "english_level",
+            "operator": "in",
+            "value": [
+              "intermediate",
+              "proficient",
+              "advanced",
+              "native"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "CEC requires minimum CLB 7 for TEER 0/1 occupations, CLB 5 for TEER 2/3."
+          },
+          {
+            "field": "current_country",
+            "operator": "eq",
+            "value": "CA",
+            "disqualifies_if_false": false,
+            "error_message": "CEC work experience must have been gained while physically in Canada with valid work authorization."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "age",
+            "weight": 0.7,
+            "favorable_values": [
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30
+            ],
+            "points": 110
+          },
+          {
+            "field": "destination_work_years",
+            "weight": 0.9,
+            "favorable_values": [
+              2,
+              3,
+              4,
+              5
+            ],
+            "points": 80
+          },
+          {
+            "field": "english_level",
+            "weight": 0.9,
+            "favorable_values": [
+              "advanced",
+              "native"
+            ],
+            "points": 136
+          },
+          {
+            "field": "education_level",
+            "weight": 0.6,
+            "favorable_values": [
+              "masters",
+              "phd"
+            ],
+            "points": 150
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "CEC has no points grid like FSW. Eligibility is binary (meet requirements or not). Competition is via CRS score in the pool."
+        },
+        "gaps": [
+          {
+            "condition": "destination_work_years < 1",
+            "gap_title": "Insufficient Canadian work experience",
+            "gap_detail": "Need at least 12 months of full-time skilled Canadian work experience within the last 3 years. Consider obtaining a work permit (PGWP, LMIA-backed, or open work permit) and gaining experience.",
+            "fixable": true,
+            "fix_timeframe": "12-24 months"
+          },
+          {
+            "condition": "crs_score < 500",
+            "gap_title": "CRS score below recent CEC draw cut-offs",
+            "gap_detail": "Recent CEC draws have had cut-offs in the 419-520 range. Improve language scores, consider French proficiency, or apply for PNP nomination for +600 CRS boost.",
+            "fixable": true,
+            "fix_timeframe": "3-12 months"
+          }
+        ],
+        "action_steps": [
+          "Ensure you have 12+ months of skilled Canadian work experience within last 3 years",
+          "Take an approved language test (IELTS General, CELPIP, TEF, or TCF)",
+          "Obtain ECA for foreign educational credentials",
+          "Create Express Entry profile",
+          "Await ITA in CEC-specific draws",
+          "Submit complete PR application within 60 days of ITA"
+        ],
+        "timeline": {
+          "optimistic_months": 5,
+          "realistic_months": 7,
+          "pessimistic_months": 12,
+          "notes": "CEC applications are historically faster to process. April 2026 draws issued ITAs with CRS as low as 419."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1085,
+          "estimated_legal_fees": 2500,
+          "notes": "Same fee structure as FSW. No proof of funds required for CEC applicants."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "CEC is currently IRCC's most frequently drawn category. Multiple CEC-specific draws were held in late 2025 and 2026 with large ITA volumes. CRS cut-offs have ranged from 419 to 531 in recent draws.",
+          "last_draw_score": 419,
+          "draw_frequency": "Multiple times per month (CEC-specific draws)",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "fst",
+        "name": "Federal Skilled Trades Program",
+        "country": "CA",
+        "category": "economic",
+        "description": "For skilled tradespeople who want to become permanent residents. Requires either a valid job offer or a certificate of qualification issued by a Canadian provincial or territorial authority. Managed through Express Entry.",
+        "hard_requirements": [
+          {
+            "field": "noc_teer_level",
+            "operator": "in",
+            "value": [
+              "teer2",
+              "teer3"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "FST requires work experience in a skilled trade occupation (TEER 2 or 3 under NOC groups 72, 73, 82, 83, 92, 93, 632, 633)."
+          },
+          {
+            "field": "total_work_years",
+            "operator": "gte",
+            "value": 2,
+            "disqualifies_if_false": true,
+            "error_message": "FST requires at least 2 years of full-time skilled trades work experience within the last 5 years."
+          },
+          {
+            "field": "english_level",
+            "operator": "in",
+            "value": [
+              "basic",
+              "intermediate",
+              "proficient",
+              "advanced",
+              "native"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "FST requires minimum CLB 5 for speaking and listening, CLB 4 for reading and writing."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "job_offer",
+            "weight": 0.9,
+            "favorable_values": [
+              "lmia_approved",
+              "lmia_exempt"
+            ],
+            "points": 0
+          },
+          {
+            "field": "education_level",
+            "weight": 0.3,
+            "favorable_values": [
+              "trade_certificate"
+            ],
+            "points": 50
+          },
+          {
+            "field": "destination_work_years",
+            "weight": 0.6,
+            "favorable_values": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "points": 80
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "FST requires either a valid job offer from up to 2 Canadian employers OR a certificate of qualification from a Canadian province/territory. No points grid."
+        },
+        "gaps": [
+          {
+            "condition": "job_offer eq 'none' and credential_recognized ne 'yes'",
+            "gap_title": "No job offer or Canadian certificate of qualification",
+            "gap_detail": "FST requires either a qualifying job offer or a Canadian provincial/territorial certificate of qualification in your trade. Consider applying for credential recognition or seeking an LMIA-backed job offer.",
+            "fixable": true,
+            "fix_timeframe": "6-18 months"
+          }
+        ],
+        "action_steps": [
+          "Obtain a certificate of qualification from a Canadian province OR secure a valid job offer",
+          "Take an approved English/French language test",
+          "Create an Express Entry profile",
+          "Await ITA (FST-specific or trades category draws)",
+          "Submit PR application within 60 days"
+        ],
+        "timeline": {
+          "optimistic_months": 6,
+          "realistic_months": 8,
+          "pessimistic_months": 14,
+          "notes": "Processing is the same as other Express Entry programs. IRCC has not held trades-specific draws in 2025 despite expanding the occupation list."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1085,
+          "estimated_legal_fees": 2500,
+          "notes": "Same fee structure as FSW/CEC."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "No trades-specific Express Entry draws have been held in 2025 despite the occupation list being expanded. FST candidates can be selected in general draws or PNP draws.",
+          "last_draw_score": null,
+          "draw_frequency": "No dedicated trades draws in 2025. Candidates compete in general/PNP draws.",
+          "last_updated": "2026-05",
+          "confidence": "medium"
+        }
+      },
+      {
+        "id": "spousal_sponsorship_ca",
+        "name": "Spousal/Partner Sponsorship (Canada)",
+        "country": "CA",
+        "category": "family",
+        "description": "Canadian citizens and permanent residents can sponsor their spouse, common-law partner, or conjugal partner for permanent residence. Available as inland (spouse in Canada) or outland (spouse outside Canada) applications.",
+        "hard_requirements": [
+          {
+            "field": "spouse_status",
+            "operator": "in",
+            "value": [
+              "citizen_ca",
+              "pr_ca"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Spousal sponsorship requires a Canadian citizen or permanent resident sponsor."
+          },
+          {
+            "field": "marital_status",
+            "operator": "in",
+            "value": [
+              "married",
+              "common_law"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Must be legally married or in a common-law relationship (12+ months cohabitation) with the sponsor."
+          },
+          {
+            "field": "age",
+            "operator": "gte",
+            "value": 18,
+            "disqualifies_if_false": true,
+            "error_message": "Both sponsor and applicant must be at least 18 years old."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may create inadmissibility for the sponsored person."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "current_country",
+            "weight": 0.3,
+            "favorable_values": [
+              "CA"
+            ],
+            "points": 0
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "Spousal sponsorship is not points-based. Eligibility is based on genuineness of relationship and admissibility."
+        },
+        "discretionary_note": "IRCC officers assess relationship genuineness. Factors include length of relationship, co-habitation evidence, shared finances, communications history, and photos. Marriages of convenience are grounds for refusal.",
+        "gaps": [
+          {
+            "condition": "marital_status not in ['married', 'common_law']",
+            "gap_title": "No qualifying relationship",
+            "gap_detail": "Must be legally married or have lived together in a conjugal relationship for 12+ continuous months to qualify as common-law.",
+            "fixable": true,
+            "fix_timeframe": "0-12 months"
+          }
+        ],
+        "action_steps": [
+          "Determine whether to apply inland or outland",
+          "Sponsor completes sponsorship application and undertaking",
+          "Sponsored person completes PR application",
+          "Submit combined application package to IRCC",
+          "Inland applicants can apply for Open Work Permit (LMIA exemption code A74)",
+          "Attend interview if requested",
+          "Complete medical exam and provide police certificates"
+        ],
+        "timeline": {
+          "optimistic_months": 12,
+          "realistic_months": 15,
+          "pessimistic_months": 24,
+          "notes": "Outland is currently ~15 months; inland is ~21-24 months as of March 2026. Quebec applicants face longer timelines due to the Canada-Quebec Accord."
+        },
+        "filing_costs_usd": {
+          "government_fees": 850,
+          "estimated_legal_fees": 3000,
+          "notes": "CAD $75 sponsor fee + CAD $490 principal applicant processing fee + CAD $515 RPRF + biometrics CAD $85. Approximate USD."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Spousal sponsorship remains open year-round with no caps. Outland processing has improved to approximately 15 months.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake, no draws",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "pgp",
+        "name": "Parents and Grandparents Program",
+        "country": "CA",
+        "category": "family",
+        "description": "Allows Canadian citizens and permanent residents to sponsor their parents and grandparents for permanent residence. Uses an annual lottery-based interest to sponsor process with limited spots.",
+        "hard_requirements": [
+          {
+            "field": "spouse_status",
+            "operator": "in",
+            "value": [
+              "citizen_ca",
+              "pr_ca"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "The sponsor (child/grandchild in Canada) must be a Canadian citizen or permanent resident."
+          },
+          {
+            "field": "age",
+            "operator": "gte",
+            "value": 18,
+            "disqualifies_if_false": true,
+            "error_message": "Sponsor must be at least 18 years old."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility for the sponsored parent/grandparent."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "net_worth_usd",
+            "weight": 0.7,
+            "favorable_values": [
+              "50k_200k",
+              "200k_1m",
+              "over_1m"
+            ],
+            "points": 0
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "The sponsor must meet Minimum Necessary Income (MNI) requirements for 3 consecutive tax years. This is a financial threshold, not a points test."
+        },
+        "gaps": [
+          {
+            "condition": "net_worth_usd in ['under_10k', '10k_50k']",
+            "gap_title": "May not meet Minimum Necessary Income",
+            "gap_detail": "Sponsors must demonstrate income at or above the MNI threshold (varies by family size) for 3 consecutive tax years. Low net worth may indicate difficulty meeting this requirement.",
+            "fixable": true,
+            "fix_timeframe": "1-3 years"
+          }
+        ],
+        "action_steps": [
+          "Submit interest to sponsor form during the annual intake window",
+          "If selected in the lottery, receive Invitation to Apply",
+          "Prove MNI for 3 consecutive tax years via NOAs",
+          "Submit complete sponsorship and PR application",
+          "Sponsored persons complete medical and police certificates"
+        ],
+        "timeline": {
+          "optimistic_months": 24,
+          "realistic_months": 34,
+          "pessimistic_months": 48,
+          "notes": "Processing time outside Quebec is approximately 34 months as of March 2026. Quebec PGP processing has spiked to 67 months. Lottery selection adds additional uncertainty."
+        },
+        "filing_costs_usd": {
+          "government_fees": 850,
+          "estimated_legal_fees": 3000,
+          "notes": "Sponsor must also sign a 20-year financial undertaking for parents, 10 years for grandparents."
+        },
+        "current_status": {
+          "accepting_applications": false,
+          "notes": "PGP uses an annual interest-to-sponsor intake window (typically opens in October). Spots are extremely limited and allocated by lottery.",
+          "last_draw_score": null,
+          "draw_frequency": "Annual lottery intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "aip",
+        "name": "Atlantic Immigration Program",
+        "country": "CA",
+        "category": "economic",
+        "description": "Employer-driven pathway for skilled foreign workers and international graduates to settle in Atlantic Canada (New Brunswick, Nova Scotia, Prince Edward Island, Newfoundland and Labrador). Requires a job offer from a designated employer.",
+        "hard_requirements": [
+          {
+            "field": "job_offer",
+            "operator": "in",
+            "value": [
+              "lmia_approved",
+              "lmia_exempt",
+              "pending"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "AIP requires a job offer from a designated Atlantic employer. LMIA is not required but the employer must be designated."
+          },
+          {
+            "field": "education_level",
+            "operator": "not_in",
+            "value": [
+              "less_than_secondary"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "AIP requires at least a secondary school credential (or Canadian equivalent via ECA)."
+          },
+          {
+            "field": "english_level",
+            "operator": "in",
+            "value": [
+              "basic",
+              "intermediate",
+              "proficient",
+              "advanced",
+              "native"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "AIP requires minimum CLB 5 for TEER 0/1/2/3, CLB 4 for TEER 4."
+          },
+          {
+            "field": "total_work_years",
+            "operator": "gte",
+            "value": 1,
+            "disqualifies_if_false": true,
+            "error_message": "AIP requires at least 1 year of work experience (1,560 hours) in the last 5 years. International graduates from recognized Atlantic institutions are exempt."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "provincial_preference",
+            "weight": 0.9,
+            "favorable_values": [
+              "NB",
+              "NS",
+              "PE",
+              "NL"
+            ],
+            "points": 0
+          },
+          {
+            "field": "education_country",
+            "weight": 0.5,
+            "favorable_values": [
+              "canada"
+            ],
+            "points": 0
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "Not points-based. Eligibility determined by job offer and meeting minimum criteria."
+        },
+        "gaps": [
+          {
+            "condition": "job_offer eq 'none'",
+            "gap_title": "No job offer from designated Atlantic employer",
+            "gap_detail": "AIP requires a job offer from an employer designated by an Atlantic province. Search the Atlantic Immigration Program employer registry.",
+            "fixable": true,
+            "fix_timeframe": "3-12 months"
+          }
+        ],
+        "action_steps": [
+          "Secure a job offer from a designated Atlantic employer",
+          "Employer applies for provincial endorsement",
+          "Obtain a settlement plan from a designated settlement service provider organization",
+          "Apply for permanent residence through IRCC",
+          "Apply for a work permit (if needed) while PR is processing"
+        ],
+        "timeline": {
+          "optimistic_months": 8,
+          "realistic_months": 12,
+          "pessimistic_months": 18,
+          "notes": "IRCC service standard is 11 months. AIP processing jumped by 7 months in April 2026 data."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1085,
+          "estimated_legal_fees": 2500,
+          "notes": "No LMIA required (saves employer ~CAD $1,000)."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "AIP became a permanent program in 2022. Currently accepting applications year-round. Processing times have recently increased.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "rnip",
+        "name": "Rural and Northern Immigration Pilot",
+        "country": "CA",
+        "category": "economic",
+        "description": "Community-driven pilot program helping smaller communities in rural and northern areas attract and retain skilled foreign workers. Participating communities recommend candidates who then apply for PR through IRCC.",
+        "hard_requirements": [
+          {
+            "field": "job_offer",
+            "operator": "in",
+            "value": [
+              "lmia_approved",
+              "lmia_exempt",
+              "pending"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "RNIP requires a genuine job offer from an employer in a participating community."
+          },
+          {
+            "field": "total_work_years",
+            "operator": "gte",
+            "value": 1,
+            "disqualifies_if_false": true,
+            "error_message": "RNIP requires qualifying work experience or a recent graduation from a post-secondary institution in the community."
+          },
+          {
+            "field": "english_level",
+            "operator": "in",
+            "value": [
+              "basic",
+              "intermediate",
+              "proficient",
+              "advanced",
+              "native"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Language requirements vary by TEER level of job offer (CLB 6 for TEER 0/1, CLB 5 for TEER 2/3, CLB 4 for TEER 4/5)."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "Identify a participating RNIP community",
+          "Secure a job offer from an employer in that community",
+          "Apply to the community for a recommendation",
+          "Apply for PR through IRCC with community recommendation"
+        ],
+        "timeline": {
+          "optimistic_months": 8,
+          "realistic_months": 14,
+          "pessimistic_months": 20,
+          "notes": "This pilot has been extended multiple times. Check if still accepting applications for your target community."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1085,
+          "estimated_legal_fees": 2000,
+          "notes": "Approximate USD."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Pilot has been extended. Some communities have paused intake. Check individual community status.",
+          "last_draw_score": null,
+          "draw_frequency": "Community-managed intake",
+          "last_updated": "2026-05",
+          "confidence": "medium"
+        }
+      },
+      {
+        "id": "quebec_skilled_worker",
+        "name": "Quebec Skilled Worker Program (PSTQ via Arrima)",
+        "country": "CA",
+        "category": "economic",
+        "description": "Quebec manages its own skilled worker selection through the Arrima Expression of Interest portal. Selected candidates receive a Quebec Selection Certificate (CSQ), then apply to IRCC for federal PR. French proficiency is heavily weighted.",
+        "hard_requirements": [
+          {
+            "field": "provincial_preference",
+            "operator": "eq",
+            "value": "QC",
+            "disqualifies_if_false": true,
+            "error_message": "This program is only for candidates intending to settle in Quebec."
+          },
+          {
+            "field": "french_level",
+            "operator": "in",
+            "value": [
+              "intermediate",
+              "proficient",
+              "advanced",
+              "native"
+            ],
+            "disqualifies_if_false": false,
+            "error_message": "While not an absolute requirement, French proficiency is heavily weighted in Quebec's selection system. Candidates without French will score very poorly."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "french_level",
+            "weight": 1.0,
+            "favorable_values": [
+              "proficient",
+              "advanced",
+              "native"
+            ],
+            "points": 100
+          },
+          {
+            "field": "education_level",
+            "weight": 0.7,
+            "favorable_values": [
+              "masters",
+              "phd"
+            ],
+            "points": 50
+          },
+          {
+            "field": "age",
+            "weight": 0.6,
+            "favorable_values": [
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35
+            ],
+            "points": 50
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 50,
+          "close": 40,
+          "note": "Quebec uses its own points grid separate from CRS."
+        },
+        "gaps": [
+          {
+            "condition": "french_level in ['none', 'basic']",
+            "gap_title": "Insufficient French proficiency",
+            "gap_detail": "Quebec overwhelmingly selects French-speaking candidates. Without at least intermediate French (B2), chances of selection are extremely low.",
+            "fixable": true,
+            "fix_timeframe": "12-24 months"
+          }
+        ],
+        "action_steps": [
+          "Create an Expression of Interest profile in the Arrima portal",
+          "Take a recognized French test (TEF or TCF)",
+          "If invited, submit a complete application to MIFI",
+          "Receive CSQ (Quebec Selection Certificate) if approved",
+          "Apply to IRCC for federal permanent residence"
+        ],
+        "timeline": {
+          "optimistic_months": 12,
+          "realistic_months": 18,
+          "pessimistic_months": 30,
+          "notes": "Two-stage process: Quebec selection (6-12 months) + federal PR processing (6-12 months). Quebec processing times are separate from IRCC service standards."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1200,
+          "estimated_legal_fees": 4000,
+          "notes": "Includes Quebec application fees + federal PR fees."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Arrima portal is open for EOI submissions. Quebec conducts periodic invitation rounds. Strong French bias in selections.",
+          "last_draw_score": null,
+          "draw_frequency": "Periodic Arrima draws",
+          "last_updated": "2026-05",
+          "confidence": "medium"
+        }
+      },
+      {
+        "id": "startup_visa",
+        "name": "Start-up Visa Program",
+        "country": "CA",
+        "category": "economic",
+        "description": "For entrepreneurs who can secure a commitment from a designated Canadian venture capital fund, angel investor group, or business incubator. Leads to permanent residence and allows applicants to work on their start-up immediately via a work permit.",
+        "hard_requirements": [
+          {
+            "field": "english_level",
+            "operator": "in",
+            "value": [
+              "intermediate",
+              "proficient",
+              "advanced",
+              "native"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Start-up Visa requires minimum CLB 5 in all four language abilities."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "net_worth_usd",
+            "weight": 0.6,
+            "favorable_values": [
+              "50k_200k",
+              "200k_1m",
+              "over_1m"
+            ],
+            "points": 0
+          },
+          {
+            "field": "education_level",
+            "weight": 0.4,
+            "favorable_values": [
+              "bachelors",
+              "masters",
+              "phd"
+            ],
+            "points": 0
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "Requires a letter of support from a designated organization. Not points-based."
+        },
+        "discretionary_note": "The biggest challenge is obtaining a commitment letter from a designated organization. IRCC also assesses whether the business is genuine and viable. There has been significant scrutiny of this program for abuse.",
+        "gaps": [],
+        "action_steps": [
+          "Develop a viable business concept",
+          "Pitch to designated venture capital funds, angel investor groups, or business incubators",
+          "Obtain a Letter of Support from a designated organization",
+          "Meet language requirement (CLB 5+)",
+          "Prove sufficient settlement funds",
+          "Apply for PR under the Start-up Visa Program"
+        ],
+        "timeline": {
+          "optimistic_months": 12,
+          "realistic_months": 30,
+          "pessimistic_months": 48,
+          "notes": "Processing times have been very long (37+ months reported). IRCC has a large backlog. Work permit available while PR processes."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1600,
+          "estimated_legal_fees": 7500,
+          "notes": "Additional costs for incubator/accelerator program fees (can be substantial)."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Program remains open but under increased scrutiny. Processing backlog is significant. IRCC has been tightening requirements around genuine business activity.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "medium"
+        }
+      },
+      {
+        "id": "self_employed",
+        "name": "Self-Employed Persons Program",
+        "country": "CA",
+        "category": "economic",
+        "description": "For individuals with relevant experience in cultural activities, athletics, or farm management who can make a significant contribution to Canadian cultural, athletic, or agricultural life.",
+        "hard_requirements": [
+          {
+            "field": "total_work_years",
+            "operator": "gte",
+            "value": 2,
+            "disqualifies_if_false": true,
+            "error_message": "Requires at least 2 years of relevant self-employment experience in cultural activities, athletics, or farm management within the last 5 years."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "education_field",
+            "weight": 0.5,
+            "favorable_values": [
+              "arts_humanities"
+            ],
+            "points": 0
+          },
+          {
+            "field": "net_worth_usd",
+            "weight": 0.4,
+            "favorable_values": [
+              "50k_200k",
+              "200k_1m",
+              "over_1m"
+            ],
+            "points": 0
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 35,
+          "close": 30,
+          "note": "Uses a 100-point selection grid based on experience, education, age, language, and adaptability. Must score 35+."
+        },
+        "gaps": [],
+        "action_steps": [
+          "Demonstrate 2+ years of qualifying self-employment experience",
+          "Score 35+ on the selection grid",
+          "Submit application to IRCC with business plan",
+          "Attend interview if requested"
+        ],
+        "timeline": {
+          "optimistic_months": 24,
+          "realistic_months": 36,
+          "pessimistic_months": 60,
+          "notes": "This program has historically had very long processing times, often exceeding 3 years."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1085,
+          "estimated_legal_fees": 5000,
+          "notes": "Approximate USD."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Limited intake. Very long processing times. Niche program for cultural/athletic professionals.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "caregiver_pathways",
+        "name": "Home Care Worker Pathways",
+        "country": "CA",
+        "category": "temporary_to_permanent",
+        "description": "Pathways for foreign caregivers (home child care providers and home support workers) to obtain PR after gaining 24 months of qualifying Canadian work experience. Replaces former live-in caregiver program.",
+        "hard_requirements": [
+          {
+            "field": "noc_teer_level",
+            "operator": "in",
+            "value": [
+              "teer2",
+              "teer3",
+              "teer4"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Must have experience or job offer in a caregiver occupation (NOC 44100 or 44101)."
+          },
+          {
+            "field": "english_level",
+            "operator": "in",
+            "value": [
+              "basic",
+              "intermediate",
+              "proficient",
+              "advanced",
+              "native"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Requires minimum CLB 5 in all four language abilities."
+          },
+          {
+            "field": "education_level",
+            "operator": "not_in",
+            "value": [
+              "less_than_secondary"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Requires at least a secondary school credential equivalent."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "Obtain a work permit to work as a caregiver in Canada",
+          "Complete 24 months of qualifying Canadian caregiver work experience",
+          "Apply for PR under the applicable caregiver pathway"
+        ],
+        "timeline": {
+          "optimistic_months": 30,
+          "realistic_months": 36,
+          "pessimistic_months": 48,
+          "notes": "Includes 24 months to accumulate work experience + PR processing time."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1085,
+          "estimated_legal_fees": 2000,
+          "notes": "Approximate USD."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "IRCC launched updated caregiver pathways. Check current program details as these are subject to frequent policy changes.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "medium"
+        }
+      },
+      {
+        "id": "study_to_pr_pipeline",
+        "name": "Study Permit to PR Pipeline (via PGWP + CEC)",
+        "country": "CA",
+        "category": "temporary_to_permanent",
+        "description": "International students who graduate from eligible Canadian institutions can obtain a Post-Graduation Work Permit (PGWP), gain Canadian work experience, and then apply for PR through Canadian Experience Class or a Provincial Nominee Program.",
+        "hard_requirements": [
+          {
+            "field": "education_country",
+            "operator": "eq",
+            "value": "canada",
+            "disqualifies_if_false": true,
+            "error_message": "This pipeline requires studying at an eligible Canadian Designated Learning Institution (DLI)."
+          },
+          {
+            "field": "education_level",
+            "operator": "in",
+            "value": [
+              "one_year_post_secondary",
+              "two_year_post_secondary",
+              "bachelors",
+              "two_or_more_degrees",
+              "masters",
+              "phd"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "PGWP requires completion of a program of at least 8 months at an eligible DLI."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "education_field",
+            "weight": 0.7,
+            "favorable_values": [
+              "stem",
+              "healthcare"
+            ],
+            "points": 0
+          },
+          {
+            "field": "english_level",
+            "weight": 0.8,
+            "favorable_values": [
+              "advanced",
+              "native"
+            ],
+            "points": 0
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "PGWP eligibility has been restricted. As of November 2024, only graduates from programs linked to occupations in long-term shortage are PGWP-eligible for most programs. Masters and PhD programs retain broad PGWP eligibility."
+        },
+        "discretionary_note": "PGWP eligibility rules changed significantly in 2024. Field of study now matters for most programs (except masters/PhD). Check the IRCC PGWP-eligible programs list before enrollment.",
+        "gaps": [],
+        "action_steps": [
+          "Apply to an eligible Canadian DLI in a PGWP-eligible program",
+          "Obtain a study permit",
+          "Complete the program successfully",
+          "Apply for PGWP within 180 days of receiving final marks",
+          "Work in a skilled occupation (TEER 0-3) for at least 12 months",
+          "Apply for PR through CEC or PNP"
+        ],
+        "timeline": {
+          "optimistic_months": 24,
+          "realistic_months": 36,
+          "pessimistic_months": 60,
+          "notes": "Total pipeline: study (1-4 years) + work experience (1 year) + PR processing (6-8 months). This is a multi-year strategy."
+        },
+        "filing_costs_usd": {
+          "government_fees": 15000,
+          "estimated_legal_fees": 2000,
+          "notes": "Includes tuition (highly variable: CAD $15k-$50k/year for international students), study permit fee CAD $150, PGWP fee CAD $255, and eventual PR fees."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "IRCC has significantly restricted study permits and PGWP eligibility since 2024. Provincial attestation letters now required for study permits. PGWP limited to shortage-occupation programs for most credentials.",
+          "last_draw_score": null,
+          "draw_frequency": "N/A - pipeline strategy",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "tfwp",
+        "name": "Temporary Foreign Worker Program",
+        "country": "CA",
+        "category": "non_immigrant",
+        "description": "Allows Canadian employers to hire foreign workers on a temporary basis when qualified Canadians are not available. Requires a Labour Market Impact Assessment (LMIA) unless exempt. Can serve as a stepping stone to PR through CEC or PNP.",
+        "hard_requirements": [
+          {
+            "field": "job_offer",
+            "operator": "in",
+            "value": [
+              "lmia_approved",
+              "lmia_exempt"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "TFWP requires a job offer supported by an approved LMIA or an LMIA exemption."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history creates inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "Employer applies for LMIA (or qualifies for exemption)",
+          "Once LMIA approved, apply for work permit",
+          "After gaining Canadian work experience, consider CEC or PNP for PR"
+        ],
+        "timeline": {
+          "optimistic_months": 2,
+          "realistic_months": 4,
+          "pessimistic_months": 8,
+          "notes": "LMIA processing: 2-4 months. Work permit processing: 2-8 weeks after LMIA. Varies by stream (high-wage, low-wage, agricultural, Global Talent Stream)."
+        },
+        "filing_costs_usd": {
+          "government_fees": 300,
+          "estimated_legal_fees": 2000,
+          "notes": "Employer pays CAD $1,000 LMIA fee + CAD $100 employer compliance fee. Worker pays CAD $155 work permit fee."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "IRCC has tightened LMIA requirements in 2024-2025. Low-wage stream restrictions increased. Global Talent Stream provides expedited processing for tech workers.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      }
+    ],
+    "pnp_streams": [
+      {
+        "province": "Ontario",
+        "province_code": "ON",
+        "streams": [
+          {
+            "name": "Human Capital Priorities",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": 400,
+            "notes": "Targets candidates in the EE pool. Score threshold varies per draw. Recent draws have targeted specific NOCs.",
+            "confidence": "medium"
+          },
+          {
+            "name": "French-Speaking Skilled Worker",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "For French-speaking candidates in the EE pool.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Skilled Trades",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "For candidates in skilled trade occupations in the EE pool.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Employer Job Offer: Foreign Worker",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "Requires job offer in TEER 0/1/2/3 occupation.",
+            "confidence": "high"
+          },
+          {
+            "name": "Employer Job Offer: International Student",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For international graduates with Ontario employer job offer.",
+            "confidence": "high"
+          },
+          {
+            "name": "Employer Job Offer: In-Demand Skills",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For TEER 4/5 occupations in agriculture and construction.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Masters Graduate",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For masters graduates from eligible Ontario institutions. No job offer required.",
+            "confidence": "high"
+          },
+          {
+            "name": "PhD Graduate",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For PhD graduates from eligible Ontario institutions. No job offer required.",
+            "confidence": "high"
+          }
+        ]
+      },
+      {
+        "province": "British Columbia",
+        "province_code": "BC",
+        "streams": [
+          {
+            "name": "Skills Immigration - Skilled Worker",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "Points-based EOI system. Targets high-impact candidates.",
+            "confidence": "high"
+          },
+          {
+            "name": "Skills Immigration - Healthcare Professional",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "Priority processing for healthcare workers.",
+            "confidence": "high"
+          },
+          {
+            "name": "Skills Immigration - International Graduate",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "For recent graduates from eligible Canadian institutions.",
+            "confidence": "high"
+          },
+          {
+            "name": "Skills Immigration - International Post-Graduate",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "For masters/PhD graduates from BC institutions. No job offer required.",
+            "confidence": "high"
+          },
+          {
+            "name": "Skills Immigration - Entry Level and Semi-Skilled",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For TEER 4/5 occupations in tourism, hospitality, food processing, long-haul trucking.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Entrepreneur Immigration",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For experienced entrepreneurs. Requires minimum net worth and investment.",
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "province": "Alberta",
+        "province_code": "AB",
+        "streams": [
+          {
+            "name": "Alberta Express Entry Stream",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": 300,
+            "notes": "Alberta issues Notifications of Interest to EE candidates. Minimum CRS 300 to be considered.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Alberta Opportunity Stream",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For foreign workers currently working in Alberta. Requires valid work permit and Alberta employer.",
+            "confidence": "high"
+          },
+          {
+            "name": "Alberta Accelerated Tech Pathway",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "For tech workers in designated occupations working for Alberta tech companies.",
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "province": "Saskatchewan",
+        "province_code": "SK",
+        "streams": [
+          {
+            "name": "International Skilled Worker - Employment Offer",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "Requires job offer from SK employer. Points-based EOI.",
+            "confidence": "high"
+          },
+          {
+            "name": "International Skilled Worker - Occupation In-Demand",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "No job offer required but occupation must be on in-demand list. Points-based EOI with 60-point threshold.",
+            "confidence": "high"
+          },
+          {
+            "name": "International Skilled Worker - Saskatchewan Express Entry",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "For EE candidates with SK connection (work experience, education, family, or occupation in-demand).",
+            "confidence": "high"
+          },
+          {
+            "name": "International Skilled Worker - Hard-to-Fill Skills Pilot",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For TEER 4/5 occupations in specific industries.",
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "province": "Manitoba",
+        "province_code": "MB",
+        "streams": [
+          {
+            "name": "Skilled Workers in Manitoba",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For workers currently employed in Manitoba.",
+            "confidence": "high"
+          },
+          {
+            "name": "Skilled Workers Overseas",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "For overseas workers with connection to Manitoba (family, education, or invitation).",
+            "confidence": "high"
+          },
+          {
+            "name": "International Education Stream",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For graduates of Manitoba post-secondary institutions.",
+            "confidence": "high"
+          }
+        ]
+      },
+      {
+        "province": "Nova Scotia",
+        "province_code": "NS",
+        "streams": [
+          {
+            "name": "Labour Market Priorities",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "NS selects from EE pool based on labour market needs.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Skilled Worker Stream",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "Requires permanent full-time job offer from NS employer.",
+            "confidence": "high"
+          },
+          {
+            "name": "Occupation In-Demand",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For workers in specific in-demand occupations.",
+            "confidence": "medium"
+          },
+          {
+            "name": "International Graduate Entrepreneur",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For international graduates who started a business in NS.",
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "province": "New Brunswick",
+        "province_code": "NB",
+        "streams": [
+          {
+            "name": "Express Entry Labour Market",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "For EE candidates with NB connection.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Skilled Workers with Employer Support",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "Requires job offer from NB employer.",
+            "confidence": "high"
+          },
+          {
+            "name": "Strategic Initiative",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For Francophone workers. French proficiency required.",
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "province": "Prince Edward Island",
+        "province_code": "PE",
+        "streams": [
+          {
+            "name": "PEI Express Entry",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "EOI-based selection from EE pool.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Labour Impact: Skilled Workers",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "Requires job offer from PEI employer.",
+            "confidence": "high"
+          },
+          {
+            "name": "Labour Impact: Critical Workers",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For TEER 4/5 workers with PEI job offer.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Labour Impact: International Graduates",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For graduates from PEI institutions with PEI employer support.",
+            "confidence": "high"
+          }
+        ]
+      },
+      {
+        "province": "Newfoundland and Labrador",
+        "province_code": "NL",
+        "streams": [
+          {
+            "name": "Express Entry Skilled Worker",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "For EE candidates with NL job offer.",
+            "confidence": "high"
+          },
+          {
+            "name": "Skilled Worker",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "Requires full-time job offer from NL employer.",
+            "confidence": "high"
+          },
+          {
+            "name": "International Graduate",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "For graduates from NL post-secondary institutions.",
+            "confidence": "high"
+          }
+        ]
+      },
+      {
+        "province": "Yukon",
+        "province_code": "YT",
+        "streams": [
+          {
+            "name": "Yukon Express Entry",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "Requires job offer from Yukon employer.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Skilled Worker",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "Requires job offer from Yukon employer.",
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "province": "Northwest Territories",
+        "province_code": "NT",
+        "streams": [
+          {
+            "name": "Express Entry Stream",
+            "ee_aligned": true,
+            "active": true,
+            "min_crs": null,
+            "notes": "For EE candidates with NT employer support.",
+            "confidence": "medium"
+          },
+          {
+            "name": "Employer Driven Stream",
+            "ee_aligned": false,
+            "active": true,
+            "min_crs": null,
+            "notes": "Requires job offer from NT employer.",
+            "confidence": "medium"
+          }
+        ]
+      }
+    ],
+    "processing_times": {
+      "last_updated": "2026-04",
+      "source": "IRCC processing times tool",
+      "note": "Times represent 80% of applications. 20% may take longer. Subject to change.",
+      "programs": {
+        "express_entry_fsw": {
+          "months_low": 6,
+          "months_high": 8,
+          "service_standard_months": 6
+        },
+        "express_entry_cec": {
+          "months_low": 5,
+          "months_high": 7,
+          "service_standard_months": 6
+        },
+        "express_entry_fst": {
+          "months_low": 6,
+          "months_high": 8,
+          "service_standard_months": 6
+        },
+        "pnp_ee_aligned": {
+          "months_low": 6,
+          "months_high": 8,
+          "service_standard_months": 6
+        },
+        "pnp_base": {
+          "months_low": 11,
+          "months_high": 15,
+          "service_standard_months": 11
+        },
+        "spousal_outland": {
+          "months_low": 12,
+          "months_high": 18,
+          "service_standard_months": 12
+        },
+        "spousal_inland": {
+          "months_low": 18,
+          "months_high": 24,
+          "service_standard_months": null
+        },
+        "pgp": {
+          "months_low": 30,
+          "months_high": 48,
+          "service_standard_months": null
+        },
+        "aip": {
+          "months_low": 11,
+          "months_high": 18,
+          "service_standard_months": 11
+        },
+        "startup_visa": {
+          "months_low": 30,
+          "months_high": 48,
+          "service_standard_months": null
+        },
+        "citizenship": {
+          "months_low": 12,
+          "months_high": 15,
+          "service_standard_months": 12
+        }
+      }
+    }
+  },
+  "us": {
+    "hard_disqualifiers": [
+      {
+        "id": "us_criminal_history",
+        "field": "criminal_history",
+        "operator": "eq",
+        "value": true,
+        "effect": "disqualifies_most_pathways",
+        "error_message": "Criminal history may trigger inadmissibility under INA 212(a)(2). Certain crimes involving moral turpitude, controlled substance violations, and aggravated felonies create bars to admission. A waiver (I-601 or I-212) may be available in some cases.",
+        "discretionary_note": "Criminal inadmissibility is highly fact-specific. Some offenses do not trigger inadmissibility (e.g., purely political offenses, petty offense exception). VAWA and U visa applicants may be eligible for waivers. Consult an immigration attorney.",
+        "confidence": "high"
+      },
+      {
+        "id": "us_prior_removal",
+        "field": "prior_removal",
+        "operator": "eq",
+        "value": true,
+        "effect": "disqualifies_most_pathways",
+        "error_message": "Prior removal from the US creates a bar to reentry (5-year, 10-year, or 20-year bar depending on circumstances). An I-212 waiver (Permission to Reapply) may be required.",
+        "discretionary_note": "The length of the bar depends on the type of removal. Some humanitarian pathways (VAWA, U visa) may allow waivers. Consult an immigration attorney before attempting reentry.",
+        "confidence": "high"
+      }
+    ],
+    "visa_bulletin": {
+      "bulletin_month": "May 2026",
+      "last_updated": "2026-05",
+      "source": "https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin/2026/visa-bulletin-for-may-2026.html",
+      "chart_used_for_eb_filing": "Final Action Dates",
+      "note": "For May 2026, USCIS is using the Final Action Dates chart for employment-based AOS filings. This is a change from recent months which used the more favorable Dates for Filing chart.",
+      "warning": "The State Department warns that retrogression may occur later in FY2026 as immigrant visa demand increases or if administration actions change.",
+      "final_action_dates": {
+        "eb1": {
+          "all_chargeability": "C",
+          "china": "2023-04-01",
+          "india": "2023-04-01",
+          "mexico": "C",
+          "philippines": "C"
+        },
+        "eb2": {
+          "all_chargeability": "C",
+          "china": "2021-09-01",
+          "india": "2014-07-15",
+          "mexico": "C",
+          "philippines": "C"
+        },
+        "eb3_professional_skilled": {
+          "all_chargeability": "2024-06-01",
+          "china": "2021-06-15",
+          "india": "2013-11-15",
+          "mexico": "C",
+          "philippines": "2023-08-01"
+        },
+        "eb3_other_workers": {
+          "all_chargeability": "2022-02-01",
+          "china": "2019-02-01",
+          "india": "2013-11-15",
+          "mexico": "2022-02-01",
+          "philippines": "2023-08-01"
+        },
+        "eb5_unreserved": {
+          "all_chargeability": "C",
+          "china": "2021-02-01",
+          "india": "C",
+          "mexico": "C",
+          "philippines": "C"
+        },
+        "eb5_set_aside_rural": {
+          "all_chargeability": "C",
+          "china": "C",
+          "india": "C",
+          "mexico": "C",
+          "philippines": "C"
+        },
+        "eb5_set_aside_high_unemployment": {
+          "all_chargeability": "C",
+          "china": "C",
+          "india": "C",
+          "mexico": "C",
+          "philippines": "C"
+        },
+        "eb5_set_aside_infrastructure": {
+          "all_chargeability": "C",
+          "china": "C",
+          "india": "C",
+          "mexico": "C",
+          "philippines": "C"
+        }
+      },
+      "interpretation_note": "'C' means 'Current' - no backlog, applications with any priority date may proceed. A date means only applications with a priority date BEFORE that date may be approved. India EB-2 at July 15, 2014 means applicants have been waiting 12+ years."
+    },
+    "cap_exempt_criteria": {
+      "description": "H-1B visas filed by the following types of employers are exempt from the annual 65,000 regular cap and 20,000 US master's cap.",
+      "exempt_employers": [
+        {
+          "type": "Institutions of higher education",
+          "definition": "Accredited public or nonprofit private institutions granting bachelor's degrees or higher as defined by 20 USC 1001(a).",
+          "confidence": "high"
+        },
+        {
+          "type": "Nonprofit entities related to or affiliated with institutions of higher education",
+          "definition": "Nonprofits that are connected or associated to a qualifying institution of higher education through shared ownership, governance, control, or common purpose.",
+          "confidence": "high"
+        },
+        {
+          "type": "Nonprofit research organizations",
+          "definition": "Organizations primarily engaged in basic or applied research and that are organized as nonprofits under state or federal law.",
+          "confidence": "high"
+        },
+        {
+          "type": "Governmental research organizations",
+          "definition": "Federal, state, or local government entities primarily engaged in research.",
+          "confidence": "high"
+        }
+      ],
+      "critical_notes": [
+        "Cap exemption applies to the EMPLOYER, not the worker. The same worker can be cap-subject at one employer and cap-exempt at another.",
+        "A worker who was initially counted against the cap does not need to be counted again when changing to a cap-exempt employer or when returning to H-1B status within 6 years of prior cap-counted approval.",
+        "Working 'at' a university campus on a contract from a for-profit staffing company does NOT make the petition cap-exempt. The petitioning employer must itself be the qualifying entity.",
+        "J-1 physicians who receive Conrad 30 waivers file through a separate cap exemption."
+      ],
+      "last_updated": "2026-05",
+      "confidence": "high"
+    },
+    "pathways": [
+      {
+        "id": "eb1a",
+        "name": "EB-1A Extraordinary Ability",
+        "country": "US",
+        "category": "economic",
+        "description": "For individuals with extraordinary ability in sciences, arts, education, business, or athletics demonstrated by sustained national or international acclaim. Self-petitioning allowed (no employer sponsor needed). No labor certification required.",
+        "hard_requirements": [
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          },
+          {
+            "field": "prior_removal",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Prior removal creates bars to admission."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "education_level",
+            "weight": 0.6,
+            "favorable_values": [
+              "phd",
+              "masters"
+            ],
+            "points": 20
+          },
+          {
+            "field": "total_work_years",
+            "weight": 0.5,
+            "favorable_values": [
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "points": 15
+          },
+          {
+            "field": "education_field",
+            "weight": 0.4,
+            "favorable_values": [
+              "stem",
+              "healthcare",
+              "arts_humanities"
+            ],
+            "points": 10
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 60,
+          "close": 40,
+          "note": "Must meet at least 3 of 10 USCIS criteria (awards, membership, published material, judging, original contributions, scholarly articles, exhibitions, leading role, high salary, commercial success) OR provide evidence of a one-time major internationally recognized award."
+        },
+        "discretionary_note": "EB-1A is highly discretionary. USCIS applies a two-step analysis: (1) does the evidence meet at least 3 criteria, and (2) does the totality of the evidence demonstrate sustained national/international acclaim? Meeting 3 criteria is necessary but not sufficient. Officer discretion is significant.",
+        "gaps": [
+          {
+            "condition": "total_work_years < 5",
+            "gap_title": "Limited professional record",
+            "gap_detail": "EB-1A typically requires a substantial body of work demonstrating sustained acclaim. Early-career individuals may struggle to show 3+ criteria. Consider EB-2 NIW as an alternative.",
+            "fixable": true,
+            "fix_timeframe": "2-5 years"
+          }
+        ],
+        "action_steps": [
+          "Document evidence meeting at least 3 of the 10 EB-1A criteria",
+          "File Form I-140 Immigrant Petition (self-petitioned)",
+          "If priority date is current, file Form I-485 Adjustment of Status (or consular process)",
+          "Premium processing available (15 business days for I-140)"
+        ],
+        "timeline": {
+          "optimistic_months": 4,
+          "realistic_months": 8,
+          "pessimistic_months": 18,
+          "notes": "Premium processing available for I-140 (15 business days). AOS processing varies. For India/China-born, priority date backlog adds significant delay."
+        },
+        "location_recommendations": [
+          "Any US state (no geographic restriction)"
+        ],
+        "filing_costs_usd": {
+          "government_fees": 715,
+          "estimated_legal_fees": 8000,
+          "notes": "I-140 filing fee: $715. Premium processing: $2,805. I-485 AOS: $1,440 per person. Legal fees vary widely ($5,000-$15,000+)."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "EB-1 is current for all countries except China and India (April 1, 2023). This represents a significant backlog for Indian and Chinese nationals.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        },
+        "country_of_birth_impact": {
+          "india": "Priority date backlog. EB-1 India at April 1, 2023. Wait of 3+ years for green card after I-140 approval.",
+          "china": "Priority date backlog. EB-1 China at April 1, 2023. Wait of 3+ years.",
+          "rest_of_world": "Currently current. No additional wait after I-140 approval.",
+          "last_updated": "2026-05"
+        }
+      },
+      {
+        "id": "eb1b",
+        "name": "EB-1B Outstanding Researcher/Professor",
+        "country": "US",
+        "category": "economic",
+        "description": "For outstanding professors and researchers with at least 3 years of experience in teaching or research who are recognized internationally. Requires an employer petition for a permanent research or teaching position.",
+        "hard_requirements": [
+          {
+            "field": "total_work_years",
+            "operator": "gte",
+            "value": 3,
+            "disqualifies_if_false": true,
+            "error_message": "EB-1B requires at least 3 years of experience in teaching and/or research in the academic field."
+          },
+          {
+            "field": "employer_type",
+            "operator": "in",
+            "value": [
+              "university_nonprofit",
+              "large_corporation"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "EB-1B requires an offer for a tenured, tenure-track, or comparable permanent research position at a university, or a comparable position at a private employer with at least 3 full-time researchers."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "education_level",
+            "weight": 0.8,
+            "favorable_values": [
+              "phd"
+            ],
+            "points": 30
+          },
+          {
+            "field": "education_field",
+            "weight": 0.5,
+            "favorable_values": [
+              "stem",
+              "healthcare"
+            ],
+            "points": 15
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 60,
+          "close": 40,
+          "note": "Must meet at least 2 of 6 criteria (major awards, scholarly memberships, published material about work, judging others' work, original scholarly contributions, authorship of scholarly works)."
+        },
+        "discretionary_note": "Similar two-step analysis as EB-1A. The position must be a permanent research or tenure-track teaching position. Private employers can qualify if they employ at least 3 full-time researchers and have a documented record of research achievements.",
+        "gaps": [],
+        "action_steps": [
+          "Secure offer for qualifying research/teaching position",
+          "Employer files I-140 petition with evidence of 2+ criteria",
+          "If priority date current, file I-485 or pursue consular processing"
+        ],
+        "timeline": {
+          "optimistic_months": 4,
+          "realistic_months": 8,
+          "pessimistic_months": 18,
+          "notes": "Same timeline considerations as EB-1A. Premium processing available."
+        },
+        "filing_costs_usd": {
+          "government_fees": 715,
+          "estimated_legal_fees": 7000,
+          "notes": "Typically employer-paid. Premium processing: $2,805 additional."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Same visa bulletin dates as EB-1A. Current for most countries, backlogged for India and China.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "eb1c",
+        "name": "EB-1C Multinational Manager/Executive",
+        "country": "US",
+        "category": "economic",
+        "description": "For multinational managers or executives transferring to a US affiliate, subsidiary, or branch of their foreign employer. Requires at least 1 year of managerial/executive employment with the foreign entity within the last 3 years.",
+        "hard_requirements": [
+          {
+            "field": "total_work_years",
+            "operator": "gte",
+            "value": 1,
+            "disqualifies_if_false": true,
+            "error_message": "Must have worked for the qualifying organization outside the US in a managerial or executive capacity for at least 1 of the 3 years preceding the petition."
+          },
+          {
+            "field": "soc_category",
+            "operator": "in",
+            "value": [
+              "management"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "EB-1C requires the position to be managerial or executive in nature."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "employer_type",
+            "weight": 0.7,
+            "favorable_values": [
+              "large_corporation"
+            ],
+            "points": 20
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "Not points-based. Must demonstrate qualifying relationship between US and foreign entities and managerial/executive role."
+        },
+        "discretionary_note": "USCIS scrutinizes whether the role is genuinely managerial/executive (managing an organization, function, or other managers) vs. merely supervisory or a first-line supervisor of non-professional workers. Small companies face heightened scrutiny.",
+        "gaps": [],
+        "action_steps": [
+          "Establish or document qualifying multinational corporate relationship",
+          "Employer files I-140 petition",
+          "If priority date current, file I-485",
+          "Often preceded by L-1A intracompany transfer visa"
+        ],
+        "timeline": {
+          "optimistic_months": 6,
+          "realistic_months": 12,
+          "pessimistic_months": 24,
+          "notes": "Premium processing available for I-140. AOS depends on visa bulletin."
+        },
+        "filing_costs_usd": {
+          "government_fees": 715,
+          "estimated_legal_fees": 10000,
+          "notes": "Employer-paid. Premium processing: $2,805."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Same EB-1 visa bulletin dates.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "eb2_perm",
+        "name": "EB-2 with PERM Labor Certification",
+        "country": "US",
+        "category": "economic",
+        "description": "For professionals with advanced degrees or individuals with exceptional ability. Requires employer sponsorship through the PERM labor certification process, which tests the US labor market to show no qualified US workers are available.",
+        "hard_requirements": [
+          {
+            "field": "education_level",
+            "operator": "in",
+            "value": [
+              "masters",
+              "phd",
+              "bachelors",
+              "two_or_more_degrees"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "EB-2 requires an advanced degree (master's or higher) or a bachelor's degree plus 5 years of progressive post-baccalaureate experience, or exceptional ability."
+          },
+          {
+            "field": "job_offer",
+            "operator": "in",
+            "value": [
+              "employer_sponsored_us",
+              "pending"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "EB-2 PERM requires an employer sponsor willing to go through the PERM labor certification process."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "education_level",
+            "weight": 0.8,
+            "favorable_values": [
+              "masters",
+              "phd"
+            ],
+            "points": 30
+          },
+          {
+            "field": "total_work_years",
+            "weight": 0.5,
+            "favorable_values": [
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "points": 15
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [
+          {
+            "condition": "country_of_birth eq 'IN'",
+            "gap_title": "Severe India EB-2 backlog",
+            "gap_detail": "India EB-2 priority date is at July 15, 2014 - a 12+ year backlog. Consider EB-1A/EB-1B if qualifications permit, or EB-2 NIW, or EB-5. Some applicants file in both EB-2 and EB-3 (EB-3 downgrade strategy when EB-3 moves faster).",
+            "fixable": false,
+            "fix_timeframe": "12+ years (based on current movement)"
+          },
+          {
+            "condition": "country_of_birth eq 'CN'",
+            "gap_title": "China EB-2 backlog",
+            "gap_detail": "China EB-2 priority date is at September 1, 2021 - approximately 5-year backlog.",
+            "fixable": false,
+            "fix_timeframe": "5+ years"
+          }
+        ],
+        "action_steps": [
+          "Employer conducts PERM recruitment (prevailing wage determination, advertising)",
+          "Employer files ETA Form 9089 (PERM application) with DOL",
+          "Upon PERM approval, employer files I-140 petition with USCIS",
+          "When priority date is current, file I-485 AOS or consular process"
+        ],
+        "timeline": {
+          "optimistic_months": 12,
+          "realistic_months": 24,
+          "pessimistic_months": 180,
+          "notes": "PERM: 8-14 months. I-140: 4-8 months (or 15 days with premium). I-485: depends on priority date. India-born: potentially decades. Rest of world: currently current."
+        },
+        "filing_costs_usd": {
+          "government_fees": 715,
+          "estimated_legal_fees": 12000,
+          "notes": "PERM advertising costs: $5,000-$10,000 (employer-paid). I-140: $715. Premium processing: $2,805. PERM recruitment fees are significant."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "EB-2 is current for all countries except China (Sep 1, 2021) and India (Jul 15, 2014). This is one of the most important distinctions in the entire US immigration system.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        },
+        "country_of_birth_impact": {
+          "india": "12+ year backlog. Priority date July 15, 2014. One of the longest immigration waits in the world.",
+          "china": "~5 year backlog. Priority date September 1, 2021.",
+          "rest_of_world": "Currently current. No additional wait.",
+          "mexico": "Currently current.",
+          "philippines": "Currently current.",
+          "last_updated": "2026-05"
+        }
+      },
+      {
+        "id": "eb2_niw",
+        "name": "EB-2 National Interest Waiver",
+        "country": "US",
+        "category": "economic",
+        "description": "Allows EB-2 eligible individuals to self-petition without an employer sponsor by demonstrating their work is in the national interest of the United States. Uses the Matter of Dhanasar three-prong test. No PERM required.",
+        "hard_requirements": [
+          {
+            "field": "education_level",
+            "operator": "in",
+            "value": [
+              "masters",
+              "phd",
+              "bachelors",
+              "two_or_more_degrees"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "EB-2 NIW requires an advanced degree (master's or higher) or exceptional ability (bachelor's + 5 years progressive experience, or 3 of 6 exceptional ability criteria)."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "education_level",
+            "weight": 0.7,
+            "favorable_values": [
+              "phd",
+              "masters"
+            ],
+            "points": 25
+          },
+          {
+            "field": "education_field",
+            "weight": 0.6,
+            "favorable_values": [
+              "stem",
+              "healthcare"
+            ],
+            "points": 20
+          },
+          {
+            "field": "total_work_years",
+            "weight": 0.5,
+            "favorable_values": [
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "points": 15
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 50,
+          "close": 35,
+          "note": "Must satisfy the Dhanasar test: (1) proposed endeavor has substantial merit and national importance, (2) well positioned to advance the endeavor, (3) on balance, beneficial to the US to waive the job offer and labor certification requirements."
+        },
+        "discretionary_note": "NIW is highly discretionary under the Dhanasar framework. STEM fields with demonstrated impact tend to fare better. Entrepreneurs can qualify if they can show substantial merit of their business. RFE rates are high.",
+        "gaps": [
+          {
+            "condition": "country_of_birth eq 'IN'",
+            "gap_title": "Same EB-2 India backlog applies",
+            "gap_detail": "NIW is classified under EB-2, so the same India priority date backlog (July 15, 2014) applies. However, NIW allows self-petitioning and no employer dependency, which provides job flexibility during the wait.",
+            "fixable": false,
+            "fix_timeframe": "12+ years"
+          }
+        ],
+        "action_steps": [
+          "Prepare a detailed petition letter articulating the Dhanasar three-prong test",
+          "Compile evidence of proposed endeavor, qualifications, and national importance",
+          "Obtain expert recommendation letters",
+          "File I-140 self-petition with USCIS",
+          "When priority date current, file I-485 or consular process"
+        ],
+        "timeline": {
+          "optimistic_months": 6,
+          "realistic_months": 12,
+          "pessimistic_months": 180,
+          "notes": "I-140 processing: 4-12 months (premium processing: 45 business days for NIW). I-485 depends on country of birth. Rest of world: currently current."
+        },
+        "filing_costs_usd": {
+          "government_fees": 715,
+          "estimated_legal_fees": 7000,
+          "notes": "No PERM costs (significant savings vs EB-2 PERM). Premium processing: $2,805. Legal fees: $5,000-$10,000+."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Growing in popularity. Same EB-2 visa bulletin dates apply. Advantage over EB-2 PERM is self-petitioning (no employer dependency) and no labor market test.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "eb3_skilled",
+        "name": "EB-3 Skilled Workers / Professionals",
+        "country": "US",
+        "category": "economic",
+        "description": "For skilled workers with at least 2 years of training or experience, or professionals with a US bachelor's degree or foreign equivalent. Requires employer sponsorship through PERM.",
+        "hard_requirements": [
+          {
+            "field": "education_level",
+            "operator": "in",
+            "value": [
+              "bachelors",
+              "two_or_more_degrees",
+              "masters",
+              "phd",
+              "two_year_post_secondary",
+              "trade_certificate"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "EB-3 requires at least 2 years of job experience/training (skilled workers) or a bachelor's degree (professionals)."
+          },
+          {
+            "field": "total_work_years",
+            "operator": "gte",
+            "value": 2,
+            "disqualifies_if_false": true,
+            "error_message": "EB-3 skilled workers require at least 2 years of training or experience."
+          },
+          {
+            "field": "job_offer",
+            "operator": "in",
+            "value": [
+              "employer_sponsored_us",
+              "pending"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "EB-3 requires employer sponsorship through the PERM process."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [
+          {
+            "condition": "country_of_birth eq 'IN'",
+            "gap_title": "Severe India EB-3 backlog",
+            "gap_detail": "India EB-3 priority date is at November 15, 2013 - a 12+ year backlog. Consider EB-1 categories or EB-2 NIW if qualifications permit.",
+            "fixable": false,
+            "fix_timeframe": "12+ years"
+          }
+        ],
+        "action_steps": [
+          "Employer files PERM labor certification",
+          "Employer files I-140 upon PERM approval",
+          "File I-485 when priority date is current"
+        ],
+        "timeline": {
+          "optimistic_months": 12,
+          "realistic_months": 24,
+          "pessimistic_months": 180,
+          "notes": "Rest of world: relatively fast. India/China: substantial backlogs."
+        },
+        "filing_costs_usd": {
+          "government_fees": 715,
+          "estimated_legal_fees": 10000,
+          "notes": "Same PERM costs as EB-2."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "EB-3 all chargeability at June 1, 2024. India at Nov 15, 2013. China at June 15, 2021.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "eb3_other_workers",
+        "name": "EB-3 Other Workers (Unskilled)",
+        "country": "US",
+        "category": "economic",
+        "description": "For unskilled workers filling positions requiring less than 2 years of training or experience. Requires PERM. Limited to 10,000 visas per year (reduced by NACARA).",
+        "hard_requirements": [
+          {
+            "field": "job_offer",
+            "operator": "in",
+            "value": [
+              "employer_sponsored_us",
+              "pending"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "EB-3 Other Workers requires employer sponsorship through PERM."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "Employer files PERM",
+          "I-140 filed",
+          "I-485 when current"
+        ],
+        "timeline": {
+          "optimistic_months": 18,
+          "realistic_months": 36,
+          "pessimistic_months": 180,
+          "notes": "Annual cap of ~5,000 (after NACARA reduction) means long waits."
+        },
+        "filing_costs_usd": {
+          "government_fees": 715,
+          "estimated_legal_fees": 8000,
+          "notes": ""
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "All chargeability at Feb 1, 2022. Slow-moving category.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "eb4",
+        "name": "EB-4 Special Immigrants",
+        "country": "US",
+        "category": "economic",
+        "description": "Covers various special immigrant categories including religious workers, certain international organization employees, certain physicians, and others. Most common subcategory is religious workers (R-1).",
+        "hard_requirements": [
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "Highly specialized category. Eligibility depends on specific subcategory. Most common is religious workers requiring 2+ years of membership and service."
+        },
+        "discretionary_note": "EB-4 covers many niche subcategories. The eligibility engine cannot fully assess EB-4 eligibility from the standard user inputs. Flag as 'requires specialist assessment' for most users.",
+        "gaps": [],
+        "action_steps": [
+          "Determine qualifying EB-4 subcategory",
+          "File I-360 petition",
+          "File I-485 when current"
+        ],
+        "timeline": {
+          "optimistic_months": 6,
+          "realistic_months": 12,
+          "pessimistic_months": 24,
+          "notes": "Varies by subcategory."
+        },
+        "filing_costs_usd": {
+          "government_fees": 715,
+          "estimated_legal_fees": 5000,
+          "notes": ""
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Generally current for most countries. Some subcategories have specific caps.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "medium"
+        }
+      },
+      {
+        "id": "eb5_direct",
+        "name": "EB-5 Immigrant Investor (Direct)",
+        "country": "US",
+        "category": "economic",
+        "description": "For investors who make a qualifying investment in a new commercial enterprise that creates at least 10 full-time jobs for US workers. Minimum investment: $1,050,000 (or $800,000 in a Targeted Employment Area).",
+        "hard_requirements": [
+          {
+            "field": "net_worth_usd",
+            "operator": "in",
+            "value": [
+              "200k_1m",
+              "over_1m"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "EB-5 requires a minimum investment of $800,000 (TEA) or $1,050,000 (standard). Net worth must support the investment amount."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "net_worth_usd",
+            "weight": 1.0,
+            "favorable_values": [
+              "over_1m"
+            ],
+            "points": 50
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "Identify qualifying new commercial enterprise",
+          "Document lawful source of investment funds",
+          "Make the qualifying investment",
+          "File I-526E petition",
+          "Upon approval, file I-485 or consular process",
+          "After 2 years of conditional residence, file I-829 to remove conditions"
+        ],
+        "timeline": {
+          "optimistic_months": 18,
+          "realistic_months": 36,
+          "pessimistic_months": 60,
+          "notes": "I-526E processing has lengthened. Increased RFEs for source-of-funds documentation in 2026."
+        },
+        "filing_costs_usd": {
+          "government_fees": 3675,
+          "estimated_legal_fees": 25000,
+          "notes": "I-526E: $3,675. I-829: $3,750. Plus the investment itself ($800,000-$1,050,000). Legal fees: $15,000-$50,000+."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "EB-5 set-aside categories (rural, high unemployment, infrastructure) are current for all countries. Unreserved category has China backlog. USCIS increasing source-of-funds scrutiny.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "eb5_regional_center",
+        "name": "EB-5 Regional Center",
+        "country": "US",
+        "category": "economic",
+        "description": "Pooled EB-5 investment through a USCIS-approved regional center. Allows indirect job creation counting. Minimum investment: $800,000 in TEA. Reauthorized under EB-5 Reform and Integrity Act of 2022.",
+        "hard_requirements": [
+          {
+            "field": "net_worth_usd",
+            "operator": "in",
+            "value": [
+              "200k_1m",
+              "over_1m"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "EB-5 Regional Center requires a minimum investment of $800,000 (TEA) or $1,050,000."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "Select a USCIS-approved regional center with a viable project",
+          "Conduct due diligence on the regional center and project",
+          "Document lawful source of funds",
+          "Make the investment",
+          "File I-526E petition",
+          "File I-485 when current"
+        ],
+        "timeline": {
+          "optimistic_months": 18,
+          "realistic_months": 36,
+          "pessimistic_months": 60,
+          "notes": "Processing times have varied. Set-aside categories (rural, high unemployment) offer concurrent filing advantages and are currently current."
+        },
+        "filing_costs_usd": {
+          "government_fees": 3675,
+          "estimated_legal_fees": 30000,
+          "notes": "Plus investment of $800,000+. Regional center administrative fees typically $50,000-$75,000 additional."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Reauthorized under EB-5 Reform and Integrity Act. Rural set-aside visas are in high demand. Integrity fund fees now required.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous intake",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "h1b_cap",
+        "name": "H-1B Specialty Occupation (Cap-Subject)",
+        "country": "US",
+        "category": "non_immigrant",
+        "description": "Temporary work visa for specialty occupation positions requiring a bachelor's degree or higher. Subject to annual cap of 65,000 (regular) + 20,000 (US master's cap). Requires employer sponsorship and registration in annual lottery.",
+        "hard_requirements": [
+          {
+            "field": "education_level",
+            "operator": "in",
+            "value": [
+              "bachelors",
+              "two_or_more_degrees",
+              "masters",
+              "phd"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "H-1B requires at least a US bachelor's degree or foreign equivalent in a field related to the specialty occupation."
+          },
+          {
+            "field": "job_offer",
+            "operator": "in",
+            "value": [
+              "employer_sponsored_us",
+              "pending"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "H-1B requires an employer sponsor who files the petition."
+          },
+          {
+            "field": "soc_category",
+            "operator": "in",
+            "value": [
+              "management",
+              "professional",
+              "technical"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "H-1B is for specialty occupations that normally require a bachelor's degree or higher."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "education_level",
+            "weight": 0.4,
+            "favorable_values": [
+              "masters",
+              "phd"
+            ],
+            "points": 10
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "Lottery-based selection. Meeting requirements does not guarantee selection."
+        },
+        "discretionary_note": "H-1B cap lottery has become extremely competitive with hundreds of thousands of registrations annually. Selection is random. Multiple registrations from the same beneficiary have been restricted. USCIS has implemented fraud-detection measures.",
+        "gaps": [
+          {
+            "condition": "education_level in ['one_year_post_secondary', 'two_year_post_secondary', 'secondary', 'less_than_secondary', 'trade_certificate']",
+            "gap_title": "No qualifying degree",
+            "gap_detail": "H-1B requires at least a bachelor's degree. Some experience may substitute (3 years of experience = 1 year of education under USCIS rules), but this is increasingly scrutinized.",
+            "fixable": true,
+            "fix_timeframe": "1-4 years"
+          }
+        ],
+        "action_steps": [
+          "Employer registers in the H-1B electronic registration system (typically March)",
+          "If selected in lottery, employer files H-1B petition (I-129)",
+          "Obtain Labor Condition Application (LCA) from DOL",
+          "If approved, begin employment on October 1",
+          "Consider employer-sponsored green card for long-term stay"
+        ],
+        "timeline": {
+          "optimistic_months": 4,
+          "realistic_months": 7,
+          "pessimistic_months": 12,
+          "notes": "Registration: March. Lottery results: March-April. Filing: April-June. Start date: October 1. Premium processing available."
+        },
+        "filing_costs_usd": {
+          "government_fees": 2060,
+          "estimated_legal_fees": 5000,
+          "notes": "Base filing fee: $780. ACWIA training fee: $750-$1,500. Fraud prevention fee: $500. Registration fee: $215. Premium processing: $2,805. Employer-paid per DOL rules."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "FY2026 cap registration completed. Extreme competition. USCIS has implemented beneficiary-centric lottery to reduce duplicate registrations. Check if FY2027 registration is upcoming.",
+          "last_draw_score": null,
+          "draw_frequency": "Annual lottery (March registration, April selection)",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "h1b_cap_exempt",
+        "name": "H-1B Cap-Exempt",
+        "country": "US",
+        "category": "non_immigrant",
+        "description": "H-1B petitions filed by qualifying cap-exempt employers (universities, nonprofit research organizations, government research entities) are not subject to the annual cap or lottery. Can be filed year-round.",
+        "hard_requirements": [
+          {
+            "field": "education_level",
+            "operator": "in",
+            "value": [
+              "bachelors",
+              "two_or_more_degrees",
+              "masters",
+              "phd"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "H-1B requires at least a bachelor's degree or equivalent."
+          },
+          {
+            "field": "employer_type",
+            "operator": "in",
+            "value": [
+              "university_nonprofit"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Cap exemption requires petitioning employer to be an institution of higher education, related/affiliated nonprofit, nonprofit research organization, or governmental research entity."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "Verify employer qualifies for cap exemption",
+          "Employer files H-1B petition (I-129) at any time of year",
+          "No lottery required"
+        ],
+        "timeline": {
+          "optimistic_months": 1,
+          "realistic_months": 3,
+          "pessimistic_months": 6,
+          "notes": "Can be filed any time. Premium processing: 15 business days."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1560,
+          "estimated_legal_fees": 4000,
+          "notes": "Some fees waived/reduced for nonprofits. No ACWIA fee for certain nonprofits."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "No cap or lottery. Filed year-round. Major advantage for workers at qualifying institutions.",
+          "last_draw_score": null,
+          "draw_frequency": "Year-round filing",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "h1b1",
+        "name": "H-1B1 (Chile/Singapore)",
+        "country": "US",
+        "category": "non_immigrant",
+        "description": "Special H-1B subcategory for nationals of Chile (1,400 annual allocation) and Singapore (5,400 annual allocation) under free trade agreements. Simpler filing process than standard H-1B.",
+        "hard_requirements": [
+          {
+            "field": "country_of_birth",
+            "operator": "in",
+            "value": [
+              "CL",
+              "SG"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "H-1B1 is only available to nationals of Chile or Singapore."
+          },
+          {
+            "field": "education_level",
+            "operator": "in",
+            "value": [
+              "bachelors",
+              "two_or_more_degrees",
+              "masters",
+              "phd"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Requires a bachelor's degree or equivalent."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "Apply at US consulate (consular processing) or file I-129 if changing status in US"
+        ],
+        "timeline": {
+          "optimistic_months": 1,
+          "realistic_months": 2,
+          "pessimistic_months": 4,
+          "notes": ""
+        },
+        "filing_costs_usd": {
+          "government_fees": 460,
+          "estimated_legal_fees": 3000,
+          "notes": "Lower fees than regular H-1B."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Unused H-1B1 numbers roll into the regular H-1B cap. Generally underutilized.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "l1a",
+        "name": "L-1A Intracompany Transferee (Manager/Executive)",
+        "country": "US",
+        "category": "non_immigrant",
+        "description": "For managers and executives being transferred from a foreign office to a US office of the same employer (or parent, subsidiary, or affiliate). Initial stay up to 3 years (or 1 year for new offices), extendable to 7 years total.",
+        "hard_requirements": [
+          {
+            "field": "total_work_years",
+            "operator": "gte",
+            "value": 1,
+            "disqualifies_if_false": true,
+            "error_message": "L-1A requires at least 1 year of continuous employment with the qualifying organization abroad within the last 3 years in a managerial or executive capacity."
+          },
+          {
+            "field": "soc_category",
+            "operator": "in",
+            "value": [
+              "management"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "L-1A is for managerial or executive roles."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "employer_type",
+            "weight": 0.6,
+            "favorable_values": [
+              "large_corporation"
+            ],
+            "points": 15
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "Employer files I-129 with L supplement demonstrating qualifying relationship",
+          "If approved, worker enters US in L-1A status",
+          "Can transition to EB-1C for green card"
+        ],
+        "timeline": {
+          "optimistic_months": 1,
+          "realistic_months": 3,
+          "pessimistic_months": 6,
+          "notes": "Premium processing available. Blanket L petitions available for large multinationals."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1385,
+          "estimated_legal_fees": 6000,
+          "notes": "Includes fraud prevention/detection fee."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "No cap. Year-round filing. Common pathway for multinational executives.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "l1b",
+        "name": "L-1B Intracompany Transferee (Specialized Knowledge)",
+        "country": "US",
+        "category": "non_immigrant",
+        "description": "For employees with specialized knowledge being transferred to a US office. Initial stay up to 3 years, extendable to 5 years total. Higher denial rate than L-1A due to subjective 'specialized knowledge' standard.",
+        "hard_requirements": [
+          {
+            "field": "total_work_years",
+            "operator": "gte",
+            "value": 1,
+            "disqualifies_if_false": true,
+            "error_message": "Requires 1 year of continuous employment with the qualifying organization abroad within the last 3 years."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "discretionary_note": "The 'specialized knowledge' standard is notoriously subjective and the most common ground for L-1B denials. USCIS looks for knowledge that is not generally known in the industry and that gives the employer a competitive edge.",
+        "gaps": [],
+        "action_steps": [
+          "Employer files I-129",
+          "Document specialized knowledge thoroughly",
+          "Enter US in L-1B status"
+        ],
+        "timeline": {
+          "optimistic_months": 1,
+          "realistic_months": 3,
+          "pessimistic_months": 6,
+          "notes": "Premium processing available."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1385,
+          "estimated_legal_fees": 5000,
+          "notes": ""
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "No cap. Higher scrutiny and denial rates than L-1A.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "o1a",
+        "name": "O-1A Extraordinary Ability (Sciences/Education/Business/Athletics)",
+        "country": "US",
+        "category": "non_immigrant",
+        "description": "Temporary work visa for individuals with extraordinary ability in sciences, education, business, or athletics. Similar evidentiary criteria to EB-1A but for temporary status. No cap, no lottery.",
+        "hard_requirements": [
+          {
+            "field": "job_offer",
+            "operator": "not_eq",
+            "value": "none",
+            "disqualifies_if_false": true,
+            "error_message": "O-1A requires a US employer (petitioner) or US agent. Self-petitioning is not allowed for O-1."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "education_level",
+            "weight": 0.6,
+            "favorable_values": [
+              "phd",
+              "masters"
+            ],
+            "points": 20
+          },
+          {
+            "field": "total_work_years",
+            "weight": 0.6,
+            "favorable_values": [
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "points": 15
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 50,
+          "close": 35,
+          "note": "Must meet at least 3 of 8 criteria (similar to EB-1A) or show a major one-time achievement."
+        },
+        "discretionary_note": "O-1A has a lower standard than EB-1A ('extraordinary ability' vs 'sustained national or international acclaim'). Advisory opinion from a peer group or labor organization is required but not binding.",
+        "gaps": [],
+        "action_steps": [
+          "Employer/agent files I-129 with O supplement",
+          "Obtain advisory opinion from peer group organization",
+          "Compile evidence of extraordinary ability",
+          "If approved, initial stay up to 3 years, extensions in 1-year increments"
+        ],
+        "timeline": {
+          "optimistic_months": 1,
+          "realistic_months": 3,
+          "pessimistic_months": 5,
+          "notes": "Premium processing: 15 business days. No cap."
+        },
+        "filing_costs_usd": {
+          "government_fees": 780,
+          "estimated_legal_fees": 7000,
+          "notes": "Premium processing: $2,805 additional."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "No cap. Year-round filing. Growing in popularity as H-1B alternative.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "o1b",
+        "name": "O-1B Extraordinary Ability (Arts/Motion Pictures/TV)",
+        "country": "US",
+        "category": "non_immigrant",
+        "description": "Temporary work visa for individuals with extraordinary ability or achievement in the arts, or extraordinary achievement in the motion picture or television industry.",
+        "hard_requirements": [
+          {
+            "field": "education_field",
+            "operator": "in",
+            "value": [
+              "arts_humanities"
+            ],
+            "disqualifies_if_false": false,
+            "error_message": "O-1B is for individuals in the arts, motion picture, or television industry."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "Uses different criteria than O-1A. Looks for distinction in the arts."
+        },
+        "gaps": [],
+        "action_steps": [
+          "Employer/agent files I-129",
+          "Obtain advisory opinion",
+          "Document distinction in the arts"
+        ],
+        "timeline": {
+          "optimistic_months": 1,
+          "realistic_months": 3,
+          "pessimistic_months": 5,
+          "notes": "Premium processing available."
+        },
+        "filing_costs_usd": {
+          "government_fees": 780,
+          "estimated_legal_fees": 6000,
+          "notes": ""
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "No cap.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "tn_visa",
+        "name": "TN Visa (USMCA/NAFTA Professional)",
+        "country": "US",
+        "category": "non_immigrant",
+        "description": "For Canadian and Mexican citizens in designated professional occupations under the USMCA (formerly NAFTA). Canadian citizens can apply directly at the border or pre-flight inspection. No cap, no lottery, no petition required for Canadians.",
+        "hard_requirements": [
+          {
+            "field": "country_of_birth",
+            "operator": "in",
+            "value": [
+              "CA",
+              "MX"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "TN visa is only available to citizens of Canada and Mexico."
+          },
+          {
+            "field": "education_level",
+            "operator": "in",
+            "value": [
+              "bachelors",
+              "two_or_more_degrees",
+              "masters",
+              "phd"
+            ],
+            "disqualifies_if_false": false,
+            "error_message": "Most TN professions require at least a bachelor's degree, though some accept alternative credentials (e.g., technologists, accountants with professional designation)."
+          },
+          {
+            "field": "soc_category",
+            "operator": "in",
+            "value": [
+              "management",
+              "professional",
+              "technical"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "TN is limited to the specific USMCA professional occupations list (engineers, accountants, scientists, etc.)."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "discretionary_note": "TN is a non-immigrant visa; dual intent issues exist. Applying for a green card while on TN can create complications. Many practitioners use H-1B as a bridge between TN and green card.",
+        "gaps": [],
+        "action_steps": [
+          "Canadians: Present TN application at US port of entry or airport pre-clearance",
+          "Mexicans: Apply at US consulate for TN visa stamp",
+          "Bring diploma, transcripts, job offer letter, and professional credentials",
+          "Initial 3-year stay, renewable indefinitely in 3-year increments"
+        ],
+        "timeline": {
+          "optimistic_months": 0,
+          "realistic_months": 0,
+          "pessimistic_months": 2,
+          "notes": "Canadians can be approved at the border same-day. Mexicans require consular processing."
+        },
+        "filing_costs_usd": {
+          "government_fees": 56,
+          "estimated_legal_fees": 2000,
+          "notes": "Canadian border application: $56 I-94 fee. Mexican consular: $160 visa fee. No I-129 petition required for Canadians."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "No cap. Widely used by Canadian professionals. Border processing is efficient.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous / on-demand at border",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "e3_australia",
+        "name": "E-3 Visa (Australia)",
+        "country": "US",
+        "category": "non_immigrant",
+        "description": "Special work visa exclusively for Australian nationals in specialty occupations. Annual allocation of 10,500 visas. Similar to H-1B but only for Australians, and generally undersubscribed.",
+        "hard_requirements": [
+          {
+            "field": "country_of_birth",
+            "operator": "eq",
+            "value": "AU",
+            "disqualifies_if_false": true,
+            "error_message": "E-3 is exclusively for Australian nationals."
+          },
+          {
+            "field": "education_level",
+            "operator": "in",
+            "value": [
+              "bachelors",
+              "two_or_more_degrees",
+              "masters",
+              "phd"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Requires a bachelor's degree or equivalent."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "Obtain LCA from DOL",
+          "Apply at US consulate",
+          "Initial 2-year stay, renewable"
+        ],
+        "timeline": {
+          "optimistic_months": 1,
+          "realistic_months": 2,
+          "pessimistic_months": 4,
+          "notes": "Consular processing. Generally fast."
+        },
+        "filing_costs_usd": {
+          "government_fees": 205,
+          "estimated_legal_fees": 3000,
+          "notes": "$205 visa fee."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Generally undersubscribed. Unused numbers roll over to H-1B cap. Good alternative for Australians.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "f1_opt",
+        "name": "F-1 OPT / STEM OPT Pipeline",
+        "country": "US",
+        "category": "temporary_to_permanent",
+        "description": "International students on F-1 visas can work for up to 12 months under Optional Practical Training (OPT), with an additional 24-month extension for STEM degree holders. Total: up to 36 months of work authorization, commonly used as a bridge to H-1B or EB sponsorship.",
+        "hard_requirements": [
+          {
+            "field": "prior_us_visa",
+            "operator": "in",
+            "value": [
+              "f1"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "OPT requires current or recent F-1 student status at a SEVP-certified institution."
+          },
+          {
+            "field": "education_country",
+            "operator": "eq",
+            "value": "us",
+            "disqualifies_if_false": true,
+            "error_message": "OPT requires completion of a program at a US institution."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [
+          {
+            "field": "education_field",
+            "weight": 0.8,
+            "favorable_values": [
+              "stem"
+            ],
+            "points": 30
+          }
+        ],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "discretionary_note": "The Trump administration has paused processing of some OPT applications at various points. Check current USCIS processing status. STEM OPT requires employer to be enrolled in E-Verify.",
+        "gaps": [
+          {
+            "condition": "education_field not in ['stem']",
+            "gap_title": "No STEM OPT extension eligible",
+            "gap_detail": "Only STEM-designated degrees qualify for the 24-month STEM OPT extension. Non-STEM graduates get only 12 months of standard OPT, which provides one H-1B lottery attempt.",
+            "fixable": true,
+            "fix_timeframe": "1-2 years (complete STEM degree)"
+          }
+        ],
+        "action_steps": [
+          "Apply for OPT through school DSO (Form I-765)",
+          "Begin employment in field related to degree",
+          "If STEM eligible, apply for 24-month STEM OPT extension before standard OPT expires",
+          "Use OPT period to seek H-1B sponsorship or EB green card sponsorship"
+        ],
+        "timeline": {
+          "optimistic_months": 2,
+          "realistic_months": 4,
+          "pessimistic_months": 6,
+          "notes": "OPT processing: 3-5 months. STEM extension: apply 90 days before OPT expiration."
+        },
+        "filing_costs_usd": {
+          "government_fees": 410,
+          "estimated_legal_fees": 500,
+          "notes": "I-765 filing fee. Most students file without attorney."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "OPT/STEM OPT processing has faced significant delays in 2025-2026. Some reports of processing pauses under current administration. Check USCIS announcements.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "medium"
+        }
+      },
+      {
+        "id": "j1_exchange",
+        "name": "J-1 Exchange Visitor",
+        "country": "US",
+        "category": "non_immigrant",
+        "description": "Exchange visitor visa covering research scholars, professors, trainees, interns, au pairs, and others. Some J-1 holders are subject to the 2-year home residency requirement (INA 212(e)) which must be fulfilled or waived before changing to most other statuses.",
+        "hard_requirements": [
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "Various J-1 subcategories have different requirements. Assessment depends on specific program."
+        },
+        "discretionary_note": "The 2-year home residency requirement applies if: (1) the program was government-funded, (2) the field is on the Exchange Visitor Skills List for the home country, or (3) the visitor came for graduate medical education. J-1 waiver options include: No Objection Statement, Interested Government Agency, Conrad 30 (physicians), Persecution, Exceptional Hardship.",
+        "gaps": [],
+        "action_steps": [
+          "Obtain DS-2019 from J-1 program sponsor",
+          "Apply for J-1 visa at US consulate",
+          "If subject to 212(e), plan for waiver or home residency before status change"
+        ],
+        "timeline": {
+          "optimistic_months": 1,
+          "realistic_months": 3,
+          "pessimistic_months": 6,
+          "notes": "Program-dependent."
+        },
+        "filing_costs_usd": {
+          "government_fees": 160,
+          "estimated_legal_fees": 2000,
+          "notes": "SEVIS fee: $220. Visa fee: $160. Waiver (I-612): $120 + legal fees."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Various J-1 categories continue to operate.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "family_ir",
+        "name": "Immediate Relatives (IR-1/CR-1, IR-2, IR-5)",
+        "country": "US",
+        "category": "family",
+        "description": "For spouses, unmarried children under 21, and parents of US citizens. No annual cap - unlimited visas. CR-1 applies when marriage is less than 2 years old at time of admission (conditional residence). IR-1 when marriage is 2+ years.",
+        "hard_requirements": [
+          {
+            "field": "spouse_status",
+            "operator": "in",
+            "value": [
+              "citizen_us"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Immediate relative category requires a US citizen sponsor (spouse, parent, or adult child)."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility (some waivers available for immediate relatives)."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "US citizen files I-130 Petition for Alien Relative",
+          "Once approved, file I-485 (if in US) or process through NVC for consular processing",
+          "Attend interview",
+          "If CR-1 (married < 2 years), file I-751 to remove conditions within 90 days of 2-year anniversary"
+        ],
+        "timeline": {
+          "optimistic_months": 8,
+          "realistic_months": 14,
+          "pessimistic_months": 24,
+          "notes": "No visa number wait (current). Processing delays are administrative, not backlog-related."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1725,
+          "estimated_legal_fees": 3000,
+          "notes": "I-130: $535. I-485: $1,440. Or consular processing: $325 + $120 affidavit fee."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Immediate relatives are always current (no cap). However, Trump administration immigration pauses and travel bans have affected consular processing for nationals of many countries.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "family_f2a",
+        "name": "F-2A: Spouses and Children of Permanent Residents",
+        "country": "US",
+        "category": "family",
+        "description": "For spouses and unmarried children (under 21) of US Lawful Permanent Residents. Subject to annual caps but generally has the shortest wait times among family preference categories.",
+        "hard_requirements": [
+          {
+            "field": "spouse_status",
+            "operator": "in",
+            "value": [
+              "pr_us"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "F-2A requires a US permanent resident (green card holder) sponsor."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "LPR files I-130",
+          "Wait for priority date to become current",
+          "File I-485 or consular process"
+        ],
+        "timeline": {
+          "optimistic_months": 12,
+          "realistic_months": 18,
+          "pessimistic_months": 36,
+          "notes": "F-2A is currently current (no backlog) for all countries under the May 2026 Visa Bulletin."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1725,
+          "estimated_legal_fees": 3000,
+          "notes": ""
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "F-2A is currently current for all countries. This means no wait for a visa number, though administrative processing still takes time.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "family_f2b",
+        "name": "F-2B: Unmarried Sons and Daughters (21+) of Permanent Residents",
+        "country": "US",
+        "category": "family",
+        "description": "For unmarried sons and daughters (age 21+) of US permanent residents. Longer wait times than F-2A.",
+        "hard_requirements": [
+          {
+            "field": "spouse_status",
+            "operator": "in",
+            "value": [
+              "pr_us"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "F-2B requires a US permanent resident sponsor (parent)."
+          },
+          {
+            "field": "age",
+            "operator": "gte",
+            "value": 21,
+            "disqualifies_if_false": true,
+            "error_message": "Must be 21 or older."
+          },
+          {
+            "field": "marital_status",
+            "operator": "in",
+            "value": [
+              "single",
+              "divorced",
+              "widowed"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Must be unmarried."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "LPR parent files I-130",
+          "Wait for priority date",
+          "Process when current"
+        ],
+        "timeline": {
+          "optimistic_months": 24,
+          "realistic_months": 60,
+          "pessimistic_months": 120,
+          "notes": "Wait times vary significantly by country of birth."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1725,
+          "estimated_legal_fees": 3000,
+          "notes": ""
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Backlogged category. Check visa bulletin for current dates.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "family_f3",
+        "name": "F-3: Married Sons and Daughters of US Citizens",
+        "country": "US",
+        "category": "family",
+        "description": "For married sons and daughters (any age) of US citizens. Among the slowest-moving family categories.",
+        "hard_requirements": [
+          {
+            "field": "spouse_status",
+            "operator": "in",
+            "value": [
+              "citizen_us"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "F-3 requires a US citizen parent."
+          },
+          {
+            "field": "marital_status",
+            "operator": "in",
+            "value": [
+              "married",
+              "common_law"
+            ],
+            "disqualifies_if_false": true,
+            "error_message": "Must be married."
+          },
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "gaps": [],
+        "action_steps": [
+          "US citizen parent files I-130",
+          "Very long wait",
+          "Process when current"
+        ],
+        "timeline": {
+          "optimistic_months": 60,
+          "realistic_months": 120,
+          "pessimistic_months": 240,
+          "notes": "One of the slowest categories. Can take 10-20+ years for some countries."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1725,
+          "estimated_legal_fees": 3000,
+          "notes": ""
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Very long backlogs.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "family_f4",
+        "name": "F-4: Brothers and Sisters of US Citizens",
+        "country": "US",
+        "category": "family",
+        "description": "For brothers and sisters of US citizens (petitioner must be 21+). The longest-waiting family immigration category, with backlogs exceeding 20 years for some countries.",
+        "hard_requirements": [
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": true,
+            "error_message": "Criminal history may trigger inadmissibility."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0,
+          "note": "Requires a US citizen sibling age 21+. Cannot be assessed from standard user inputs - flag for manual assessment."
+        },
+        "gaps": [],
+        "action_steps": [
+          "US citizen sibling files I-130",
+          "Wait (potentially decades)",
+          "Process when current"
+        ],
+        "timeline": {
+          "optimistic_months": 120,
+          "realistic_months": 180,
+          "pessimistic_months": 300,
+          "notes": "Philippines F-4 backlog exceeds 23 years."
+        },
+        "filing_costs_usd": {
+          "government_fees": 1725,
+          "estimated_legal_fees": 3000,
+          "notes": ""
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Extremely long backlogs. Some countries 20+ years.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "u_visa",
+        "name": "U Visa (Crime Victims)",
+        "country": "US",
+        "category": "humanitarian",
+        "description": "For victims of certain qualifying crimes who have suffered substantial mental or physical abuse and cooperated with law enforcement. Annual cap of 10,000 U visas. Leads to permanent residence after 3 years.",
+        "hard_requirements": [
+          {
+            "field": "criminal_history",
+            "operator": "eq",
+            "value": false,
+            "disqualifies_if_false": false,
+            "error_message": "Criminal history does not automatically disqualify from U visa. Waivers under INA 212(d)(14) are broadly available for U visa applicants."
+          }
+        ],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "discretionary_note": "U visa assessment is outside the scope of automated eligibility determination. Requires: (1) victim of qualifying crime, (2) substantial abuse, (3) information about the crime, (4) crime occurred in US or violated US law, (5) law enforcement certification (I-918 Supplement B). Must be assessed by an immigration attorney.",
+        "gaps": [],
+        "action_steps": [
+          "Obtain law enforcement certification (I-918 Supplement B)",
+          "File I-918 petition with USCIS",
+          "Wait for processing (extremely long backlogs)",
+          "After 3 years in U status, apply for green card"
+        ],
+        "timeline": {
+          "optimistic_months": 48,
+          "realistic_months": 72,
+          "pessimistic_months": 120,
+          "notes": "U visa has a massive backlog with wait times of 5+ years for initial adjudication."
+        },
+        "filing_costs_usd": {
+          "government_fees": 0,
+          "estimated_legal_fees": 3000,
+          "notes": "No filing fee for U visa. Many legal aid organizations provide pro bono representation."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Massive backlog. USCIS grants bona fide determination (BFD) and work authorization while cases are pending.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "vawa",
+        "name": "VAWA Self-Petition",
+        "country": "US",
+        "category": "humanitarian",
+        "description": "Violence Against Women Act allows certain victims of domestic violence by US citizen or LPR spouses, parents, or adult children to self-petition for immigration benefits without the abuser's knowledge or cooperation.",
+        "hard_requirements": [],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "discretionary_note": "VAWA eligibility cannot be assessed from standard intake questions. Requires evidence of: (1) qualifying relationship to US citizen/LPR abuser, (2) battery or extreme cruelty, (3) good moral character, (4) residence in the US. Must be assessed by a specialized immigration attorney. VAWA applies regardless of gender despite its name.",
+        "gaps": [],
+        "action_steps": [
+          "File I-360 VAWA self-petition with USCIS (confidential)",
+          "USCIS adjudicates without notifying the abuser",
+          "If approved, apply for permanent residence"
+        ],
+        "timeline": {
+          "optimistic_months": 12,
+          "realistic_months": 24,
+          "pessimistic_months": 48,
+          "notes": "Processing varies. Deferred action and work authorization may be available while case is pending."
+        },
+        "filing_costs_usd": {
+          "government_fees": 0,
+          "estimated_legal_fees": 0,
+          "notes": "No filing fees. Many legal aid organizations provide free representation for VAWA cases."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Confidential process. Many free legal resources available.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "asylum",
+        "name": "Asylum",
+        "country": "US",
+        "category": "humanitarian",
+        "description": "Protection for individuals in the US who have been persecuted or fear persecution based on race, religion, nationality, membership in a particular social group, or political opinion.",
+        "hard_requirements": [],
+        "soft_factors": [],
+        "eligibility_score_threshold": {
+          "qualifies": 1,
+          "close": 0
+        },
+        "discretionary_note": "ASYLUM IS OUT OF SCOPE FOR THIS AUTOMATED TOOL. Asylum eligibility is highly fact-specific, involves credibility determinations, and requires expert legal assessment. This tool should flag asylum as requiring specialist consultation and not attempt automated eligibility determination. The 1-year filing deadline, safe third country agreements, and current administration policy changes make this area particularly complex.",
+        "gaps": [],
+        "action_steps": [
+          "Consult an immigration attorney or accredited representative immediately",
+          "File Form I-589 within 1 year of arrival in the US (with limited exceptions)"
+        ],
+        "timeline": {
+          "optimistic_months": 6,
+          "realistic_months": 48,
+          "pessimistic_months": 120,
+          "notes": "Massive backlog. Immigration court wait times vary dramatically by jurisdiction. Affirmative asylum (USCIS) generally faster than defensive asylum (immigration court)."
+        },
+        "filing_costs_usd": {
+          "government_fees": 0,
+          "estimated_legal_fees": 5000,
+          "notes": "No filing fee for asylum. Pro bono representation may be available."
+        },
+        "current_status": {
+          "accepting_applications": true,
+          "notes": "Asylum law is subject to rapid policy changes under the current administration. Significant restrictions have been implemented. This pathway requires specialist legal assessment.",
+          "last_draw_score": null,
+          "draw_frequency": "Continuous",
+          "last_updated": "2026-05",
+          "confidence": "low"
+        }
+      }
+    ],
+    "processing_times": {
+      "last_updated": "2026-05",
+      "source": "USCIS processing times tool and visa bulletin",
+      "note": "USCIS processing times vary by service center and form type. Premium processing available for some petitions.",
+      "programs": {
+        "i140_regular": {
+          "months_low": 6,
+          "months_high": 12,
+          "notes": "Varies by service center and category."
+        },
+        "i140_premium": {
+          "months_low": 0.5,
+          "months_high": 1,
+          "notes": "15 business days (45 business days for NIW)."
+        },
+        "i485_employment_based": {
+          "months_low": 8,
+          "months_high": 24,
+          "notes": "Depends on visa bulletin. Premium processing now available for I-485."
+        },
+        "i485_family_based": {
+          "months_low": 10,
+          "months_high": 24,
+          "notes": "Varies by category and service center."
+        },
+        "h1b_cap_regular": {
+          "months_low": 3,
+          "months_high": 8,
+          "notes": "From filing to approval."
+        },
+        "h1b_premium": {
+          "months_low": 0.5,
+          "months_high": 1,
+          "notes": "15 business days."
+        },
+        "l1_regular": {
+          "months_low": 3,
+          "months_high": 8,
+          "notes": "Varies by service center."
+        },
+        "l1_premium": {
+          "months_low": 0.5,
+          "months_high": 1,
+          "notes": "15 business days."
+        },
+        "perm_labor_certification": {
+          "months_low": 8,
+          "months_high": 18,
+          "notes": "DOL processing. Includes prevailing wage determination (6-8 months) and PERM application (2-8 months)."
+        },
+        "i130_immediate_relative": {
+          "months_low": 8,
+          "months_high": 18,
+          "notes": "Varies by filing location."
+        },
+        "i130_preference": {
+          "months_low": 12,
+          "months_high": 24,
+          "notes": "Plus visa bulletin wait."
+        },
+        "naturalization_n400": {
+          "months_low": 8,
+          "months_high": 14,
+          "notes": "Varies by field office."
+        }
+      }
+    }
+  }
+}
