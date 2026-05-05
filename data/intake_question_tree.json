@@ -1,0 +1,1342 @@
+[
+  {
+    "id": "selected_country",
+    "question": "Which country are you hoping to immigrate to?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "canada",
+        "label": "Canada"
+      },
+      {
+        "value": "us",
+        "label": "United States"
+      }
+    ],
+    "show_if": [],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "Pick the country you're most serious about. Every question after this is tailored to that country's pathways \u2014 if you're considering both, start with one and we can revisit later.",
+    "lawyer_note": "Always asked first. Drives every downstream branch: pathway set, language requirements, supporting field collection (TEER vs SOC, CRS vs visa bulletin)."
+  },
+  {
+    "id": "current_country",
+    "question": "Where do you live right now?",
+    "type": "text",
+    "options": null,
+    "show_if": [],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "Enter the country where you physically reside today (ISO country code or full name). This is different from where you were born \u2014 and it changes which pathways apply. For example, the Canadian Experience Class only applies if you're already in Canada.",
+    "lawyer_note": "Determines whether applicant files from inside the destination (adjustment of status / inland) or from abroad (consular processing). Required to evaluate CEC (current_country=CA hard req), F-1 OPT (already in US), and to gate the prior_us_visa question."
+  },
+  {
+    "id": "current_immigration_status",
+    "question": "What's your immigration status in the country where you live now?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "citizen",
+        "label": "Citizen"
+      },
+      {
+        "value": "pr",
+        "label": "Permanent resident / green card holder"
+      },
+      {
+        "value": "study_permit",
+        "label": "Student visa or study permit"
+      },
+      {
+        "value": "work_permit_open",
+        "label": "Open work permit (any employer)"
+      },
+      {
+        "value": "work_permit_closed",
+        "label": "Employer-specific work permit"
+      },
+      {
+        "value": "visitor",
+        "label": "Visitor / tourist status"
+      },
+      {
+        "value": "undocumented",
+        "label": "No legal status"
+      },
+      {
+        "value": "none",
+        "label": "Not applicable / I'm in my home country"
+      }
+    ],
+    "show_if": [],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "Tell us your status today, in the country you currently live in. If you're a citizen of the country you live in, pick 'Not applicable.' Don't worry \u2014 we ask everyone, and your answer doesn't affect what we'll show you negatively.",
+    "lawyer_note": "Two purposes: (1) gates primary_goal options (a Canadian PR can't apply for PR again), (2) drives auto_fill of prior_us_visa for F-1 students currently in the US."
+  },
+  {
+    "id": "primary_goal",
+    "question": "You already have permanent residence in your destination country. What are you trying to accomplish?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "citizenship",
+        "label": "Apply for citizenship"
+      },
+      {
+        "value": "family_sponsorship",
+        "label": "Sponsor a family member"
+      },
+      {
+        "value": "explore",
+        "label": "Just exploring my options"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "current_immigration_status",
+        "operator": "eq",
+        "value": "pr"
+      },
+      {
+        "field": "current_country",
+        "operator": "eq",
+        "value": "$selected_country_iso"
+      }
+    ],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "Since you're already a permanent resident, you don't need to apply for PR again. The two main things people in your position pursue are citizenship for themselves or sponsorship for family.",
+    "lawyer_note": "PR-already-in-destination variant. The placeholder $selected_country_iso resolves to 'CA' if selected_country=canada, 'US' if selected_country=us. Excludes 'permanent_residence' from options because they have it."
+  },
+  {
+    "id": "primary_goal",
+    "question": "You're already a citizen. Are you here to help someone else immigrate?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "family_sponsorship",
+        "label": "I want to sponsor a family member"
+      },
+      {
+        "value": "explore",
+        "label": "Just gathering information"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "current_immigration_status",
+        "operator": "eq",
+        "value": "citizen"
+      },
+      {
+        "field": "current_country",
+        "operator": "eq",
+        "value": "$selected_country_iso"
+      }
+    ],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "As a citizen of your destination country, your own immigration is already settled. Most people in your position want to bring family over.",
+    "lawyer_note": "Citizen-already-in-destination variant. Excludes permanent_residence and citizenship \u2014 they have both. Only sponsorship and exploration remain."
+  },
+  {
+    "id": "primary_goal",
+    "question": "What's your main immigration goal right now?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "permanent_residence",
+        "label": "Get permanent residence / a green card"
+      },
+      {
+        "value": "work_permit",
+        "label": "Get a work permit / work visa"
+      },
+      {
+        "value": "study_permit",
+        "label": "Get a student visa / study permit"
+      },
+      {
+        "value": "family_sponsorship",
+        "label": "Immigrate through family sponsorship"
+      },
+      {
+        "value": "explore",
+        "label": "I'm not sure yet \u2014 exploring my options"
+      }
+    ],
+    "show_if": [],
+    "skip_if": [
+      {
+        "field": "current_immigration_status",
+        "operator": "in",
+        "value": [
+          "pr",
+          "citizen"
+        ]
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "Pick the closest fit. If you eventually want PR but think a work permit is the realistic first step, choose 'permanent residence' \u2014 we'll still show you the work-permit pathways that lead there.",
+    "lawyer_note": "General-population variant. Shown when applicant is NOT already PR/citizen of destination, OR is a PR/citizen of a different country. Most users land here."
+  },
+  {
+    "id": "country_of_birth",
+    "question": "What country were you born in?",
+    "type": "text",
+    "options": null,
+    "show_if": [],
+    "skip_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "canada"
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "Country of birth, not citizenship. This matters more than you might think for the US (it determines visa-bulletin wait times for India and China born applicants) and gates a few country-specific visas like TN, E-3, and H-1B1.",
+    "lawyer_note": "Hard requirement for h1b1 (CL/SG), tn_visa (CA/MX), e3_australia (AU). Drives visa bulletin retrogression for EB-2/EB-3 (India, China, Mexico, Philippines have separate cutoffs). Skipped when Canada is the selected country since no CA pathway in the dataset uses country of birth."
+  },
+  {
+    "id": "age",
+    "question": "How old are you?",
+    "type": "number",
+    "options": null,
+    "show_if": [],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "Your current age in years. Age affects scoring on Canadian Express Entry (peak points 20-29) and gates a few US family categories that require age 21+.",
+    "lawyer_note": "Hard requirement floor for spousal_sponsorship_ca and pgp (gte 18) and family_f2b (gte 21). Major soft factor in CRS \u2014 points peak at 20-29 and decline after 30."
+  },
+  {
+    "id": "marital_status",
+    "question": "What's your marital status?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "single",
+        "label": "Single (never married)"
+      },
+      {
+        "value": "married",
+        "label": "Married"
+      },
+      {
+        "value": "common_law",
+        "label": "Common-law partner (lived together 12+ months)"
+      },
+      {
+        "value": "separated",
+        "label": "Separated"
+      },
+      {
+        "value": "divorced",
+        "label": "Divorced"
+      },
+      {
+        "value": "widowed",
+        "label": "Widowed"
+      }
+    ],
+    "show_if": [],
+    "skip_if": [],
+    "auto_fill": {
+      "field": "spouse_status",
+      "value": "none",
+      "condition": "answer in ['single', 'separated', 'divorced', 'widowed']"
+    },
+    "help_text": "Common-law in Canada means you've lived with a partner in a marriage-like relationship for at least 12 continuous months. If you're separated but not legally divorced, choose 'separated.'",
+    "lawyer_note": "Hard requirement for spousal_sponsorship_ca and family_f3 (married/common-law) and family_f2b (single/divorced/widowed). Also auto-fills spouse_status to skip a question when no current partner exists."
+  },
+  {
+    "id": "spouse_status",
+    "question": "What's your spouse or partner's immigration status in Canada?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "citizen",
+        "label": "Canadian citizen"
+      },
+      {
+        "value": "permanent_resident",
+        "label": "Permanent resident of Canada"
+      },
+      {
+        "value": "in_destination",
+        "label": "Currently in Canada on a visa or work/study permit"
+      },
+      {
+        "value": "abroad",
+        "label": "Abroad (in another country)"
+      },
+      {
+        "value": "applying_with_me",
+        "label": "Applying together with me"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "marital_status",
+        "operator": "in",
+        "value": [
+          "married",
+          "common_law"
+        ]
+      },
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "canada"
+      },
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "permanent_residence",
+          "family_sponsorship"
+        ]
+      }
+    ],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "If they're a citizen or permanent resident of Canada, you may qualify for spousal sponsorship \u2014 typically the fastest PR route. If they're applying with you, their language scores and education can boost your CRS points significantly.",
+    "lawyer_note": "Hard requirement for spousal_sponsorship_ca (citizen or permanent_resident). Major CRS factor: 'with accompanying spouse' uses a different points table where spouse's CLB level and education each contribute up to 20 points. CA-only variant \u2014 split from US variant because US PR pathways don't use spouse_status in eligibility logic."
+  },
+  {
+    "id": "spouse_status",
+    "question": "What's your spouse's status in the US?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "citizen",
+        "label": "US citizen"
+      },
+      {
+        "value": "permanent_resident",
+        "label": "Lawful Permanent Resident (green card)"
+      },
+      {
+        "value": "in_destination",
+        "label": "Currently in the US on a visa"
+      },
+      {
+        "value": "abroad",
+        "label": "Abroad (in another country)"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "marital_status",
+        "operator": "in",
+        "value": [
+          "married",
+          "common_law"
+        ]
+      },
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "us"
+      },
+      {
+        "field": "primary_goal",
+        "operator": "eq",
+        "value": "family_sponsorship"
+      }
+    ],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "Citizen-sponsored spouses go through the IR-1/CR-1 immigrant visa or Adjustment of Status \u2014 no annual quota and the fastest family route. LPR-sponsored spouses use the F2A category, which has a separate visa bulletin queue (currently moving but with country-specific waits).",
+    "lawyer_note": "Hard requirement for family_ir (citizen sponsor) vs family_f2a (LPR sponsor). Determines whether the applicant faces visa bulletin retrogression. US-only variant \u2014 restricted to family_sponsorship goal because US employment-based PR pathways treat spouses as derivative beneficiaries without affecting principal's eligibility."
+  },
+  {
+    "id": "education_level",
+    "question": "What's the highest level of education you've completed?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "less_than_secondary",
+        "label": "Less than high school"
+      },
+      {
+        "value": "secondary",
+        "label": "High school / secondary diploma"
+      },
+      {
+        "value": "trade_certificate",
+        "label": "Trade certificate or apprenticeship"
+      },
+      {
+        "value": "one_year_post_secondary",
+        "label": "1-year college/university certificate or diploma"
+      },
+      {
+        "value": "two_year_post_secondary",
+        "label": "2-year college diploma"
+      },
+      {
+        "value": "bachelors",
+        "label": "Bachelor's degree"
+      },
+      {
+        "value": "two_or_more_degrees",
+        "label": "Two or more post-secondary credentials (one of which is 3+ years)"
+      },
+      {
+        "value": "masters",
+        "label": "Master's degree"
+      },
+      {
+        "value": "phd",
+        "label": "Doctorate / PhD"
+      }
+    ],
+    "show_if": [],
+    "skip_if": [
+      {
+        "field": "primary_goal",
+        "operator": "eq",
+        "value": "explore"
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "Pick the highest credential you've actually completed and have documentation for. Programs you started but didn't finish don't count. If you have a 3-year bachelor's plus a 1-year diploma, that's 'two or more credentials.'",
+    "lawyer_note": "Hard requirement for FSW (gte secondary), CEC (none), most US economic categories (EB-2 needs masters or bachelors+5yr, EB-3 skilled needs at least 2yr post-secondary, H-1B/TN/E-3 need bachelors+). Also major CRS soft factor."
+  },
+  {
+    "id": "education_country",
+    "question": "Where did you complete your most recent or highest degree?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "canada",
+        "label": "Canada"
+      },
+      {
+        "value": "us",
+        "label": "United States"
+      },
+      {
+        "value": "other",
+        "label": "Another country"
+      }
+    ],
+    "show_if": [],
+    "skip_if": [
+      {
+        "field": "education_level",
+        "operator": "in",
+        "value": [
+          "less_than_secondary",
+          "secondary"
+        ]
+      },
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "citizenship",
+          "family_sponsorship"
+        ]
+      }
+    ],
+    "auto_fill": {
+      "field": "credential_recognized",
+      "value": "na",
+      "condition": "answer in ['canada', 'us']"
+    },
+    "help_text": "Where you earned your degree matters \u2014 Canadian credentials are automatically recognized for Canadian PR, and US degrees skip the credential-evaluation step for US pathways. If you studied in multiple countries, pick where your highest degree is from.",
+    "lawyer_note": "Hard requirement for study_to_pr_pipeline (canada) and f1_opt (us). Auto-fills credential_recognized to 'na' for in-country credentials, eliminating one downstream question for ~30% of users."
+  },
+  {
+    "id": "credential_recognized",
+    "question": "Has a Canadian or US authority formally evaluated your foreign credential as equivalent to a local degree?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "yes",
+        "label": "Yes, I have a completed evaluation (e.g. WES, IQAS, ECFMG)"
+      },
+      {
+        "value": "in_progress",
+        "label": "I've started the evaluation but it's not done yet"
+      },
+      {
+        "value": "no",
+        "label": "No, I haven't done this yet"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "education_country",
+        "operator": "eq",
+        "value": "other"
+      }
+    ],
+    "skip_if": [
+      {
+        "field": "primary_goal",
+        "operator": "eq",
+        "value": "work_permit"
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "For Canadian PR, this is called an Educational Credential Assessment (ECA) \u2014 common providers are WES and IQAS. For US pathways, regulated professions (medicine, engineering) often need separate credential review. If you're not sure whether yours counts, pick 'No' and we'll flag it as a step to complete.",
+    "lawyer_note": "Only asked when education is from outside CA/US. Drives 'gap' generation in pathway results \u2014 credential evaluation is a 2-4 month blocker for FSW/CEC and several US PR pathways. Skipped for work_permit goal since the petitioning employer handles credential equivalence at the I-140/LMIA stage."
+  },
+  {
+    "id": "education_field",
+    "question": "What field is your education in?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "stem",
+        "label": "STEM (science, tech, engineering, math)"
+      },
+      {
+        "value": "healthcare",
+        "label": "Healthcare / medicine / nursing"
+      },
+      {
+        "value": "business_finance",
+        "label": "Business, finance, or economics"
+      },
+      {
+        "value": "law",
+        "label": "Law"
+      },
+      {
+        "value": "trades",
+        "label": "Skilled trades"
+      },
+      {
+        "value": "education_teaching",
+        "label": "Education / teaching"
+      },
+      {
+        "value": "arts_humanities",
+        "label": "Arts, humanities, or social sciences"
+      },
+      {
+        "value": "other",
+        "label": "Other"
+      }
+    ],
+    "show_if": [],
+    "skip_if": [
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "citizenship",
+          "family_sponsorship",
+          "study_permit"
+        ]
+      },
+      {
+        "field": "education_level",
+        "operator": "in",
+        "value": [
+          "less_than_secondary",
+          "secondary"
+        ]
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "Used to flag pathways that prioritize specific fields \u2014 STEM and healthcare draw boosts in Canada, EB-2 NIW in the US, and O-1B for arts. Pick the closest fit; you can choose 'other' if nothing matches.",
+    "lawyer_note": "Hard requirement for o1b (arts_humanities). Soft factor / category-draw eligibility for f1_opt STEM extension, eb1a/eb1b/eb2_niw, study_to_pr_pipeline, and Canadian healthcare/STEM category-based EE draws."
+  },
+  {
+    "id": "total_work_years",
+    "question": "How many total years of full-time professional work experience do you have?",
+    "type": "number",
+    "options": null,
+    "show_if": [],
+    "skip_if": [
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "citizenship",
+          "family_sponsorship",
+          "study_permit"
+        ]
+      }
+    ],
+    "auto_fill": {
+      "field": "destination_work_years",
+      "value": 0,
+      "condition": "answer eq 0"
+    },
+    "help_text": "Count only paid, full-time (or equivalent part-time) work in skilled positions. Internships and student jobs usually don't count. Round down \u2014 2.5 years counts as 2. If you've never worked, enter 0.",
+    "lawyer_note": "Hard requirement floor for FSW (gte 1), FST (gte 2), self_employed (gte 2), eb1b (gte 3), eb1c (gte 1), l1a/l1b (gte 1), eb3_skilled (gte 2). Auto-fills destination_work_years=0 if total is 0 to skip a redundant question."
+  },
+  {
+    "id": "destination_work_years",
+    "question": "How many of those years were worked in your destination country?",
+    "type": "number",
+    "options": null,
+    "show_if": [
+      {
+        "field": "total_work_years",
+        "operator": "not_eq",
+        "value": 0
+      }
+    ],
+    "skip_if": [
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "citizenship",
+          "family_sponsorship",
+          "study_permit"
+        ]
+      },
+      {
+        "field": "current_country",
+        "operator": "not_eq",
+        "value": "$selected_country_iso"
+      },
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "us"
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "Count only work done physically in your destination country, on a valid work permit or visa (or as a citizen/PR). Work done remotely from abroad for a Canadian or US company doesn't count for this purpose.",
+    "lawyer_note": "Hard requirement for CEC (gte 1 year in Canada). Major CRS soft factor. Skipped for US \u2014 no US pathway in the dataset uses destination work years for eligibility (employer-based US categories use total work experience, not US-specific). For CA users abroad, auto-defaults to 0 via skip rule."
+  },
+  {
+    "id": "noc_teer_level",
+    "question": "What's the skill level of your work experience under Canada's NOC system?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "teer0",
+        "label": "TEER 0 \u2014 Management (e.g. directors, senior managers)"
+      },
+      {
+        "value": "teer1",
+        "label": "TEER 1 \u2014 Professional, requires university degree (e.g. engineers, doctors, software developers)"
+      },
+      {
+        "value": "teer2",
+        "label": "TEER 2 \u2014 Skilled, requires college diploma or 2+ years training (e.g. technicians, supervisors)"
+      },
+      {
+        "value": "teer3",
+        "label": "TEER 3 \u2014 Skilled, requires college diploma or apprenticeship (e.g. chefs, dental assistants)"
+      },
+      {
+        "value": "teer4",
+        "label": "TEER 4 \u2014 Intermediate, requires high school + on-the-job training (e.g. retail supervisors, home support workers)"
+      },
+      {
+        "value": "teer5",
+        "label": "TEER 5 \u2014 Labour, no formal education required"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "canada"
+      },
+      {
+        "field": "total_work_years",
+        "operator": "not_eq",
+        "value": 0
+      }
+    ],
+    "skip_if": [
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "citizenship",
+          "family_sponsorship",
+          "study_permit"
+        ]
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "NOC = National Occupational Classification. If you're not sure, look up your job title at noc.esdc.gc.ca \u2014 every Canadian skilled-worker pathway uses TEER level. Most office professionals are TEER 1; technicians and skilled trades are TEER 2-3.",
+    "lawyer_note": "Hard requirement for FSW (TEER 0/1/2/3), CEC (TEER 0/1/2/3), FST (TEER 2/3 trades), caregiver_pathways (TEER 2/3/4). Canada-only field."
+  },
+  {
+    "id": "soc_category",
+    "question": "What category best describes your occupation under the US SOC classification?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "management",
+        "label": "Management (executives, directors, senior managers)"
+      },
+      {
+        "value": "professional",
+        "label": "Professional (requires bachelor's degree \u2014 accountants, lawyers, engineers)"
+      },
+      {
+        "value": "technical",
+        "label": "Technical / specialized (IT, science, healthcare practitioners)"
+      },
+      {
+        "value": "service",
+        "label": "Service occupations (food, healthcare support, personal care)"
+      },
+      {
+        "value": "other",
+        "label": "Other (sales, office, production, construction, transportation)"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "us"
+      },
+      {
+        "field": "total_work_years",
+        "operator": "not_eq",
+        "value": 0
+      }
+    ],
+    "skip_if": [
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "citizenship",
+          "family_sponsorship",
+          "study_permit"
+        ]
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "SOC = Standard Occupational Classification. Most US work-based visas (H-1B, TN, EB-1C, L-1A) require management or professional/technical roles. If your job involves specialty knowledge that requires a degree, pick 'professional' or 'technical.'",
+    "lawyer_note": "Hard requirement for h1b_cap, tn_visa (management/professional/technical), eb1c, l1a (management). US-only field \u2014 Canada uses NOC TEER instead."
+  },
+  {
+    "id": "job_offer",
+    "question": "Do you have a job offer from a Canadian employer?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "lmia_approved",
+        "label": "Yes \u2014 with an approved Labour Market Impact Assessment (LMIA)"
+      },
+      {
+        "value": "lmia_exempt",
+        "label": "Yes \u2014 under an LMIA-exempt category (e.g. CUSMA, intra-company transfer)"
+      },
+      {
+        "value": "pending",
+        "label": "I have a verbal offer but no written/approved paperwork yet"
+      },
+      {
+        "value": "none",
+        "label": "No job offer"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "canada"
+      }
+    ],
+    "skip_if": [
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "citizenship",
+          "family_sponsorship"
+        ]
+      }
+    ],
+    "auto_fill": {
+      "field": "employer_type",
+      "value": "none",
+      "condition": "answer eq 'none'"
+    },
+    "help_text": "An LMIA is a document the employer gets to prove no Canadian could fill the role. If you don't know if your offer has one, ask the employer \u2014 or pick 'pending' for now. Job offers are required for the Atlantic Immigration Program, RNIP, and TFWP, but not for FSW or CEC.",
+    "lawyer_note": "Hard requirement for aip, rnip (lmia_approved/exempt/pending), tfwp (lmia_approved/exempt). Note: as of March 2025, job offer points removed from CRS \u2014 but offers still gate eligibility for several pathways."
+  },
+  {
+    "id": "job_offer",
+    "question": "Do you have a job offer from a US employer willing to sponsor you?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "employer_sponsored_us",
+        "label": "Yes \u2014 employer has confirmed they'll sponsor a visa or green card"
+      },
+      {
+        "value": "pending",
+        "label": "I have an offer but sponsorship hasn't been confirmed"
+      },
+      {
+        "value": "none",
+        "label": "No job offer"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "us"
+      }
+    ],
+    "skip_if": [
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "citizenship",
+          "family_sponsorship"
+        ]
+      }
+    ],
+    "auto_fill": {
+      "field": "employer_type",
+      "value": "none",
+      "condition": "answer eq 'none'"
+    },
+    "help_text": "Most US work-based pathways require an employer to file a petition for you. 'Sponsorship' means they're willing to pay legal fees and file the paperwork \u2014 not just hire you. If you're unsure, ask the employer directly: 'Are you willing to sponsor a work visa?'",
+    "lawyer_note": "Hard requirement for h1b_cap, eb2_perm, eb3_skilled, eb3_other_workers (employer_sponsored_us/pending). O-1A requires job_offer not_eq none. Drives whether self-petition routes (EB-1A, EB-2 NIW, O-1) are the realistic path."
+  },
+  {
+    "id": "employer_type",
+    "question": "What type of organization is offering you the job?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "large_corporation",
+        "label": "Large corporation (1000+ employees)"
+      },
+      {
+        "value": "small_medium",
+        "label": "Small or medium business (under 1000 employees)"
+      },
+      {
+        "value": "university_nonprofit",
+        "label": "University, research institute, or qualifying nonprofit"
+      },
+      {
+        "value": "self_employed",
+        "label": "I'd be self-employed / starting my own company"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "job_offer",
+        "operator": "not_eq",
+        "value": "none"
+      }
+    ],
+    "skip_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "canada"
+      },
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "citizenship",
+          "family_sponsorship",
+          "study_permit",
+          "explore"
+        ]
+      },
+      {
+        "field": "job_offer",
+        "operator": "in",
+        "value": [
+          "none"
+        ]
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "Employer type matters more than you'd think. For the US, universities and qualifying nonprofits are exempt from the H-1B lottery \u2014 meaning no annual cap. For EB-1B, the employer must be a university or have at least 3 full-time researchers.",
+    "lawyer_note": "Hard requirement for h1b_cap_exempt (university_nonprofit) and eb1b (university_nonprofit/large_corporation). Also a soft signal for L-1 viability (large_corporation suggests qualifying multinational). Skipped entirely for Canada \u2014 no CA pathway in the dataset uses employer type."
+  },
+  {
+    "id": "english_level",
+    "question": "How would you describe your English ability?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "none",
+        "label": "None or very minimal"
+      },
+      {
+        "value": "basic",
+        "label": "Basic \u2014 simple conversations, struggles with complex topics"
+      },
+      {
+        "value": "intermediate",
+        "label": "Intermediate \u2014 can hold most conversations and read general material"
+      },
+      {
+        "value": "proficient",
+        "label": "Proficient \u2014 comfortable in professional settings"
+      },
+      {
+        "value": "advanced",
+        "label": "Advanced \u2014 near-native fluency"
+      },
+      {
+        "value": "native",
+        "label": "Native speaker"
+      }
+    ],
+    "show_if": [],
+    "skip_if": [],
+    "auto_fill": {
+      "field": "english_test",
+      "value": "none",
+      "condition": "answer eq 'none'"
+    },
+    "help_text": "Pick honestly \u2014 official language tests will measure this objectively, but your self-assessment helps us flag pathways you'd qualify for. 'Intermediate' roughly maps to IELTS 6 / CLB 7. If your work and education have been in English, you're likely 'proficient' or 'advanced.'",
+    "lawyer_note": "Hard requirement minimums: FSW/CEC/startup_visa need intermediate+ (CLB 7), FST/AIP/RNIP/caregiver need basic+ (CLB 5). Heavily weighted CRS soft factor \u2014 advanced/native gets max points."
+  },
+  {
+    "id": "english_test",
+    "question": "Have you taken an official English language test?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "ielts",
+        "label": "Yes \u2014 IELTS (General Training)"
+      },
+      {
+        "value": "toefl",
+        "label": "Yes \u2014 TOEFL iBT"
+      },
+      {
+        "value": "none",
+        "label": "No, not yet"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "english_level",
+        "operator": "not_in",
+        "value": [
+          "none"
+        ]
+      },
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "canada"
+      }
+    ],
+    "skip_if": [
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "explore",
+          "citizenship",
+          "family_sponsorship"
+        ]
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "For Canadian PR, you'll need IELTS General Training or CELPIP \u2014 TOEFL is not accepted. For most US visas, English is assumed if your education was in English. If your test is over 2 years old, you'll need to retake it. Native English speakers from designated countries can sometimes skip this for US pathways.",
+    "lawyer_note": "Required documentation for any Canadian Express Entry profile or PNP application. CELPIP is also valid for Canada but not in current schema enum \u2014 backend should map CELPIP to 'ielts' equivalent or extend schema."
+  },
+  {
+    "id": "french_level",
+    "question": "Do you speak French \u2014 and if so, how well?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "none",
+        "label": "Not at all"
+      },
+      {
+        "value": "basic",
+        "label": "Basic \u2014 a few words and phrases"
+      },
+      {
+        "value": "intermediate",
+        "label": "Intermediate \u2014 can hold conversations"
+      },
+      {
+        "value": "proficient",
+        "label": "Proficient \u2014 comfortable in most settings"
+      },
+      {
+        "value": "advanced",
+        "label": "Advanced \u2014 near-native fluency"
+      },
+      {
+        "value": "native",
+        "label": "Native speaker"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "canada"
+      }
+    ],
+    "skip_if": [],
+    "auto_fill": {
+      "field": "french_test",
+      "value": "none",
+      "condition": "answer eq 'none'"
+    },
+    "help_text": "French matters a lot for Canadian immigration right now \u2014 IRCC has been holding 'French-speaking' draws with much lower CRS cutoffs (sometimes 100+ points lower than general draws). Even intermediate French (CLB 7) unlocks 25-50 bonus CRS points.",
+    "lawyer_note": "Hard requirement for quebec_skilled_worker (intermediate+). Major bonus in CRS \u2014 bilingual candidates get up to 50 extra points, plus eligibility for category-based French draws with significantly lower cutoffs."
+  },
+  {
+    "id": "french_test",
+    "question": "Have you taken an official French test?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "tef",
+        "label": "Yes \u2014 TEF (Test d'\u00e9valuation de fran\u00e7ais)"
+      },
+      {
+        "value": "tcf",
+        "label": "Yes \u2014 TCF (Test de connaissance du fran\u00e7ais)"
+      },
+      {
+        "value": "none",
+        "label": "No, not yet"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "canada"
+      },
+      {
+        "field": "french_level",
+        "operator": "not_in",
+        "value": [
+          "none"
+        ]
+      }
+    ],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "Both TEF Canada and TCF Canada are accepted by IRCC for Express Entry. They cost about CAD $400 and take a few hours. If you've never taken one, that's fine \u2014 we'll flag it as a step to do if French scoring would help your case.",
+    "lawyer_note": "Required documentation for French CRS points and category-based French draws. TEF is more common; TCF is increasingly accepted."
+  },
+  {
+    "id": "prior_us_visa",
+    "question": "Have you ever held a US visa before?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "h1b",
+        "label": "H-1B (specialty occupation)"
+      },
+      {
+        "value": "l1",
+        "label": "L-1 (intracompany transfer)"
+      },
+      {
+        "value": "o1",
+        "label": "O-1 (extraordinary ability)"
+      },
+      {
+        "value": "f1",
+        "label": "F-1 (student)"
+      },
+      {
+        "value": "tn",
+        "label": "TN (USMCA professional)"
+      },
+      {
+        "value": "b2",
+        "label": "B-1/B-2 (business or tourist visitor)"
+      },
+      {
+        "value": "other",
+        "label": "Another type of US visa"
+      },
+      {
+        "value": "none",
+        "label": "No, I've never held a US visa"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "us"
+      }
+    ],
+    "skip_if": [
+      {
+        "field": "current_country",
+        "operator": "eq",
+        "value": "US"
+      },
+      {
+        "field": "current_immigration_status",
+        "operator": "not_eq",
+        "value": "none"
+      },
+      {
+        "field": "primary_goal",
+        "operator": "in",
+        "value": [
+          "citizenship",
+          "family_sponsorship"
+        ]
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "Prior visa history affects what's possible next. F-1 students with OPT can extend; H-1B holders may be subject to lottery again or can switch employers. If you held multiple, pick the most recent or most relevant.",
+    "lawyer_note": "Hard requirement for f1_opt (must currently be or recently have been F-1). Skip rule: if currently in US with active status (not 'none'), prior visa info is implicit from current_immigration_status. Per spec rule 7."
+  },
+  {
+    "id": "i140_filed",
+    "question": "Has an employer ever filed an I-140 immigrant petition for you?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "true",
+        "label": "Yes"
+      },
+      {
+        "value": "false",
+        "label": "No / I'm not sure"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "us"
+      },
+      {
+        "field": "primary_goal",
+        "operator": "eq",
+        "value": "permanent_residence"
+      }
+    ],
+    "skip_if": [],
+    "auto_fill": {
+      "field": "priority_date",
+      "value": null,
+      "condition": "answer eq 'false'"
+    },
+    "help_text": "An I-140 is the immigrant petition employers file as the second step of the green card process (after PERM, if required). If your employer told you they're 'starting your green card,' an I-140 may have been filed. If you're not sure, ask your HR or attorney \u2014 they can confirm in days.",
+    "lawyer_note": "Determines whether priority_date is meaningful. Auto-fills priority_date=null if no I-140 filed. Critical for visa-bulletin retrogression assessment for India/China born applicants."
+  },
+  {
+    "id": "priority_date",
+    "question": "What's the priority date on your I-140?",
+    "type": "text",
+    "options": null,
+    "show_if": [
+      {
+        "field": "i140_filed",
+        "operator": "eq",
+        "value": "true"
+      }
+    ],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "The priority date is on your I-140 receipt notice (Form I-797). It's typically the date PERM was filed. Format: YYYY-MM-DD. This is the date that 'holds your place in line' against the visa bulletin \u2014 earlier dates clear sooner.",
+    "lawyer_note": "Compared against visa_bulletin.final_action_dates by category and country_of_birth chargeability. Determines whether applicant can file I-485 now or must wait."
+  },
+  {
+    "id": "net_worth_usd",
+    "question": "Roughly what's your total net worth in US dollars?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "under_10k",
+        "label": "Under $10,000"
+      },
+      {
+        "value": "10k_50k",
+        "label": "$10,000 \u2013 $50,000"
+      },
+      {
+        "value": "50k_200k",
+        "label": "$50,000 \u2013 $200,000"
+      },
+      {
+        "value": "200k_1m",
+        "label": "$200,000 \u2013 $1,000,000"
+      },
+      {
+        "value": "over_1m",
+        "label": "Over $1,000,000"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "primary_goal",
+        "operator": "eq",
+        "value": "permanent_residence"
+      }
+    ],
+    "skip_if": [
+      {
+        "field": "job_offer",
+        "operator": "in",
+        "value": [
+          "lmia_approved",
+          "lmia_exempt",
+          "employer_sponsored_us"
+        ]
+      },
+      {
+        "field": "i140_filed",
+        "operator": "eq",
+        "value": "true"
+      },
+      {
+        "field": "noc_teer_level",
+        "operator": "in",
+        "value": [
+          "teer0",
+          "teer1",
+          "teer2",
+          "teer3"
+        ]
+      }
+    ],
+    "auto_fill": null,
+    "help_text": "We're asking because investor and entrepreneur visas (US EB-5, Canadian Start-up Visa, Self-Employed) have minimum capital requirements. Your bracket is private and only used to flag pathways you might qualify for. Pick the closest range \u2014 exact numbers aren't needed.",
+    "lawyer_note": "Hard requirement for eb5_direct/eb5_regional_center (gte 200k_1m). Soft factor for canadian pgp, startup_visa, self_employed. Skipped when applicant is locked into employer-sponsored route (LMIA-approved or US employer sponsor), already in green-card pipeline (i140_filed=true), or is a CA skilled worker with a TEER 0-3 NOC (investor pathways unlikely to be their best match)."
+  },
+  {
+    "id": "provincial_preference",
+    "question": "Is there a specific Canadian province or territory you want to live in?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "ON",
+        "label": "Ontario"
+      },
+      {
+        "value": "BC",
+        "label": "British Columbia"
+      },
+      {
+        "value": "AB",
+        "label": "Alberta"
+      },
+      {
+        "value": "QC",
+        "label": "Quebec"
+      },
+      {
+        "value": "MB",
+        "label": "Manitoba"
+      },
+      {
+        "value": "SK",
+        "label": "Saskatchewan"
+      },
+      {
+        "value": "NS",
+        "label": "Nova Scotia"
+      },
+      {
+        "value": "NB",
+        "label": "New Brunswick"
+      },
+      {
+        "value": "NL",
+        "label": "Newfoundland and Labrador"
+      },
+      {
+        "value": "PE",
+        "label": "Prince Edward Island"
+      },
+      {
+        "value": "YT",
+        "label": "Yukon"
+      },
+      {
+        "value": "NT",
+        "label": "Northwest Territories"
+      },
+      {
+        "value": "NU",
+        "label": "Nunavut"
+      },
+      {
+        "value": "no_preference",
+        "label": "No preference / open to anywhere"
+      }
+    ],
+    "show_if": [
+      {
+        "field": "selected_country",
+        "operator": "eq",
+        "value": "canada"
+      },
+      {
+        "field": "primary_goal",
+        "operator": "eq",
+        "value": "permanent_residence"
+      }
+    ],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "Each province runs its own immigration streams (PNPs) with different criteria. If you have a strong preference, we'll prioritize provincial pathways for that area. If you're flexible, we'll show all options. Quebec runs entirely separately from Express Entry \u2014 its system (Arrima/PSTQ) is its own track.",
+    "lawyer_note": "Hard requirement for quebec_skilled_worker (provincial_preference=QC). Drives PNP stream filtering \u2014 each province's streams have distinct eligibility. Only relevant for PR-track applicants."
+  },
+  {
+    "id": "prior_removal",
+    "question": "Have you ever been ordered to leave Canada or the US, or removed/deported from either country?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "true",
+        "label": "Yes"
+      },
+      {
+        "value": "false",
+        "label": "No"
+      }
+    ],
+    "show_if": [],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "We're asking because removal orders create legal bars to coming back \u2014 but those bars often have solutions (Authorization to Return to Canada, I-212 waivers in the US). If this happened to you, you're not the first. Be honest \u2014 we'll flag the right next step.",
+    "lawyer_note": "Hard disqualifier per schema (disqualifies_all_pathways for CA, disqualifies_most for US) \u2014 but with discretionary remedies. Phrased without the word 'deport' first to reduce shame and increase disclosure rate."
+  },
+  {
+    "id": "criminal_history",
+    "question": "Have you ever been arrested, charged, or convicted of any offense \u2014 anywhere in the world?",
+    "type": "single_select",
+    "options": [
+      {
+        "value": "true",
+        "label": "Yes"
+      },
+      {
+        "value": "false",
+        "label": "No"
+      }
+    ],
+    "show_if": [],
+    "skip_if": [],
+    "auto_fill": null,
+    "help_text": "Including arrests that didn't lead to charges, traffic offenses involving alcohol or drugs, and anything from when you were younger. Not all of these create immigration problems \u2014 many are overcomable through rehabilitation or waivers \u2014 but we need to know to advise properly. This information is confidential within the tool.",
+    "lawyer_note": "Hard disqualifier per schema with discretionary remedies (criminal rehabilitation in CA, I-601/I-212 waivers in US). Worded to capture full disclosure: arrests, charges, AND convictions, not just convictions. Includes 'anywhere in the world' because some clients forget foreign records matter."
+  }
+]
