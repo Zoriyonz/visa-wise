@@ -4,32 +4,21 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import type { AnalysisResult } from "@/../lib/ai";
-import type { EligibilityReport, PathwayResult } from "@/../lib/eligibility/types";
+import type { EligibilityReport } from "@/../lib/eligibility/types";
 
-type ResultPayload = { id: string; analysis_result: AnalysisResult; eligibility_report: EligibilityReport; paid?: boolean };
+import { PathwayCard } from "./PathwayCard";
 
-function PathwayCard({ item, tone }: { item: PathwayResult; tone: "green" | "amber" }) {
-  const border = tone === "green" ? "border-[#238636]/40 bg-[#238636]/10" : "border-[#9e6a03]/40 bg-[#9e6a03]/10";
-  const badge = tone === "green" ? "bg-[#238636]/20 text-[#238636]" : "bg-[#9e6a03]/20 text-[#9e6a03]";
-  const bar = tone === "green" ? "bg-[#238636]" : "bg-[#9e6a03]";
-  const pct = Math.min(100, Math.round((item.score / Math.max(item.threshold_qualifies, 1)) * 100));
-  return (
-    <article className={`rounded-xl border p-5 ${border}`}>
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="font-semibold text-[#f0ece4]">{item.pathway_name}</h3>
-        <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs ${badge}`}>{tone === "green" ? "Qualifies" : "Close"}</span>
-      </div>
-      <div className="mt-3 h-1 rounded-full bg-[#30363d]">
-        <div className={`h-1 rounded-full ${bar}`} style={{ width: `${pct}%` }} />
-      </div>
-      <p className="mt-1.5 text-xs text-[#8b949e]">Score {item.score} · qualifies at {item.threshold_qualifies}</p>
-    </article>
-  );
-}
+type ResultPayload = {
+  id: string;
+  analysis_result: AnalysisResult;
+  eligibility_report: EligibilityReport;
+  paid?: boolean;
+};
 
 export function ResultsClient() {
   const params = useSearchParams();
   const id = params.get("id");
+  const urlUnlocked = params.get("unlocked") === "true";
   const [data, setData] = useState<ResultPayload | null>(null);
   const [error, setError] = useState(false);
 
@@ -38,15 +27,15 @@ export function ResultsClient() {
     const cached = sessionStorage.getItem(`analysis:${id}`);
     if (cached) { setData(JSON.parse(cached) as ResultPayload); return; }
     fetch(`/api/results?id=${id}`)
-      .then(async (r) => { const j = await r.json() as ResultPayload; if (!j?.eligibility_report) setError(true); else setData(j); })
+      .then(async (r) => { const j = (await r.json()) as ResultPayload; if (!j?.eligibility_report || !j?.analysis_result) setError(true); else setData(j); })
       .catch(() => setError(true));
   }, [id]);
 
   async function startCheckout() {
     if (!id) return;
     const r = await fetch("/api/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) });
-    const p = (await r.json()) as { checkoutUrl?: string };
-    if (p.checkoutUrl) window.location.href = p.checkoutUrl;
+    const { checkoutUrl } = (await r.json()) as { checkoutUrl?: string };
+    if (checkoutUrl) window.location.href = checkoutUrl;
   }
 
   if (error || (data !== null && (!data?.eligibility_report || !data?.analysis_result))) {
@@ -54,12 +43,8 @@ export function ResultsClient() {
       <main className="flex min-h-screen items-center justify-center bg-[#0d1117] px-6">
         <div className="mx-auto max-w-md rounded-xl border border-[#30363d] bg-[#1c2128] p-8 text-center">
           <h1 className="display-font text-2xl text-[#f0ece4]">We couldn't load your results</h1>
-          <p className="mt-3 text-sm leading-relaxed text-[#8b949e]">
-            This can happen if the session expired or the analysis didn't complete. Please try again.
-          </p>
-          <a href="/form" className="mt-6 inline-flex h-11 items-center rounded-full bg-[#c9922a] px-7 font-semibold text-[#0d1117] transition-colors hover:bg-[#e0b060]">
-            Start Over
-          </a>
+          <p className="mt-3 text-sm leading-relaxed text-[#8b949e]">This can happen if the session expired or the analysis didn't complete. Please try again.</p>
+          <a href="/form" className="mt-6 inline-flex h-11 items-center rounded-full bg-[#c9922a] px-7 font-semibold text-[#0d1117] transition-colors hover:bg-[#e0b060]">Start Over</a>
         </div>
       </main>
     );
@@ -73,49 +58,84 @@ export function ResultsClient() {
     );
   }
 
+  const paid = data.paid === true || urlUnlocked;
   const top = data.eligibility_report.qualifying[0] ?? data.eligibility_report.borderline[0];
+  const gaps = data.analysis_result.key_gaps.length > 0 ? data.analysis_result.key_gaps : data.eligibility_report.computed_gaps;
+  const steps = data.analysis_result.next_steps.length > 0 ? data.analysis_result.next_steps : data.eligibility_report.action_steps;
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
-      <section className="rounded-xl border border-[#30363d] bg-[#1c2128] p-6 md:p-8">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-[#8b949e]">Top Match</p>
-        <h1 className="display-font mt-2 text-3xl text-[#f0ece4] md:text-4xl">{top?.pathway_name ?? "No strong match found"}</h1>
-        <p className="mt-3 leading-relaxed text-[#8b949e]">{data.analysis_result.summary}</p>
-      </section>
+    <main className="min-h-screen bg-[#0d1117] px-6 py-12">
+      <div className="mx-auto max-w-3xl space-y-10">
+        <header>
+          <p className="font-mono text-xs uppercase tracking-widest text-[#c9922a]">Your Immigration Analysis</p>
+          <h1 className="display-font mt-2 text-3xl text-[#f0ece4] md:text-4xl">{top?.pathway_name ?? "Analysis Complete"}</h1>
+          <p className="mt-1 text-sm text-[#8b949e]">Based on published IRCC and USCIS guidelines</p>
+          {data.analysis_result.summary && <p className="mt-4 leading-relaxed text-[#8b949e]">{data.analysis_result.summary}</p>}
+        </header>
 
-      {data.eligibility_report.qualifying.length > 0 && (
-        <section className="mt-6">
-          <h2 className="mb-3 font-mono text-xs uppercase tracking-widest text-[#8b949e]">Qualifying Pathways</h2>
-          <div className="grid gap-3 md:grid-cols-2">{data.eligibility_report.qualifying.map((p) => <PathwayCard key={p.pathway_id} item={p} tone="green" />)}</div>
-        </section>
-      )}
-      {data.eligibility_report.borderline.length > 0 && (
-        <section className="mt-6">
-          <h2 className="mb-3 font-mono text-xs uppercase tracking-widest text-[#8b949e]">Close Matches</h2>
-          <div className="grid gap-3 md:grid-cols-2">{data.eligibility_report.borderline.map((p) => <PathwayCard key={p.pathway_id} item={p} tone="amber" />)}</div>
-        </section>
-      )}
+        {data.eligibility_report.qualifying.length > 0 && (
+          <section>
+            <h2 className="display-font mb-4 text-xl text-[#f0ece4]">Pathways You Qualify For</h2>
+            <div className="grid gap-4 md:grid-cols-2">{data.eligibility_report.qualifying.map((p) => <PathwayCard key={p.pathway_id} item={p} tone="green" />)}</div>
+          </section>
+        )}
 
-      <section className={`mt-8 space-y-6 transition-all ${data.paid ? "" : "select-none blur-sm"}`}>
-        {data.eligibility_report.computed_gaps.length > 0 && (
-          <div>
-            <h2 className="mb-3 font-semibold text-[#f0ece4]">Key Gaps</h2>
-            <ul className="space-y-2">{data.eligibility_report.computed_gaps.map((g) => <li key={g} className="flex items-start gap-2 text-sm text-[#8b949e]"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#da3633]" />{g}</li>)}</ul>
+        {data.eligibility_report.borderline.length > 0 && (
+          <section>
+            <h2 className="display-font mb-4 text-xl text-[#f0ece4]">Close — With Some Work</h2>
+            <div className="grid gap-4 md:grid-cols-2">{data.eligibility_report.borderline.map((p) => <PathwayCard key={p.pathway_id} item={p} tone="amber" />)}</div>
+          </section>
+        )}
+
+        <div className="relative">
+          <div className={`space-y-8 ${paid ? "" : "pointer-events-none select-none blur-sm"}`}>
+            {gaps.length > 0 && (
+              <section>
+                <h2 className="display-font mb-4 text-xl text-[#f0ece4]">What's Holding You Back</h2>
+                <ul className="space-y-3">
+                  {gaps.map((g) => (
+                    <li key={g} className="flex items-start gap-3 rounded-lg border border-[#30363d] bg-[#1c2128] p-4">
+                      <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#da3633]" />
+                      <span className="text-sm leading-relaxed text-[#8b949e]">{g}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            {steps.length > 0 && (
+              <section>
+                <h2 className="display-font mb-4 text-xl text-[#f0ece4]">Your Action Plan</h2>
+                <ol className="list-none space-y-3">
+                  {steps.map((s, i) => (
+                    <li key={s} className="flex items-start gap-4 rounded-lg border border-[#30363d] bg-[#1c2128] p-4">
+                      <span className="shrink-0 font-mono text-sm font-medium text-[#c9922a]">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="text-sm leading-relaxed text-[#8b949e]">{s}</span>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            )}
+          </div>
+          {!paid && (
+            <div className="absolute inset-0 flex items-center justify-center px-4">
+              <div className="w-full max-w-sm rounded-xl border border-[#30363d] bg-[#1c2128]/95 p-8 text-center shadow-2xl backdrop-blur-sm">
+                <h3 className="display-font text-2xl text-[#f0ece4]">Unlock Your Full Report</h3>
+                <p className="mt-3 text-lg font-semibold text-[#c9922a]">$9.99 — One time payment</p>
+                <p className="mt-1 text-sm text-[#8b949e]">Gap analysis, action plan, and PDF export</p>
+                <button onClick={startCheckout} className="mt-6 inline-flex h-12 items-center rounded-full bg-[#c9922a] px-8 font-semibold text-[#0d1117] shadow-[0_4px_20px_rgba(201,146,42,0.3)] transition-colors hover:bg-[#e0b060] active:scale-[0.98]">
+                  Unlock Now
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {paid && (
+          <div className="text-center">
+            <p className="mb-4 text-sm text-[#c9922a]">Full report unlocked</p>
+            <button onClick={() => window.print()} className="rounded-full border border-[#c9922a] px-6 py-2.5 text-sm text-[#c9922a] transition-colors hover:bg-[#c9922a]/10">Download PDF</button>
           </div>
         )}
-        {data.eligibility_report.action_steps.length > 0 && (
-          <div>
-            <h2 className="mb-3 font-semibold text-[#f0ece4]">Action Steps</h2>
-            <ol className="space-y-2 list-none">{data.eligibility_report.action_steps.map((s, i) => <li key={s} className="flex items-start gap-3 text-sm text-[#8b949e]"><span className="font-mono text-xs text-[#c9922a]">{String(i + 1).padStart(2, "0")}</span>{s}</li>)}</ol>
-          </div>
-        )}
-      </section>
-
-      <div className="mt-10 text-center">
-        {data.paid
-          ? <><p className="mb-4 text-sm text-[#c9922a]">Full report unlocked</p><button onClick={() => window.print()} className="rounded-full border border-[#c9922a] px-6 py-2.5 text-sm text-[#c9922a] transition-colors hover:bg-[#c9922a]/10">Download PDF</button></>
-          : <button onClick={startCheckout} className="inline-flex h-12 items-center rounded-full bg-[#c9922a] px-8 font-semibold text-[#0d1117] shadow-[0_4px_20px_rgba(201,146,42,0.25)] transition-colors hover:bg-[#e0b060]">Unlock Full Report — $9.99</button>
-        }
       </div>
     </main>
   );
