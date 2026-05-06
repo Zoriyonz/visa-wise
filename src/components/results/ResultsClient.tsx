@@ -7,6 +7,7 @@ import type { AnalysisResult } from "@/../lib/ai";
 import type { EligibilityReport } from "@/../lib/eligibility/types";
 import { generateVisaWiseReport } from "@/lib/pdf/generateReport";
 
+import { DisclaimerModal } from "./DisclaimerModal";
 import { PathwayCard } from "./PathwayCard";
 
 type ResultPayload = {
@@ -22,6 +23,7 @@ export function ResultsClient() {
   const [data, setData] = useState<ResultPayload | null>(null);
   const [error, setError] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
 
   useEffect(() => {
     if (!id) { setError(true); return; }
@@ -31,6 +33,16 @@ export function ResultsClient() {
       .then(async (r) => { const j = (await r.json()) as ResultPayload; if (!j?.eligibility_report || !j?.analysis_result) setError(true); else setData(j); })
       .catch(() => setError(true));
   }, [id]);
+
+  useEffect(() => {
+    if (!data?.paid || !id) return;
+    if (!sessionStorage.getItem(`disclaimer_shown_${id}`)) setShowDisclaimer(true);
+  }, [data, id]);
+
+  function handleDisclaimerConfirm() {
+    if (id) sessionStorage.setItem(`disclaimer_shown_${id}`, "1");
+    setShowDisclaimer(false);
+  }
 
   async function startCheckout() {
     if (!id) return;
@@ -75,6 +87,7 @@ export function ResultsClient() {
 
   return (
     <main className="min-h-screen bg-[#0d1117] px-6 py-12">
+      {showDisclaimer && <DisclaimerModal onConfirm={handleDisclaimerConfirm} />}
       <div className="mx-auto max-w-3xl space-y-10">
         <header>
           <p className="font-mono text-xs uppercase tracking-widest text-[#c9922a]">Your Immigration Analysis</p>
