@@ -38,7 +38,7 @@ function buildPrompt(report: EligibilityReport): string {
 
 export async function generateAnalysis(report: EligibilityReport): Promise<AnalysisResult> {
   const response = await anthropic.messages.create({
-    model: "claude-sonnet-4-20250514",
+    model: "claude-sonnet-4-6",
     max_tokens: 2000,
     temperature: 0.2,
     messages: [{ role: "user", content: buildPrompt(report) }],
@@ -47,7 +47,8 @@ export async function generateAnalysis(report: EligibilityReport): Promise<Analy
   if (!content || content.type !== "text") {
     throw new Error("Claude returned no text output.");
   }
-  const parsed = JSON.parse(content.text) as AnalysisResult;
+  const raw = content.text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+  const parsed = JSON.parse(raw) as AnalysisResult;
   return {
     summary: parsed.summary,
     top_recommendations: parsed.top_recommendations ?? [],
