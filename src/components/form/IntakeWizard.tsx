@@ -1,62 +1,146 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
-import { allQuestions, initialAnswers } from "@/../lib/form/questions";
-import type { UserAnswers } from "@/../lib/eligibility/types";
+import { evaluateAutoFillCondition } from "@/../lib/intake/conditions";
+import { postIntakeAnalysis } from "@/../lib/intake/postIntakeAnalysis";
+import type { IntakeQuestion, TreeAnswersState } from "@/../lib/intake/questionTreeTypes";
+import { clearAnswersAfterIndex, getVisiblePathIndices, nextTreeIndexAfter } from "@/../lib/intake/path";
 
-export function IntakeWizard() {
-  const params = useSearchParams();
+import { IntakeProgressBar } from "./IntakeProgressBar";
+import { IntakeQuestionFields } from "./IntakeQuestionFields";
+
+interface Props {
+  questions: readonly IntakeQuestion[];
+}
+
+function normalizeAnswer(q: IntakeQuestion, v: string): string | number | boolean | null {
+  if (q.type === "number") { const n = v === "" ? 0 : Number(v); return Number.isFinite(n) ? n : 0; }
+  if (q.type === "text") return v.trim();
+  return v;
+}
+
+export function IntakeWizard({ questions }: Props) {
   const router = useRouter();
-  const [answers, setAnswers] = useState<UserAnswers>({ ...initialAnswers, selected_country: params.get("country") === "us" ? "us" : "canada" });
-  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<TreeAnswersState>({} as TreeAnswersState);
+  const [history, setHistory] = useState<number[]>([0]);
   const [loading, setLoading] = useState(false);
-  const questions = useMemo(() => allQuestions.filter((q) => !q.countries || q.countries.includes(answers.selected_country)), [answers.selected_country]);
-  const questionStep = step - 1;
-  const current = questionStep >= 0 ? questions[questionStep] : null;
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [pendingValue, setPendingValue] = useState<string | undefined>();
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  async function submitForm() {
-    setLoading(true);
-    const response = await fetch("/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(answers) });
-    const payload = (await response.json()) as { id: string; result: unknown; report: unknown };
-    sessionStorage.setItem(`analysis:${payload.id}`, JSON.stringify({ id: payload.id, analysis_result: payload.result, eligibility_report: payload.report }));
-    router.push(`/results?id=${payload.id}`);
+  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
+
+  const activeTreeIndex = history[history.length - 1] ?? 0;
+  const activeQuestion = questions[activeTreeIndex];
+  const path = useMemo(() => getVisiblePathIndices(questions, answers), [questions, answers]);
+  const stepIndex = path.indexOf(activeTreeIndex);
+  const currentStep = stepIndex >= 0 ? stepIndex + 1 : 1;
+  const totalSteps = path.length;
+
+  const draftText = activeQuestion?.type === "text" ? String(answers[activeQuestion.id] ?? "") : "";
+  const rawSingle = activeQuestion?.type === "single_select" ? answers[activeQuestion.id] : undefined;
+  const selectedSingle = typeof rawSingle === "string" ? rawSingle : undefined;
+  const draftNumber = activeQuestion?.type === "number" && typeof answers[activeQuestion.id] === "number"
+    ? String(answers[activeQuestion.id]) : "";
+
+  const advance = useCallback((nextAnswers: TreeAnswersState, answeredIndex: number) => {
+    const nextIdx = nextTreeIndexAfter(questions, nextAnswers, answeredIndex);
+    if (nextIdx === null) {
+      setLoading(true);
+      void postIntakeAnalysis(nextAnswers).then((payload) => {
+        const id = payload.id;
+        if (!id || id === "undefined") {
+          setLoading(false);
+          setSubmitError("Something went wrong. Please try submitting again.");
+          return;
+        }
+        sessionStorage.setItem(`analysis:${id}`, JSON.stringify({ id, analysis_result: payload.result, eligibility_report: payload.report }));
+        router.push(`/results?id=${id}`);
+      }).catch(() => {
+        setLoading(false);
+        setSubmitError("Something went wrong. Please try submitting again.");
+      });
+      return;
+    }
+    setPendingValue(undefined);
+    setAnswers(nextAnswers);
+    setHistory((h) => [...h, nextIdx]);
+  }, [questions, router]);
+
+  const selectOption = useCallback((value: string) => {
+    if (!activeQuestion) return;
+    if (timerRef.current) clearTimeout(timerRef.current);
+    const coerced = normalizeAnswer(activeQuestion, value);
+    let next: TreeAnswersState = { ...answers, [activeQuestion.id]: coerced };
+    const rule = activeQuestion.auto_fill;
+    if (rule && evaluateAutoFillCondition(rule.condition, coerced)) next = { ...next, [rule.field]: rule.value };
+    setPendingValue(value);
+    timerRef.current = setTimeout(() => advance(next, activeTreeIndex), 320);
+  }, [activeQuestion, activeTreeIndex, answers, advance]);
+
+  const applyTextOrNumber = useCallback((rawDisplay: string) => {
+    if (!activeQuestion) return;
+    const coerced = normalizeAnswer(activeQuestion, rawDisplay);
+    let next: TreeAnswersState = { ...answers, [activeQuestion.id]: coerced };
+    const rule = activeQuestion.auto_fill;
+    if (rule && evaluateAutoFillCondition(rule.condition, coerced)) next = { ...next, [rule.field]: rule.value };
+    advance(next, activeTreeIndex);
+  }, [activeQuestion, activeTreeIndex, answers, advance]);
+
+  const goBack = useCallback(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setPendingValue(undefined);
+    setHistory((prev) => {
+      if (prev.length <= 1) return prev;
+      const nextH = prev.slice(0, -1);
+      const prevIdx = nextH[nextH.length - 1];
+      setAnswers((a) => clearAnswersAfterIndex(questions, a, prevIdx));
+      return nextH;
+    });
+  }, [questions]);
+
+  if (loading || !activeQuestion) {
+    return (
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-[#0d1117] px-4">
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#30363d] border-t-[#c9922a]" />
+        <p className="display-font text-center text-2xl text-[#f0ece4] md:text-3xl">Analyzing your profile…</p>
+      </div>
+    );
   }
-
-  function parseValue(raw: string): string | number | boolean {
-    if (current?.type === "number") return Number(raw || 0);
-    if (current?.type === "boolean") return raw === "true";
-    return raw;
-  }
-
-  if (loading) return <div className="fixed inset-0 z-50 grid place-items-center bg-black/80"><p className="display-font text-3xl">Analyzing your profile...</p></div>;
 
   return (
-    <section className="rounded-2xl border border-[#1a1a1a] bg-[#111111] p-6 md:p-10">
-      <div className="mb-8"><div className="h-2 rounded-full bg-[#1a1a1a]"><div className="h-2 rounded-full bg-[#c9922a] transition-all duration-500" style={{ width: `${((step + 1) / (questions.length + 1)) * 100}%` }} /></div><p className="mt-3 text-sm text-[#666]">Step {step + 1} of {questions.length + 1}</p></div>
-      {step === 0 ? (
-        <div className="space-y-5">
-          <h2 className="display-font text-3xl">Choose your destination country</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            {[{ id: "canada", label: "Canada", flag: "🇨🇦", color: "#d4273a" }, { id: "us", label: "United States", flag: "🇺🇸", color: "#1c3f8f" }].map((item) => (
-              <button key={item.id} onClick={() => setAnswers((prev) => ({ ...prev, selected_country: item.id as UserAnswers["selected_country"] }))} className={`rounded-xl border p-6 text-left ${answers.selected_country === item.id ? "border-[#c9922a]" : "border-[#1a1a1a]"}`}>
-                <p className="text-3xl">{item.flag}</p><p className="mt-2 text-xl" style={{ color: item.color }}>{item.label}</p>
-              </button>
-            ))}
-          </div>
-          <button onClick={() => setStep(1)} className="rounded-full bg-[#c9922a] px-6 py-3 font-semibold text-black">Continue</button>
+    <div className="overflow-hidden rounded-2xl border border-[#30363d] bg-[#1c2128]">
+      <IntakeProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+      <div className="px-6 pb-10 pt-6 md:px-12 md:pb-12">
+        <h2 className="display-font mb-6 text-[22px] leading-snug text-[#f0ece4] md:text-[28px]">
+          {activeQuestion.question}
+        </h2>
+        <IntakeQuestionFields
+          question={activeQuestion}
+          selectedSingleValue={selectedSingle}
+          pendingValue={pendingValue}
+          textValue={draftText}
+          numberValue={draftNumber}
+          onSelectOption={selectOption}
+          onNumberChange={(v) => setAnswers((a) => ({ ...a, [activeQuestion.id]: Number.isFinite(Number(v)) ? Number(v) : 0 }))}
+          onNumberContinue={() => applyTextOrNumber(draftNumber === "" ? "0" : draftNumber)}
+          onTextChange={(v) => setAnswers((a) => ({ ...a, [activeQuestion.id]: v }))}
+          onTextContinue={() => applyTextOrNumber(draftText)}
+        />
+        <p className="mt-6 text-sm italic leading-relaxed text-[#8b949e]">{activeQuestion.help_text}</p>
+        {submitError && (
+          <p role="alert" className="mt-4 rounded-lg border border-[#da3633]/40 bg-[#da3633]/10 px-4 py-3 text-sm text-[#da3633]">
+            {submitError}
+          </p>
+        )}
+        <div className="mt-8">
+          <button type="button" onClick={goBack} className="flex items-center gap-1.5 text-sm text-[#8b949e] transition-colors hover:text-[#f0ece4]">
+            <span aria-hidden>←</span> Back
+          </button>
         </div>
-      ) : (
-        <div className="space-y-6 transition-all duration-300 ease-out">
-          <h2 className="display-font text-3xl">{current?.label}</h2>
-          {current?.type === "number" ? <input type="number" value={String(answers[current.key] ?? "")} onChange={(event) => setAnswers((prev) => ({ ...prev, [current.key]: parseValue(event.target.value) as UserAnswers[typeof current.key] }))} className="w-full rounded-lg border border-[#1a1a1a] bg-black/40 p-4" /> : <div className="grid gap-3">{current?.options?.map((option) => <button key={option.value} onClick={() => setAnswers((prev) => ({ ...prev, [current.key]: parseValue(option.value) as UserAnswers[typeof current.key] }))} className={`rounded-lg border px-4 py-3 text-left ${String(answers[current.key]) === option.value ? "border-[#c9922a]" : "border-[#1a1a1a]"}`}>{option.label}</button>)}</div>}
-          <div className="flex gap-3">
-            <button onClick={() => setStep((value) => Math.max(0, value - 1))} className="rounded-full border border-[#1a1a1a] px-5 py-2">Back</button>
-            <button onClick={() => (step === questions.length ? submitForm() : setStep((value) => value + 1))} className="rounded-full bg-[#c9922a] px-5 py-2 text-black">{step === questions.length ? "Analyze" : "Next"}</button>
-          </div>
-        </div>
-      )}
-    </section>
+      </div>
+    </div>
   );
 }

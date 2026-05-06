@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   if (!supabase) return NextResponse.json({ error: "Supabase unavailable" }, { status: 503 });
   const { data, error } = await supabase
     .from("intake_submissions")
-    .select("id, analysis_result, eligibility_report")
+    .select("id, analysis_result, eligibility_report, paid")
     .eq("id", id)
     .single();
   if (error || !data) return NextResponse.json({ error: "Result not found" }, { status: 404 });
