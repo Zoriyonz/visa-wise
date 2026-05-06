@@ -12,6 +12,7 @@ export interface IntakeSubmissionRow {
   user_answers: UserAnswers;
   analysis_result: AnalysisResult;
   eligibility_report?: EligibilityReport;
+  paid?: boolean;
 }
 
 export interface Database {

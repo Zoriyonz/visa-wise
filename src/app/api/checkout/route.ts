@@ -12,7 +12,8 @@ export async function POST(request: Request) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [{ quantity: 1, price_data: { currency: "usd", product_data: { name: "Visa-Wise Full Report" }, unit_amount: 999 } }],
-      success_url: `${siteUrl}/results?id=${body.id}&unlocked=true`,
+      metadata: { analysisId: body.id },
+      success_url: `${siteUrl}/results?id=${body.id}`,
       cancel_url: `${siteUrl}/results?id=${body.id}`,
     });
     return NextResponse.json({ checkoutUrl: session.url });
