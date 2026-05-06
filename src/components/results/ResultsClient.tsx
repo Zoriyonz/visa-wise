@@ -21,6 +21,7 @@ export function ResultsClient() {
   const id = params.get("id");
   const [data, setData] = useState<ResultPayload | null>(null);
   const [error, setError] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) { setError(true); return; }
@@ -33,9 +34,18 @@ export function ResultsClient() {
 
   async function startCheckout() {
     if (!id) return;
-    const r = await fetch("/api/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) });
-    const { checkoutUrl } = (await r.json()) as { checkoutUrl?: string };
-    if (checkoutUrl) window.location.href = checkoutUrl;
+    setCheckoutError(null);
+    try {
+      const r = await fetch("/api/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) });
+      const json = (await r.json()) as { checkoutUrl?: string; error?: string };
+      if (json.checkoutUrl) {
+        window.location.href = json.checkoutUrl;
+      } else {
+        setCheckoutError(json.error ?? "Could not start checkout. Please try again.");
+      }
+    } catch {
+      setCheckoutError("Could not start checkout. Please try again.");
+    }
   }
 
   if (error || (data !== null && (!data?.eligibility_report || !data?.analysis_result))) {
@@ -122,6 +132,7 @@ export function ResultsClient() {
                 <h3 className="display-font text-2xl text-[#f0ece4]">Unlock Your Full Report</h3>
                 <p className="mt-3 text-lg font-semibold text-[#c9922a]">$9.99 — One time payment</p>
                 <p className="mt-1 text-sm text-[#8b949e]">Gap analysis, action plan, and PDF export</p>
+                {checkoutError && <p className="mt-3 text-sm text-[#da3633]">{checkoutError}</p>}
                 <button onClick={startCheckout} className="mt-6 inline-flex h-12 items-center rounded-full bg-[#c9922a] px-8 font-semibold text-[#0d1117] shadow-[0_4px_20px_rgba(201,146,42,0.3)] transition-colors hover:bg-[#e0b060] active:scale-[0.98]">
                   Unlock Now
                 </button>
