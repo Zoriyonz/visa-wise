@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import type { AnalysisResult } from "@/../lib/ai";
 import type { EligibilityReport } from "@/../lib/eligibility/types";
+import { generateVisaWiseReport } from "@/lib/pdf/generateReport";
 
 import { PathwayCard } from "./PathwayCard";
 
@@ -132,7 +133,7 @@ export function ResultsClient() {
         {paid && (
           <div className="text-center">
             <p className="mb-4 text-sm text-[#c9922a]">Full report unlocked</p>
-            <button onClick={() => window.print()} className="rounded-full border border-[#c9922a] px-6 py-2.5 text-sm text-[#c9922a] transition-colors hover:bg-[#c9922a]/10">Download PDF</button>
+            <button onClick={() => generateVisaWiseReport(data)} className="rounded-full border border-[#c9922a] px-6 py-2.5 text-sm text-[#c9922a] transition-colors hover:bg-[#c9922a]/10">Download PDF Report</button>
           </div>
         )}
       </div>
