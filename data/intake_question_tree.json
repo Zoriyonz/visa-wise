@@ -65,13 +65,13 @@
       },
       {
         "value": "none",
-        "label": "Not applicable / I'm in my home country"
+        "label": "I live outside the destination country \u2014 no status there"
       }
     ],
     "show_if": [],
     "skip_if": [],
     "auto_fill": null,
-    "help_text": "Tell us your status today, in the country you currently live in. If you're a citizen of the country you live in, pick 'Not applicable.' Don't worry \u2014 we ask everyone, and your answer doesn't affect what we'll show you negatively.",
+    "help_text": "Choose this if you're applying from outside Canada or the US and have never held any immigration status there.",
     "lawyer_note": "Two purposes: (1) gates primary_goal options (a Canadian PR can't apply for PR again), (2) drives auto_fill of prior_us_visa for F-1 students currently in the US."
   },
   {
