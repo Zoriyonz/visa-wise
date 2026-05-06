@@ -18,7 +18,6 @@ type ResultPayload = {
 export function ResultsClient() {
   const params = useSearchParams();
   const id = params.get("id");
-  const urlUnlocked = params.get("unlocked") === "true";
   const [data, setData] = useState<ResultPayload | null>(null);
   const [error, setError] = useState(false);
 
@@ -58,7 +57,7 @@ export function ResultsClient() {
     );
   }
 
-  const paid = data.paid === true || urlUnlocked;
+  const paid = data.paid === true;
   const top = data.eligibility_report.qualifying[0] ?? data.eligibility_report.borderline[0];
   const gaps = data.analysis_result.key_gaps.length > 0 ? data.analysis_result.key_gaps : data.eligibility_report.computed_gaps;
   const steps = data.analysis_result.next_steps.length > 0 ? data.analysis_result.next_steps : data.eligibility_report.action_steps;
