@@ -31,7 +31,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
   }
   try {
-    const answers = (await request.json()) as UserAnswers;
+    const raw: unknown = await request.json();
+    if (typeof raw !== "object" || raw === null) {
+      return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+    }
+    const { selected_country } = raw as { selected_country?: unknown };
+    if (selected_country !== "canada" && selected_country !== "us") {
+      return NextResponse.json({ error: "Invalid country selection" }, { status: 400 });
+    }
+    const answers = raw as UserAnswers;
     const eligibilityReport = computeEligibility(answers);
     const analysisResult = await generateAnalysis(eligibilityReport);
     const fallbackId = randomUUID();
