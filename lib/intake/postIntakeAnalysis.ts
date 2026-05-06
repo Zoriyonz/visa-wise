@@ -17,6 +17,10 @@ export async function postIntakeAnalysis(answers: TreeAnswersState): Promise<Ana
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userAnswers),
   });
+  if (!response.ok) {
+    const body: { error?: string } | null = await response.json().catch(() => null);
+    throw new Error(body?.error ?? `Analysis request failed (${response.status})`);
+  }
   const payload: AnalyzeResponsePayload = await response.json();
   return payload;
 }
