@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { evaluateAutoFillCondition } from "@/../lib/intake/conditions";
-import { postIntakeAnalysis } from "@/../lib/intake/postIntakeAnalysis";
+import { ApiError, postIntakeAnalysis } from "@/../lib/intake/postIntakeAnalysis";
 import type { IntakeQuestion, TreeAnswersState } from "@/../lib/intake/questionTreeTypes";
 import { clearAnswersAfterIndex, getVisiblePathIndices, nextTreeIndexAfter } from "@/../lib/intake/path";
 
@@ -29,6 +29,7 @@ export function IntakeWizard({ questions }: Props) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [pendingValue, setPendingValue] = useState<string | undefined>();
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const retryRef = useRef<(() => void) | null>(null);
 
   useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
 
@@ -48,20 +49,37 @@ export function IntakeWizard({ questions }: Props) {
   const advance = useCallback((nextAnswers: TreeAnswersState, answeredIndex: number) => {
     const nextIdx = nextTreeIndexAfter(questions, nextAnswers, answeredIndex);
     if (nextIdx === null) {
-      setLoading(true);
-      void postIntakeAnalysis(nextAnswers).then((payload) => {
-        const id = payload.id;
-        if (!id || id === "undefined") {
-          setLoading(false);
-          setSubmitError("Something went wrong. Please try submitting again.");
-          return;
-        }
-        sessionStorage.setItem(`analysis:${id}`, JSON.stringify({ id, analysis_result: payload.result, eligibility_report: payload.report }));
-        router.push(`/results?id=${id}`);
-      }).catch(() => {
-        setLoading(false);
-        setSubmitError("Something went wrong. Please try submitting again.");
-      });
+      const submitAnalysis = () => {
+        setLoading(true);
+        setSubmitError(null);
+        void postIntakeAnalysis(nextAnswers)
+          .then((payload) => {
+            const id = payload.id;
+            if (!id || id === "undefined") {
+              setLoading(false);
+              setSubmitError("Something went wrong. Please try again.");
+              return;
+            }
+            sessionStorage.setItem(`analysis:${id}`, JSON.stringify({ id, analysis_result: payload.result, eligibility_report: payload.report }));
+            router.push(`/results?id=${id}`);
+          })
+          .catch((err: unknown) => {
+            setLoading(false);
+            if (err instanceof ApiError) {
+              if (err.status === 429) {
+                setSubmitError("You've reached the limit of 3 analyses per hour. Please try again later.");
+              } else if (err.status === 402) {
+                setSubmitError("Our service is temporarily unavailable. Please try again in a few minutes.");
+              } else {
+                setSubmitError("Something went wrong. Please try again.");
+              }
+            } else {
+              setSubmitError("Something went wrong. Please try again.");
+            }
+          });
+      };
+      retryRef.current = submitAnalysis;
+      submitAnalysis();
       return;
     }
     setPendingValue(undefined);
@@ -131,9 +149,16 @@ export function IntakeWizard({ questions }: Props) {
         />
         <p className="mt-6 text-sm italic leading-relaxed text-[#8b949e]">{activeQuestion.help_text}</p>
         {submitError && (
-          <p role="alert" className="mt-4 rounded-lg border border-[#da3633]/40 bg-[#da3633]/10 px-4 py-3 text-sm text-[#da3633]">
-            {submitError}
-          </p>
+          <div role="alert" className="mt-4 rounded-lg border border-[#da3633]/40 bg-[#da3633]/10 px-4 py-3">
+            <p className="text-sm text-[#da3633]">{submitError}</p>
+            <button
+              type="button"
+              onClick={() => { setSubmitError(null); retryRef.current?.(); }}
+              className="mt-2 text-xs font-medium text-[#da3633] underline underline-offset-2 hover:opacity-80"
+            >
+              Try Again
+            </button>
+          </div>
         )}
         <div className="mt-8">
           <button type="button" onClick={goBack} className="flex items-center gap-1.5 text-sm text-[#8b949e] transition-colors hover:text-[#f0ece4]">
