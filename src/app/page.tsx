@@ -28,7 +28,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 50% at 50% 45%, rgba(201,146,42,0.04), transparent)" }} />
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <h1 className="display-font text-[36px] font-bold leading-[1.15] tracking-tight md:text-[56px]">
-            Know your immigration pathway before you spend $300 on a lawyer
+            Know your immigration pathway before you spend $$$$ on a lawyer
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-[#8b949e]">
             Answer targeted questions. Our engine checks 40+ pathways against published IRCC and USCIS rules — not AI guesswork.
