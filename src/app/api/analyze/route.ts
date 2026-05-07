@@ -59,6 +59,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ id, summary: analysisResult.summary, result: analysisResult, report: eligibilityReport });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Analysis failed";
+    const lower = message.toLowerCase();
+    if (lower.includes("credit balance") || lower.includes("insufficient") || lower.includes("billing")) {
+      return NextResponse.json(
+        { error: "Our analysis service is temporarily unavailable. Please try again in a few minutes." },
+        { status: 402 }
+      );
+    }
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
