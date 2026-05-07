@@ -1,0 +1,87 @@
+name: Update Immigration Data
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run update script
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/update-immigration-data.mjs
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet data/immigration_pathways.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes detected — skipping PR."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Changes detected in immigration_pathways.json."
+          fi
+
+      - name: Create branch and commit
+        if: steps.changes.outputs.changed == 'true'
+        id: commit
+        run: |
+          DATE=$(date +%Y-%m-%d)
+          BRANCH="data/auto-update-${DATE}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "${BRANCH}"
+          git add data/immigration_pathways.json
+          git commit -m "data: auto-update immigration pathways (${DATE})"
+          git push origin "${BRANCH}"
+          echo "branch=${BRANCH}" >> "$GITHUB_OUTPUT"
+          echo "date=${DATE}" >> "$GITHUB_OUTPUT"
+
+      - name: Ensure data-update label exists
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh label create "data-update" \
+            --color "0075ca" \
+            --description "Automated immigration data updates" \
+            --repo "${{ github.repository }}" 2>/dev/null || true
+
+      - name: Create pull request
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh pr create \
+            --title "data: weekly immigration data update (${{ steps.commit.outputs.date }})" \
+            --body "Automated weekly update of \`data/immigration_pathways.json\`.\n\nChanges detected and applied by Claude. Please review before merging to verify accuracy against official sources." \
+            --base main \
+            --head "${{ steps.commit.outputs.branch }}" \
+            --label "data-update"
