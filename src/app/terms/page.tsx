@@ -112,7 +112,7 @@ export default function TermsPage() {
           <Section num="05" title="Payment and Refund Policy">
             <p>
               Access to a full Visa-Wise report requires a one-time payment of
-              $9.99 USD. This payment is processed securely through Stripe.
+              $19.99 USD. This payment is processed securely through Stripe.
             </p>
             <p>
               Due to the immediate digital nature of the product, refunds are
@@ -160,7 +160,7 @@ export default function TermsPage() {
               To the maximum extent permitted by applicable law, our total
               liability to you for any claim arising from these Terms or your
               use of the Service is limited to the amount you paid for the
-              Service ($9.99 USD).
+              Service ($19.99 USD).
             </p>
           </Section>
 

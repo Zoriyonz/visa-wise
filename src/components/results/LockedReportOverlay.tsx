@@ -8,7 +8,7 @@ export function LockedReportOverlay() {
           Unlock Your Full Report
         </h3>
         <p className="font-body text-[16px] text-muted mt-2">
-          $9.99 — One time payment
+          $19.99 — One time payment
         </p>
         <p className="font-body text-[13px] text-muted mt-3">
           See all 40+ pathways, gap analysis, action plan, and processing
