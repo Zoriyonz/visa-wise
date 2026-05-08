@@ -52,7 +52,7 @@ export function IntakeWizard() {
           >
             <QuestionCard
               question={current}
-              stepLabel={`Step ${index + 1} of ${questions.length}`}
+              stepLabel={`Step ${index + 1}`}
               onAnswer={handleAnswer}
             />
           </motion.div>

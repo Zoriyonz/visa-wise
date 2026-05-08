@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Logo } from "@/components/Logo";
 import { Wordmark } from "@/components/Wordmark";
 import { LockedReportOverlay } from "@/components/results/LockedReportOverlay";
@@ -28,10 +30,14 @@ export default function ResultsPage() {
     <main className="min-h-screen bg-cream py-16 px-6">
       <div className="max-w-3xl mx-auto">
         <header className="flex flex-col items-center text-center mb-16">
-          <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            aria-label="Visa-Wise home"
+            className="flex items-center gap-3"
+          >
             <Logo size={48} />
             <Wordmark className="!text-[24px]" />
-          </div>
+          </Link>
           <h1 className="font-display font-light text-display-md text-dark mt-10">
             Your Immigration Analysis
           </h1>
