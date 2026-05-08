@@ -1,0 +1,57 @@
+<svg width="100%" viewBox="0 0 690 690" role="img" xmlns="http://www.w3.org/2000/svg" style="">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Visa-Wise logo</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Elegant circular VW monogram on cream</desc>
+
+  <defs>
+    
+  </defs>
+
+  <rect width="680" height="680" fill="#F0EBE1" style="fill:rgb(240, 235, 225);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Outer ring -->
+  <circle cx="340" cy="340" r="210" fill="none" stroke="#0D0D0D" stroke-width="0.9" style="fill:none;stroke:rgb(13, 13, 13);color:rgb(255, 255, 255);stroke-width:0.9px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Inner ring -->
+  <circle cx="340" cy="340" r="200" fill="none" stroke="#0D0D0D" stroke-width="0.4" style="fill:none;stroke:rgb(13, 13, 13);color:rgb(255, 255, 255);stroke-width:0.4px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!--
+    VW mark — balanced, sitting centrally.
+    Total mark width ~180px, centered at x=340.
+    So left edge = 250, right edge = 430.
+
+    V: apex at bottom center of V portion
+       left top:  (258, 290)
+       right top: (322, 290)
+       bottom:    (290, 375)
+
+    W: symmetric, same cap height
+       leftmost:  (318, 290)
+       peak1 down:(336, 355)
+       inner top: (352, 310)
+       peak2 down:(368, 355)
+       rightmost: (386, 290)   — wait let me rebalance
+
+    Let total width = 190. Center = 340.
+    V occupies left ~80px: x 255 to 325, apex 290
+    W occupies right ~110px: x 320 to 430, 
+
+    Let cap height = 290, baseline peaks = 375 for V bottom
+    W inner peaks at y=318
+  -->
+
+  <!-- V — clean, tall, proportional -->
+  <line x1="258" y1="288" x2="295" y2="382" stroke="#0D0D0D" stroke-width="1.6" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(13, 13, 13);color:rgb(255, 255, 255);stroke-width:1.6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="332" y1="288" x2="295" y2="382" stroke="#0D0D0D" stroke-width="1.6" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(13, 13, 13);color:rgb(255, 255, 255);stroke-width:1.6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- W — same cap height, elegant inner peaks -->
+  <line x1="328" y1="288" x2="348" y2="368" stroke="#0D0D0D" stroke-width="1.6" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(13, 13, 13);color:rgb(255, 255, 255);stroke-width:1.6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="348" y1="368" x2="368" y2="316" stroke="#0D0D0D" stroke-width="1.6" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(13, 13, 13);color:rgb(255, 255, 255);stroke-width:1.6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="368" y1="316" x2="388" y2="368" stroke="#0D0D0D" stroke-width="1.6" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(13, 13, 13);color:rgb(255, 255, 255);stroke-width:1.6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="388" y1="368" x2="412" y2="288" stroke="#0D0D0D" stroke-width="1.6" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(13, 13, 13);color:rgb(255, 255, 255);stroke-width:1.6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Hairline serif detail — ultra thin baseline rule under mark -->
+  <line x1="258" y1="390" x2="412" y2="390" stroke="#0D0D0D" stroke-width="0.3" opacity="0.35" style="fill:rgb(0, 0, 0);stroke:rgb(13, 13, 13);color:rgb(255, 255, 255);stroke-width:0.3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.35;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Elegant dot separator between V and W -->
+  <circle cx="335" cy="288" r="1.2" fill="#0D0D0D" opacity="0.5" style="fill:rgb(13, 13, 13);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+</svg>
