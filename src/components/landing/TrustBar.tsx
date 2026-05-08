@@ -4,12 +4,30 @@ interface StatConfig {
   target: number;
   format: TrustStatFormat;
   label: string;
+  prefix?: string;
+  sublabel?: string;
 }
 
 const STATS: readonly StatConfig[] = [
-  { target: 2400, format: "thousands-plus", label: "Analyses Completed" },
-  { target: 40, format: "plus", label: "Immigration Pathways" },
-  { target: 2, format: "plain", label: "Countries Covered" },
+  {
+    target: 40,
+    format: "plus",
+    label: "PATHWAYS CHECKED",
+    sublabel: "Per analysis, every time",
+  },
+  {
+    target: 2,
+    format: "plain",
+    label: "COUNTRIES COVERED",
+    sublabel: "Canada & United States",
+  },
+  {
+    target: 0,
+    format: "plain",
+    prefix: "$",
+    label: "LAWYER FEES",
+    sublabel: "For this step",
+  },
 ];
 
 export function TrustBar() {
@@ -25,6 +43,8 @@ export function TrustBar() {
               target={stat.target}
               format={stat.format}
               label={stat.label}
+              prefix={stat.prefix}
+              sublabel={stat.sublabel}
             />
             {index < STATS.length - 1 && (
               <div
