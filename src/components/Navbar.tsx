@@ -8,9 +8,9 @@ import { Logo } from "./Logo";
 import { Wordmark } from "./Wordmark";
 
 const NAV_LINKS = [
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "How it works", href: "/#how-it-works" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "FAQ", href: "/#faq" },
 ] as const;
 
 export function Navbar() {
@@ -34,13 +34,13 @@ export function Navbar() {
 
         <nav className="hidden md:flex items-center gap-10">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="font-body text-[14px] text-muted hover:text-dark transition-colors duration-200"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 

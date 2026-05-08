@@ -15,7 +15,7 @@ export function LockedReportOverlay() {
           estimates.
         </p>
         <div className="mt-6">
-          <CTAButton variant="dark" size="lg" fullWidth>
+          <CTAButton href="/form" variant="dark" size="lg" fullWidth>
             Unlock Full Report
           </CTAButton>
         </div>
