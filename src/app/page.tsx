@@ -3,8 +3,8 @@ import { Navbar } from "@/components/Navbar";
 import { FAQ } from "@/components/landing/FAQ";
 import { Hero } from "@/components/landing/Hero";
 import { HowItWorks } from "@/components/landing/HowItWorks";
+import { Methodology } from "@/components/landing/Methodology";
 import { Pricing } from "@/components/landing/Pricing";
-import { Testimonials } from "@/components/landing/Testimonials";
 import { TrustBar } from "@/components/landing/TrustBar";
 import { WhatYouGet } from "@/components/landing/WhatYouGet";
 
@@ -17,7 +17,7 @@ export default function LandingPage() {
         <TrustBar />
         <HowItWorks />
         <WhatYouGet />
-        <Testimonials />
+        <Methodology />
         <FAQ />
         <Pricing />
       </main>

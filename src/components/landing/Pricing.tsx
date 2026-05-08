@@ -29,7 +29,7 @@ export function Pricing() {
           className="font-display font-light text-cream block mt-4 text-[64px] md:text-price"
           style={{ lineHeight: 1, letterSpacing: "-0.02em" }}
         >
-          $9.99
+          $19.99
         </span>
         <p className="font-body text-[16px] text-muted-dark mt-2">
           One-time payment. No subscription.
