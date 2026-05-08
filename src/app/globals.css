@@ -1,60 +1,111 @@
 @import "tailwindcss";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/playfair-display/600.css";
-@import "@fontsource/playfair-display/700.css";
-@import "@fontsource/jetbrains-mono/400.css";
 
-:root {
-  --bg-primary:  #0d1117;
-  --bg-surface:  #161b22;
-  --bg-card:     #1c2128;
-  --border:      #30363d;
-  --text-primary:#f0ece4;
-  --text-muted:  #8b949e;
-  --gold:        #c9922a;
-  --gold-light:  #e0b060;
-  --gold-dim:    #7a5a1a;
-  --success:     #238636;
-  --warning:     #9e6a03;
-  --danger:      #da3633;
-  --font-display:"Playfair Display", Georgia, serif;
-  --font-body:   "Inter", system-ui, sans-serif;
-  --font-mono:   "JetBrains Mono", monospace;
+@theme {
+  --color-cream: #F5F0E8;
+  --color-surface: #EDEAE0;
+  --color-dark: #0D0D0D;
+  --color-dark-surface: #1A1A1A;
+  --color-dark-border: #2A2A2A;
+  --color-muted: #6B6B6B;
+  --color-muted-dark: #9B9B9B;
+  --color-border: #D4CFC4;
+  --color-success: #1A6B3C;
+  --color-error: #C0392B;
+  --color-amber: #B8860B;
 
-  /* keep background/foreground aliases for Tailwind @theme */
-  --background:  var(--bg-primary);
-  --foreground:  var(--text-primary);
-  --surface:     var(--bg-surface);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --text-display-xl: 72px;
+  --text-display-xl--line-height: 1.05;
+  --text-display-xl--letter-spacing: -0.02em;
+
+  --text-display-lg: 56px;
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.02em;
+
+  --text-display-md: 48px;
+  --text-display-md--line-height: 1.1;
+  --text-display-md--letter-spacing: -0.02em;
+
+  --text-display-sm: 32px;
+  --text-display-sm--line-height: 1.2;
+  --text-display-sm--letter-spacing: -0.01em;
+
+  --text-price: 80px;
+  --text-price--line-height: 1;
+  --text-price--letter-spacing: -0.02em;
+
+  --text-stat: 56px;
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.02em;
+
+  --tracking-tight-display: -0.02em;
+  --tracking-wordmark: 0.05em;
+  --tracking-micro: 0.15em;
+  --tracking-micro-wide: 0.2em;
+
+  --shadow-cta: 0 4px 24px rgba(13, 13, 13, 0.15);
+  --shadow-cta-hover: 0 6px 32px rgba(13, 13, 13, 0.22);
+  --shadow-card: 0 1px 3px rgba(13, 13, 13, 0.04);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans:   var(--font-body);
-  --font-serif:  var(--font-display);
-  --font-mono:   var(--font-mono);
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-body);
+  background: #F5F0E8;
+  color: #0D0D0D;
+  line-height: 1.6;
 }
 
-.display-font { font-family: var(--font-display); }
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) var(--bg-primary);
+/* Selection — cream on dark */
+::selection {
+  background: #0D0D0D;
+  color: #F5F0E8;
 }
-*::-webkit-scrollbar { width: 8px; }
-*::-webkit-scrollbar-track { background: var(--bg-primary); }
-*::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  border: 2px solid var(--bg-primary);
-  background: var(--border);
+
+/* Hairline horizontal rule used as section divider when needed */
+.hairline {
+  height: 1px;
+  background: #D4CFC4;
+  width: 100%;
+}
+
+/* Noise overlay — apply via class on a positioned ::before */
+.noise-overlay {
+  position: relative;
+  isolation: isolate;
+}
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: multiply;
+}
+.noise-overlay > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Reduced motion — kill all transitions, animations, and transforms */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Display heading defaults */
+.font-display {
+  font-feature-settings: 'liga' 1, 'kern' 1;
 }
