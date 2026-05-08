@@ -70,8 +70,8 @@ export function Hero() {
           className="font-body text-muted text-center mt-8 text-[16px] md:text-[18px] max-w-[540px] mx-auto"
           style={{ lineHeight: 1.6 }}
         >
-          Answer 20 targeted questions. Our engine checks 40+ pathways against
-          published IRCC and USCIS guidelines — not AI guesswork.
+          Answer a few targeted questions. Our engine checks 40+ pathways
+          against published IRCC and USCIS guidelines — not AI guesswork.
         </motion.p>
 
         <motion.div
