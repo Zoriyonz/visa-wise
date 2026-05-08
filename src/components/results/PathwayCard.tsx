@@ -1,47 +1,50 @@
-import type { PathwayResult } from "@/../lib/eligibility/types";
-
-interface Props {
-  item: PathwayResult;
-  tone: "green" | "amber";
+interface PathwayCardProps {
+  name: string;
+  score: number;
+  country: "CA" | "US";
+  borderline?: boolean;
 }
 
-const ACCENTS = {
-  green: { hex: "#238636", label: "Qualifies" },
-  amber: { hex: "#9e6a03", label: "Close Match" },
-} as const;
-
-export function PathwayCard({ item, tone }: Props) {
-  const { hex, label } = ACCENTS[tone];
-  const pct = Math.min(100, Math.round((item.score / Math.max(item.threshold_qualifies, 1)) * 100));
-
-  const reason =
-    tone === "green"
-      ? item.matched_soft_factors.slice(0, 2).join(" · ") || null
-      : (item.unmet_gaps[0] ?? item.failed_hard_requirements[0] ?? null);
+export function PathwayCard({
+  name,
+  score,
+  country,
+  borderline = false,
+}: PathwayCardProps) {
+  const accent = borderline ? "#B8860B" : "#1A6B3C";
+  const label = borderline ? "Close Match" : "Strong Match";
+  const countryLabel = country === "CA" ? "CANADA" : "UNITED STATES";
 
   return (
-    <article className="relative overflow-hidden rounded-xl border border-[#30363d] bg-[#1c2128] p-5">
-      <div className="absolute left-0 top-0 h-full w-[3px]" style={{ background: hex }} />
-      <div className="pl-3">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="display-font text-lg leading-snug text-[#f0ece4]">{item.pathway_name}</h3>
-          <span
-            className="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium"
-            style={{ background: `${hex}25`, color: hex }}
+    <article
+      className="bg-surface rounded-[12px] p-6 border border-border"
+      style={{ borderLeft: `3px solid ${accent}` }}
+    >
+      <header className="flex items-start justify-between gap-4">
+        <div>
+          <p
+            className="font-mono uppercase text-[11px] text-muted"
+            style={{ letterSpacing: "0.15em" }}
           >
-            {label}
-          </span>
+            {countryLabel}
+          </p>
+          <h3 className="font-display text-[24px] text-dark mt-2">{name}</h3>
         </div>
-        <div className="mt-3 h-1 rounded-full bg-[#30363d]">
+        <span
+          className="font-body text-[11px] font-medium text-cream px-2.5 py-1 rounded-[6px]"
+          style={{ backgroundColor: accent }}
+        >
+          {label}
+        </span>
+      </header>
+      <div className="mt-5">
+        <div className="h-1 bg-border rounded-full overflow-hidden">
           <div
-            className="h-1 rounded-full transition-all duration-700"
-            style={{ width: `${pct}%`, background: hex }}
+            className="h-full bg-dark rounded-full"
+            style={{ width: `${score}%` }}
           />
         </div>
-        <p className="mt-1 text-xs text-[#8b949e]">
-          Score {item.score} · qualifies at {item.threshold_qualifies}
-        </p>
-        {reason && <p className="mt-3 text-sm leading-relaxed text-[#8b949e]">{reason}</p>}
+        <p className="font-mono text-[11px] text-muted mt-2">{score} / 100</p>
       </div>
     </article>
   );
