@@ -10,6 +10,8 @@ interface TrustStatProps {
   target: number;
   format: TrustStatFormat;
   label: string;
+  prefix?: string;
+  sublabel?: string;
 }
 
 function formatValue(value: number, format: TrustStatFormat): string {
@@ -18,7 +20,7 @@ function formatValue(value: number, format: TrustStatFormat): string {
   return `${value}`;
 }
 
-export function TrustStat({ target, format, label }: TrustStatProps) {
+export function TrustStat({ target, format, label, prefix, sublabel }: TrustStatProps) {
   const { value, ref } = useCountUp(target);
   return (
     <div ref={ref} className="flex flex-col items-center text-center">
@@ -26,7 +28,7 @@ export function TrustStat({ target, format, label }: TrustStatProps) {
         className="font-display font-light text-stat text-dark"
         style={{ fontVariantNumeric: "tabular-nums" }}
       >
-        {formatValue(value, format)}
+        {prefix}{formatValue(value, format)}
       </span>
       <span
         className="font-body uppercase text-[13px] text-muted mt-3"
@@ -34,6 +36,14 @@ export function TrustStat({ target, format, label }: TrustStatProps) {
       >
         {label}
       </span>
+      {sublabel && (
+        <span
+          className="font-body text-[11px] text-muted mt-1"
+          style={{ letterSpacing: "0.05em" }}
+        >
+          {sublabel}
+        </span>
+      )}
     </div>
   );
 }
