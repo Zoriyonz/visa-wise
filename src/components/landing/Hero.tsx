@@ -81,7 +81,7 @@ export function Hero() {
           className="mt-10 flex justify-center"
         >
           <CTAButton href="/form" size="lg" variant="dark">
-            Start Your Analysis — $9.99
+            Start Your Analysis — $19.99
           </CTAButton>
         </motion.div>
 
