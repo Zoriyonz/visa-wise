@@ -18,10 +18,6 @@ function uniqueValues(values: string[]): string[] {
   return [...new Set(values)];
 }
 
-function collectActionSteps(pathways: PathwayResult[]): string[] {
-  return uniqueValues(pathways.flatMap((pathway) => pathway.action_steps));
-}
-
 function collectTopGaps(pathways: PathwayResult[], limit: number): string[] {
   return uniqueValues(pathways.flatMap((pathway) => pathway.unmet_gaps)).slice(0, limit);
 }
@@ -38,11 +34,15 @@ function SectionHeading({ title }: { title: string }) {
 
 export function ResultsDisplay({ answers }: ResultsDisplayProps) {
   const report = computeEligibility(mapTreeAnswersToUserAnswers(answers));
-  const hasMatches = report.qualifying.length > 0 || report.borderline.length > 0;
+  const trueBorderline = report.borderline.filter((pathway) => pathway.score > 0);
+  const falsePositives = report.borderline.filter((pathway) => pathway.score === 0);
+  const allIneligible = [...falsePositives, ...report.ineligible];
+  const hasMatches = report.qualifying.length > 0 || trueBorderline.length > 0;
   const totalChecked =
     report.qualifying.length + report.borderline.length + report.ineligible.length;
-  const checklistItems = collectActionSteps([...report.qualifying, ...report.borderline]);
-  const topGaps = collectTopGaps(report.ineligible, 5);
+  const topMatch = report.qualifying[0] ?? trueBorderline[0];
+  const checklistItems = topMatch ? topMatch.action_steps : [];
+  const topGaps = collectTopGaps(allIneligible, 5);
 
   return (
     <>
@@ -64,22 +64,22 @@ export function ResultsDisplay({ answers }: ResultsDisplayProps) {
             </section>
           )}
 
-          {report.borderline.length > 0 && (
+          {trueBorderline.length > 0 && (
             <section aria-label="Close matches" className="space-y-6 mt-10">
               <SectionHeading title="Close Matches" />
-              {report.borderline.map((pathway) => (
+              {trueBorderline.map((pathway) => (
                 <ResultsPathwayCard key={pathway.pathway_id} pathway={pathway} borderline />
               ))}
             </section>
           )}
 
-          {report.ineligible.length > 0 && (
+          {allIneligible.length > 0 && (
             <details className="mt-10 rounded-[16px] border border-border bg-surface/40 p-6">
               <summary className="cursor-pointer list-none font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
-                Not Yet Eligible ({report.ineligible.length})
+                Not Yet Eligible ({allIneligible.length})
               </summary>
               <div className="mt-6 space-y-3">
-                {report.ineligible.map((pathway) => (
+                {allIneligible.map((pathway) => (
                   <IneligiblePathwayCard key={pathway.pathway_id} pathway={pathway} />
                 ))}
               </div>
@@ -111,7 +111,7 @@ export function ResultsDisplay({ answers }: ResultsDisplayProps) {
           )}
 
           <div className="space-y-3">
-            {report.ineligible.map((pathway) => (
+            {allIneligible.map((pathway) => (
               <IneligiblePathwayCard key={pathway.pathway_id} pathway={pathway} />
             ))}
           </div>

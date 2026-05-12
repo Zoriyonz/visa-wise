@@ -11,6 +11,7 @@ import {
   INITIAL_ANSWERS,
   isComplete,
 } from "@/lib/intake-engine";
+import { applyDisplayOverrides } from "@/lib/question-display";
 import type { IntakeQuestion, TreeAnswersState } from "../../../lib/intake/questionTreeTypes";
 
 import { IntakeInputQuestion } from "./IntakeInputQuestion";
@@ -87,6 +88,7 @@ export function IntakeWizard() {
 
   if (!currentQuestion) return null;
 
+  const displayQuestion = applyDisplayOverrides(currentQuestion);
   const motionKey = `${currentQuestion.id}:${currentQuestion.question}`;
 
   return (
@@ -105,13 +107,13 @@ export function IntakeWizard() {
           >
             {currentQuestion.type === "single_select" ? (
               <QuestionCard
-                question={toQuestionCardProps(currentQuestion)}
+                question={toQuestionCardProps(displayQuestion)}
                 stepLabel={stepLabel}
                 onAnswer={(value) => handleAnswer(value)}
               />
             ) : (
               <IntakeInputQuestion
-                question={currentQuestion}
+                question={displayQuestion}
                 stepLabel={stepLabel}
                 textValue={textValue}
                 numberValue={numberValue}
