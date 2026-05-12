@@ -8,7 +8,7 @@ import { SectionLabel } from "@/components/SectionLabel";
 const FAQS = [
   {
     q: "Is this legal advice?",
-    a: "No. Visa-Wise provides educational information based on publicly available IRCC and USCIS guidelines. We are not a law firm and no attorney-client relationship is created. Always verify with official sources before taking action.",
+    a: "No. Visa-Wise provides educational information based on publicly available IRCC guidelines. We are not a law firm and no attorney-client relationship is created. Always verify with official sources before taking action.",
   },
   {
     q: "How accurate is the analysis?",
@@ -16,7 +16,7 @@ const FAQS = [
   },
   {
     q: "What if my situation is complex?",
-    a: "The tool handles most standard immigration scenarios for Canada and the United States. If your situation involves criminal history, prior removals, or highly unusual circumstances, we flag these and recommend consulting a licensed professional.",
+    a: "The tool handles most standard Canadian immigration scenarios. If your situation involves criminal history, prior removals, or highly unusual circumstances, we flag these and recommend consulting a licensed professional.",
   },
   {
     q: "How is this different from just Googling it?",

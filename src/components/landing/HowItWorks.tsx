@@ -13,7 +13,7 @@ const STEPS = [
   {
     number: "02",
     title: "Engine checks 40+ pathways",
-    body: "Deterministic rules against published IRCC and USCIS criteria. Same answers always produce the same result — no AI guesswork.",
+    body: "Deterministic rules against published IRCC criteria. Same answers always produce the same result — no AI guesswork.",
   },
   {
     number: "03",

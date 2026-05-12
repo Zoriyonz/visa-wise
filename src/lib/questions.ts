@@ -17,21 +17,19 @@ export const questions: Question[] = [
   {
     id: "primary_goal",
     type: "select",
-    prompt: "Which country are you primarily considering?",
-    helpText:
-      "You can answer for either Canada or the United States. Some pathways exist in both.",
+    prompt: "What is your main immigration goal?",
+    helpText: "Choose the outcome you are most serious about pursuing in Canada.",
     options: [
-      { value: "canada", label: "Canada" },
-      { value: "us", label: "United States" },
-      { value: "both", label: "Both — show me everything" },
+      { value: "canada", label: "Permanent residence in Canada" },
+      { value: "study", label: "Study in Canada" },
+      { value: "explore", label: "Explore my options" },
     ],
   },
   {
     id: "country_of_birth",
     type: "select",
     prompt: "What is your country of birth?",
-    helpText:
-      "Country of birth — not citizenship — determines visa bulletin backlogs for US employment-based pathways.",
+    helpText: "Country of birth can affect eligibility for some Canadian pathways.",
     options: [
       { value: "IN", label: "India" },
       { value: "CN", label: "China" },
@@ -47,7 +45,6 @@ export const questions: Question[] = [
     prompt: "Where do you currently live?",
     options: [
       { value: "CA", label: "Canada" },
-      { value: "US", label: "United States" },
       { value: "OTHER", label: "Other country" },
     ],
   },
@@ -55,8 +52,7 @@ export const questions: Question[] = [
     id: "age",
     type: "select",
     prompt: "How old are you?",
-    helpText:
-      "Age affects CRS scoring in Canada and several US humanitarian pathways.",
+    helpText: "Age affects CRS scoring in Canada.",
     options: [
       { value: "18-29", label: "18–29" },
       { value: "30-34", label: "30–34" },
@@ -143,7 +139,6 @@ export const questions: Question[] = [
     options: [
       { value: "none", label: "No job offer" },
       { value: "pending", label: "In conversations / interviewing" },
-      { value: "employer_sponsored_us", label: "Yes — US employer willing to sponsor" },
       { value: "lmia_approved", label: "Yes — Canadian employer with LMIA" },
       { value: "lmia_exempt", label: "Yes — Canadian employer (LMIA-exempt)" },
     ],
@@ -170,8 +165,6 @@ export const questions: Question[] = [
       { value: "none", label: "Not applicable" },
       { value: "citizen_ca", label: "Canadian citizen" },
       { value: "pr_ca", label: "Canadian permanent resident" },
-      { value: "citizen_us", label: "US citizen" },
-      { value: "pr_us", label: "US permanent resident" },
       { value: "other", label: "Other / none of the above" },
     ],
   },
@@ -189,7 +182,7 @@ export const questions: Question[] = [
   {
     id: "prior_removal",
     type: "boolean",
-    prompt: "Have you ever been removed or deported from Canada or the US?",
+    prompt: "Have you ever been removed or deported from Canada?",
     options: [
       { value: "no", label: "No" },
       { value: "yes", label: "Yes" },
