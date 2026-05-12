@@ -8,6 +8,7 @@ import {
   applyAutoFill,
   getNextQuestion,
   getProgress,
+  INITIAL_ANSWERS,
   isComplete,
 } from "@/lib/intake-engine";
 import type { IntakeQuestion, TreeAnswersState } from "../../../lib/intake/questionTreeTypes";
@@ -38,9 +39,9 @@ function toQuestionCardProps(question: IntakeQuestion) {
 
 export function IntakeWizard() {
   const router = useRouter();
-  const [answers, setAnswers] = useState<TreeAnswersState>({});
+  const [answers, setAnswers] = useState<TreeAnswersState>(INITIAL_ANSWERS);
   const [currentQuestion, setCurrentQuestion] = useState<IntakeQuestion | null>(
-    () => getNextQuestion({}),
+    () => getNextQuestion(INITIAL_ANSWERS),
   );
   const [history, setHistory] = useState<string[]>([]);
   const [direction, setDirection] = useState<Direction>(1);

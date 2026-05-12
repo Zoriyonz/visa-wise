@@ -3,9 +3,26 @@ import {
   evaluateAutoFillCondition,
   isQuestionVisible,
 } from "../../lib/intake/conditions";
-import type { IntakeQuestion, TreeAnswersState } from "../../lib/intake/questionTreeTypes";
+import type { Condition, IntakeQuestion, TreeAnswersState } from "../../lib/intake/questionTreeTypes";
 
-const QUESTIONS = questionTreeJson as IntakeQuestion[];
+export const INITIAL_ANSWERS: TreeAnswersState = {
+  selected_country: "canada",
+};
+
+function isUsOnlyQuestion(question: IntakeQuestion): boolean {
+  const { show_if: showIf } = question;
+  if (showIf.length === 0) return false;
+  return showIf.every(
+    (condition: Condition) =>
+      condition.field === "selected_country" &&
+      condition.operator === "eq" &&
+      condition.value === "us",
+  );
+}
+
+const QUESTIONS = (questionTreeJson as IntakeQuestion[]).filter(
+  (question) => !isUsOnlyQuestion(question),
+);
 
 function isAnswered(id: string, answers: TreeAnswersState): boolean {
   return Object.prototype.hasOwnProperty.call(answers, id);
