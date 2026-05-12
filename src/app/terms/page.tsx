@@ -65,7 +65,7 @@ export default function TermsPage() {
             <p>
               Visa-Wise provides educational information about immigration
               pathways based on publicly available government guidelines
-              published by IRCC, USCIS, and other official sources.
+              published by IRCC and other official sources.
             </p>
             <p>
               <strong className="text-dark">We are not a law firm.</strong> No
@@ -75,8 +75,8 @@ export default function TermsPage() {
             <p>
               You must not rely solely on our analysis for any immigration
               decision. You are responsible for independently verifying all
-              information with official government sources (ircc.canada.ca,
-              uscis.gov) before taking any action.
+              information with official government sources (ircc.canada.ca)
+              before taking any action.
             </p>
           </Section>
 
