@@ -23,8 +23,8 @@ const FAQS = [
     a: "Google gives you general information. Visa-Wise gives you a personalized analysis of your specific profile against 40+ pathways, identifies your gaps, tells you what to do next, and puts it all in a structured report you can reference and share.",
   },
   {
-    q: "What do I get for $19.99?",
-    a: "A complete pathway analysis including: eligibility assessment for 40+ programs, gap analysis with specific fixes, a step-by-step action plan, province/state recommendations, processing time estimates, government fee breakdown, and an exportable PDF report.",
+    q: "What do I get from Visa-Wise?",
+    a: "A complete pathway analysis including: eligibility assessment for 40+ Canadian programs, gap analysis with specific fixes, a step-by-step action plan, province recommendations, and processing time estimates. Completely free — no account required.",
   },
 ] as const;
 

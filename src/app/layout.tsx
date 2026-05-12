@@ -26,9 +26,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Visa-Wise — Immigration pathway analysis for $19.99",
+  title: "Visa-Wise — Free Canadian immigration pathway analysis",
   description:
-    "Answer a few targeted questions. Our engine checks 40+ pathways against published IRCC and USCIS guidelines — not AI guesswork.",
+    "Answer a few targeted questions. Our engine checks 40+ Canadian pathways against published IRCC guidelines — not AI guesswork.",
   icons: {
     icon: "/visawise_logo_v3.svg",
     shortcut: "/visawise_logo_v3.svg",
