@@ -6,13 +6,12 @@ import { Checkmark } from "@/components/Checkmark";
 import { SectionLabel } from "@/components/SectionLabel";
 
 const ITEMS = [
-  "Pathway eligibility across 40+ programs",
-  "Gap analysis with specific actionable fixes",
+  "Eligibility check across 40+ Canadian pathways",
+  "Gap analysis — what's blocking you and why",
   "Step-by-step action plan with timeframes",
-  "Province and state recommendations",
+  "Province-specific recommendations",
   "Processing time estimates",
-  "Government fee breakdown",
-  "Exportable PDF report",
+  "Email notification when rules change",
 ] as const;
 
 export function DeliverableList() {
