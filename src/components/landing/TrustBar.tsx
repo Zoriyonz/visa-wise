@@ -16,10 +16,10 @@ const STATS: readonly StatConfig[] = [
     sublabel: "Per analysis, every time",
   },
   {
-    target: 2,
+    target: 1,
     format: "plain",
-    label: "COUNTRIES COVERED",
-    sublabel: "Canada & United States",
+    label: "COUNTRY COVERED",
+    sublabel: "Canada",
   },
   {
     target: 0,

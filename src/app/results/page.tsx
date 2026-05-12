@@ -49,7 +49,7 @@ export default async function ResultsPage({
             Your Immigration Analysis
           </h1>
           <p className="font-body text-[15px] text-muted mt-3">
-            Based on published IRCC and USCIS guidelines
+            Based on published IRCC guidelines
           </p>
         </header>
 

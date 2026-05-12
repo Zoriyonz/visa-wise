@@ -13,7 +13,7 @@ export function PathwayCard({
 }: PathwayCardProps) {
   const accent = borderline ? "#B8860B" : "#1A6B3C";
   const label = borderline ? "Close Match" : "Strong Match";
-  const countryLabel = country === "CA" ? "CANADA" : "UNITED STATES";
+  const countryLabel = country === "CA" ? "CANADA" : "CANADA";
 
   return (
     <article

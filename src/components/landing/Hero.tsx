@@ -70,8 +70,8 @@ export function Hero() {
           className="font-body text-muted text-center mt-8 text-[16px] md:text-[18px] max-w-[540px] mx-auto"
           style={{ lineHeight: 1.6 }}
         >
-          Answer a few targeted questions. Our engine checks 40+ pathways
-          against published IRCC and USCIS guidelines — not AI guesswork.
+          Answer a few targeted questions. Our engine checks 40+ Canadian
+          pathways against published IRCC guidelines — not AI guesswork.
         </motion.p>
 
         <motion.div
@@ -81,7 +81,7 @@ export function Hero() {
           className="mt-10 flex justify-center"
         >
           <CTAButton href="/form" size="lg" variant="dark">
-            Start Your Analysis — $19.99
+            Start Your Analysis — Free
           </CTAButton>
         </motion.div>
 

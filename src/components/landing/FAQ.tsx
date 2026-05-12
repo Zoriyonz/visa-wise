@@ -8,7 +8,7 @@ import { SectionLabel } from "@/components/SectionLabel";
 const FAQS = [
   {
     q: "Is this legal advice?",
-    a: "No. Visa-Wise provides educational information based on publicly available IRCC and USCIS guidelines. We are not a law firm and no attorney-client relationship is created. Always verify with official sources before taking action.",
+    a: "No. Visa-Wise provides educational information based on publicly available IRCC guidelines. We are not a law firm and no attorney-client relationship is created. Always verify with official sources before taking action.",
   },
   {
     q: "How accurate is the analysis?",
@@ -16,15 +16,15 @@ const FAQS = [
   },
   {
     q: "What if my situation is complex?",
-    a: "The tool handles most standard immigration scenarios for Canada and the United States. If your situation involves criminal history, prior removals, or highly unusual circumstances, we flag these and recommend consulting a licensed professional.",
+    a: "The tool handles most standard Canadian immigration scenarios. If your situation involves criminal history, prior removals, or highly unusual circumstances, we flag these and recommend consulting a licensed professional.",
   },
   {
     q: "How is this different from just Googling it?",
     a: "Google gives you general information. Visa-Wise gives you a personalized analysis of your specific profile against 40+ pathways, identifies your gaps, tells you what to do next, and puts it all in a structured report you can reference and share.",
   },
   {
-    q: "What do I get for $19.99?",
-    a: "A complete pathway analysis including: eligibility assessment for 40+ programs, gap analysis with specific fixes, a step-by-step action plan, province/state recommendations, processing time estimates, government fee breakdown, and an exportable PDF report.",
+    q: "What do I get from Visa-Wise?",
+    a: "A complete pathway analysis including: eligibility assessment for 40+ Canadian programs, gap analysis with specific fixes, a step-by-step action plan, province recommendations, and processing time estimates. Completely free — no account required.",
   },
 ] as const;
 

@@ -8,17 +8,17 @@ const PILLARS = [
   {
     number: "01",
     title: "Deterministic engine",
-    body: "Same inputs always produce the same outputs. No AI model involved in eligibility scoring — just published IRCC and USCIS criteria encoded as rules.",
+    body: "Same inputs always produce the same outputs. No AI model involved in eligibility scoring — just published IRCC criteria encoded as rules.",
   },
   {
     number: "02",
     title: "40+ pathways checked",
-    body: "Every analysis runs against all active Canadian federal, provincial, and US pathways simultaneously. Nothing is skipped based on assumptions.",
+    body: "Every analysis runs against all active Canadian federal and provincial pathways simultaneously. Nothing is skipped based on assumptions.",
   },
   {
     number: "03",
     title: "Updated from official sources",
-    body: "Pathway criteria are reviewed against IRCC.gc.ca and USCIS.gov on a regular basis. You're never working from stale data.",
+    body: "Pathway criteria are reviewed against IRCC.gc.ca on a regular basis. You're never working from stale data.",
   },
 ] as const;
 

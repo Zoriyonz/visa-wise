@@ -65,7 +65,7 @@ export default function TermsPage() {
             <p>
               Visa-Wise provides educational information about immigration
               pathways based on publicly available government guidelines
-              published by IRCC, USCIS, and other official sources.
+              published by IRCC and other official sources.
             </p>
             <p>
               <strong className="text-dark">We are not a law firm.</strong> No
@@ -75,8 +75,8 @@ export default function TermsPage() {
             <p>
               You must not rely solely on our analysis for any immigration
               decision. You are responsible for independently verifying all
-              information with official government sources (ircc.canada.ca,
-              uscis.gov) before taking any action.
+              information with official government sources (ircc.canada.ca)
+              before taking any action.
             </p>
           </Section>
 
@@ -109,15 +109,13 @@ export default function TermsPage() {
             </p>
           </Section>
 
-          <Section num="05" title="Payment and Refund Policy">
+          <Section num="05" title="Access and Service">
             <p>
-              Access to a full Visa-Wise report requires a one-time payment of
-              $19.99 USD. This payment is processed securely through Stripe.
+              Visa-Wise is provided free of charge. You may use the Service
+              without creating an account or submitting payment.
             </p>
             <p>
-              Due to the immediate digital nature of the product, refunds are
-              not available once your report has been generated and delivered.
-              If a technical error prevents report delivery, contact{" "}
+              If a technical error prevents your results from loading, contact{" "}
               <a
                 href="mailto:support@visa-wise.com"
                 className="text-dark underline underline-offset-2 hover:text-muted"
@@ -159,8 +157,7 @@ export default function TermsPage() {
             <p>
               To the maximum extent permitted by applicable law, our total
               liability to you for any claim arising from these Terms or your
-              use of the Service is limited to the amount you paid for the
-              Service ($19.99 USD).
+              use of the Service is limited to $0 (free service).
             </p>
           </Section>
 
