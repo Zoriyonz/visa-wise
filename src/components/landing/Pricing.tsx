@@ -11,7 +11,7 @@ const FEATURES = [
   "Gap analysis with specific fixes",
   "Step-by-step action plan",
   "Processing time + fee estimates",
-  "Exportable PDF report",
+  "Email notification when rules change",
 ] as const;
 
 export function Pricing() {
@@ -25,17 +25,12 @@ export function Pricing() {
         className="bg-dark-surface border border-dark-border rounded-[24px] p-8 md:p-16 max-w-[520px] mx-auto flex flex-col items-center text-center"
       >
         <SectionLabel inverted>PRICING</SectionLabel>
-        <span
-          className="font-display font-light text-cream block mt-4 text-[64px] md:text-price"
-          style={{ lineHeight: 1, letterSpacing: "-0.02em" }}
-        >
-          $19.99
-        </span>
-        <p className="font-body text-[16px] text-muted-dark mt-2">
-          One-time payment. No subscription.
-        </p>
-        <p className="font-body text-[14px] text-muted mt-2">
-          Compare: an initial lawyer consultation costs $300–500
+        <h2 className="font-display font-light text-cream mt-4 text-[40px] md:text-[48px] leading-tight tracking-[-0.02em]">
+          Free. No account required.
+        </h2>
+        <p className="font-body text-[16px] text-muted-dark mt-4 max-w-sm">
+          We believe everyone deserves to know their options before spending
+          thousands on a lawyer.
         </p>
 
         <div className="h-px bg-dark-border my-8 w-full" />
@@ -59,6 +54,9 @@ export function Pricing() {
             Start Your Analysis
           </CTAButton>
         </div>
+        <p className="font-body text-[14px] text-muted mt-4">
+          No signup required. Results in minutes.
+        </p>
       </motion.div>
     </section>
   );
