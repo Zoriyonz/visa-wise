@@ -41,24 +41,6 @@ function PathwayRow({
   );
 }
 
-function LockIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="#F5F0E8"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="mx-auto w-6 h-6"
-      aria-hidden="true"
-    >
-      <rect x="4" y="11" width="16" height="9" rx="2" />
-      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-    </svg>
-  );
-}
-
 export function AnalysisPreview() {
   return (
     <motion.div
@@ -96,32 +78,6 @@ export function AnalysisPreview() {
           <li>IELTS score below CLB 9 — affects French-speaking draws</li>
           <li>No Canadian work experience — limits CEC eligibility</li>
         </ul>
-      </div>
-
-      <div className="relative mt-8">
-        <div
-          className="space-y-2 text-[14px] font-body text-muted-dark"
-          style={{ filter: "blur(6px)" }}
-        >
-          <p>
-            Action plan: Step 1 — register IELTS retake within 30 days for
-            CLB 9 eligibility.
-          </p>
-          <p>
-            Step 2 — request ECA for foreign credentials, expected return
-            within 4–6 weeks.
-          </p>
-          <p>
-            Step 3 — enter Express Entry pool with updated CRS and target
-            provincial draws.
-          </p>
-        </div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <LockIcon />
-          <p className="font-body text-[13px] text-cream mt-2">
-            Unlock the full report
-          </p>
-        </div>
       </div>
     </motion.div>
   );

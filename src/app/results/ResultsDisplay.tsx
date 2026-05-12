@@ -1,114 +1,128 @@
 import Link from "next/link";
 
 import { computeEligibility } from "@/../lib/eligibility/engine";
+import type { PathwayResult } from "@/../lib/eligibility/types";
 import { mapTreeAnswersToUserAnswers } from "@/../lib/intake/mapUserAnswers";
 import type { TreeAnswersState } from "@/../lib/intake/questionTreeTypes";
-import { PathwayCard } from "@/components/results/PathwayCard";
 
+import { DocumentsChecklist } from "./DocumentsChecklist";
 import { EmailCapture } from "./EmailCapture";
 import { IneligiblePathwayCard } from "./IneligiblePathwayCard";
+import { ResultsPathwayCard } from "./ResultsPathwayCard";
 
 interface ResultsDisplayProps {
   answers: TreeAnswersState;
 }
 
-function pathwayCountry(countryCode: string): "CA" | "US" {
-  return countryCode === "US" ? "US" : "CA";
+function uniqueValues(values: string[]): string[] {
+  return [...new Set(values)];
+}
+
+function collectActionSteps(pathways: PathwayResult[]): string[] {
+  return uniqueValues(pathways.flatMap((pathway) => pathway.action_steps));
+}
+
+function collectTopGaps(pathways: PathwayResult[], limit: number): string[] {
+  return uniqueValues(pathways.flatMap((pathway) => pathway.unmet_gaps)).slice(0, limit);
+}
+
+function SectionHeading({ title }: { title: string }) {
+  return (
+    <h2
+      className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted mb-4"
+    >
+      {title}
+    </h2>
+  );
 }
 
 export function ResultsDisplay({ answers }: ResultsDisplayProps) {
-  const userAnswers = mapTreeAnswersToUserAnswers(answers);
-  const report = computeEligibility(userAnswers);
+  const report = computeEligibility(mapTreeAnswersToUserAnswers(answers));
   const hasMatches = report.qualifying.length > 0 || report.borderline.length > 0;
-  const checkedPathways = [
-    ...report.qualifying,
-    ...report.borderline,
-    ...report.ineligible,
-  ];
-  const gapEntries = report.ineligible.flatMap((pathway) =>
-    pathway.unmet_gaps.map((gap) => ({
-      id: `${pathway.pathway_id}-${gap}`,
-      description: gap,
-    })),
-  );
+  const totalChecked =
+    report.qualifying.length + report.borderline.length + report.ineligible.length;
+  const checklistItems = collectActionSteps([...report.qualifying, ...report.borderline]);
+  const topGaps = collectTopGaps(report.ineligible, 5);
 
   return (
     <>
-      {!hasMatches && (
+      {hasMatches ? (
+        <>
+          <header className="mb-10 text-center">
+            <h2 className="font-display text-[32px] text-dark">Here&apos;s what we found</h2>
+            <p className="font-body text-[15px] text-muted mt-3">
+              {totalChecked} Canadian pathways analysed
+            </p>
+          </header>
+
+          {report.qualifying.length > 0 && (
+            <section aria-label="Strong matches" className="space-y-6">
+              <SectionHeading title="Strong Matches" />
+              {report.qualifying.map((pathway) => (
+                <ResultsPathwayCard key={pathway.pathway_id} pathway={pathway} />
+              ))}
+            </section>
+          )}
+
+          {report.borderline.length > 0 && (
+            <section aria-label="Close matches" className="space-y-6 mt-10">
+              <SectionHeading title="Close Matches" />
+              {report.borderline.map((pathway) => (
+                <ResultsPathwayCard key={pathway.pathway_id} pathway={pathway} borderline />
+              ))}
+            </section>
+          )}
+
+          {report.ineligible.length > 0 && (
+            <details className="mt-10 rounded-[16px] border border-border bg-surface/40 p-6">
+              <summary className="cursor-pointer list-none font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
+                Not Yet Eligible ({report.ineligible.length})
+              </summary>
+              <div className="mt-6 space-y-3">
+                {report.ineligible.map((pathway) => (
+                  <IneligiblePathwayCard key={pathway.pathway_id} pathway={pathway} />
+                ))}
+              </div>
+            </details>
+          )}
+
+          <DocumentsChecklist items={checklistItems} />
+        </>
+      ) : (
         <section className="mb-12">
-          <h2 className="font-display text-3xl text-dark mb-3">No strong matches yet</h2>
-          <p className="text-muted mb-8 max-w-prose">
-            Based on what you&apos;ve told us so far, no pathway is a clear fit.
-            Here&apos;s what&apos;s blocking each one, and what you could do next.
-          </p>
-          {gapEntries.length > 0 && (
-            <ul className="space-y-3">
-              {gapEntries.map((gap) => (
-                <li key={gap.id} className="flex items-start gap-3">
-                  <span className="font-mono text-xs text-muted mt-1 shrink-0">—</span>
-                  <span className="text-dark">{gap.description}</span>
+          <header className="mb-8">
+            <h2 className="font-display text-[32px] text-dark">No matches yet — here&apos;s why</h2>
+            <p className="font-body text-[15px] text-muted mt-3">
+              {totalChecked} Canadian pathways analysed
+            </p>
+          </header>
+
+          {topGaps.length > 0 && (
+            <ul className="space-y-3 mb-8">
+              {topGaps.map((gap) => (
+                <li
+                  key={gap}
+                  className="rounded-[12px] border border-border bg-surface px-5 py-4 font-body text-[15px] text-dark"
+                >
+                  {gap}
                 </li>
               ))}
             </ul>
           )}
-          <div className="mt-8 space-y-4">
+
+          <div className="space-y-3">
             {report.ineligible.map((pathway) => (
               <IneligiblePathwayCard key={pathway.pathway_id} pathway={pathway} />
             ))}
           </div>
+
           <Link
             href="/form"
-            className="inline-flex items-center gap-2 mt-12 px-6 py-3 bg-dark text-cream font-mono text-sm uppercase tracking-wider rounded-full hover:opacity-90 transition"
+            className="inline-flex items-center mt-10 px-6 py-3 bg-dark text-cream font-mono text-sm uppercase tracking-wider rounded-full hover:opacity-90 transition"
           >
-            Answer more questions to refine your results
+            Start again with different answers
           </Link>
         </section>
-      )}
-
-      {hasMatches && report.qualifying.length > 0 && (
-        <section aria-label="Qualifying pathways" className="space-y-4">
-          {report.qualifying.map((pathway) => (
-            <PathwayCard
-              key={pathway.pathway_id}
-              name={pathway.pathway_name}
-              score={pathway.score}
-              country={pathwayCountry(pathway.country_code)}
-            />
-          ))}
-        </section>
-      )}
-
-      {hasMatches && report.borderline.length > 0 && (
-        <section aria-label="Borderline pathways" className="space-y-4 mt-8">
-          {report.borderline.map((pathway) => (
-            <PathwayCard
-              key={pathway.pathway_id}
-              name={pathway.pathway_name}
-              score={pathway.score}
-              country={pathwayCountry(pathway.country_code)}
-              borderline
-            />
-          ))}
-        </section>
-      )}
-
-      {hasMatches && report.ineligible.length > 0 && (
-        <>
-          <p className="font-body text-[14px] text-muted mt-10 text-center">
-            {report.ineligible.length} additional pathways checked — not yet eligible
-          </p>
-          <section aria-label="Ineligible pathways" className="mt-8 space-y-4">
-            {report.ineligible.map((pathway) => (
-              <IneligiblePathwayCard key={pathway.pathway_id} pathway={pathway} />
-            ))}
-          </section>
-        </>
-      )}
-
-      {hasMatches && checkedPathways.length === 0 && (
-        <p className="font-body text-[14px] text-muted text-center">
-          No pathways were checked for this profile.
-        </p>
       )}
 
       <EmailCapture answers={answers} />
