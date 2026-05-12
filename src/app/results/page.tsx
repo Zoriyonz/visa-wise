@@ -1,31 +1,38 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
+import type { TreeAnswersState } from "@/../lib/intake/questionTreeTypes";
 import { Logo } from "@/components/Logo";
 import { Wordmark } from "@/components/Wordmark";
-import { LockedReportOverlay } from "@/components/results/LockedReportOverlay";
-import { PathwayCard } from "@/components/results/PathwayCard";
 
-interface PreviewPathway {
-  name: string;
-  score: number;
-  country: "CA" | "US";
-  borderline?: boolean;
+import { ResultsDisplay } from "./ResultsDisplay";
+
+function decodeAnswers(encoded: string): TreeAnswersState | null {
+  try {
+    const binary = atob(encoded);
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index++) {
+      bytes[index] = binary.charCodeAt(index);
+    }
+    const json = new TextDecoder().decode(bytes);
+    return JSON.parse(json) as TreeAnswersState;
+  } catch {
+    return null;
+  }
 }
 
-const QUALIFYING: readonly PreviewPathway[] = [
-  { name: "Federal Skilled Worker", score: 74, country: "CA" },
-  { name: "Express Entry CEC", score: 58, country: "CA", borderline: true },
-  { name: "EB-2 NIW", score: 51, country: "US", borderline: true },
-];
+export default async function ResultsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ a?: string }>;
+}) {
+  const params = await searchParams;
+  const encoded = params.a;
+  if (!encoded) redirect("/form");
 
-const LOCKED_PLACEHOLDERS: readonly PreviewPathway[] = [
-  { name: "Provincial Nominee — Ontario", score: 42, country: "CA", borderline: true },
-  { name: "Atlantic Immigration Program", score: 39, country: "CA", borderline: true },
-  { name: "Rural and Northern Immigration", score: 37, country: "CA", borderline: true },
-  { name: "EB-3 Skilled Worker", score: 33, country: "US", borderline: true },
-];
+  const decoded = decodeAnswers(encoded);
+  if (!decoded) redirect("/form");
 
-export default function ResultsPage() {
   return (
     <main className="min-h-screen bg-cream py-16 px-6">
       <div className="max-w-3xl mx-auto">
@@ -46,20 +53,7 @@ export default function ResultsPage() {
           </p>
         </header>
 
-        <section aria-label="Qualifying pathways" className="space-y-4">
-          {QUALIFYING.map((pathway) => (
-            <PathwayCard key={pathway.name} {...pathway} />
-          ))}
-        </section>
-
-        <section aria-label="Locked pathways" className="relative mt-12">
-          <div className="space-y-4 blur-[6px] pointer-events-none select-none">
-            {LOCKED_PLACEHOLDERS.map((pathway) => (
-              <PathwayCard key={pathway.name} {...pathway} />
-            ))}
-          </div>
-          <LockedReportOverlay />
-        </section>
+        <ResultsDisplay answers={decoded} />
       </div>
     </main>
   );

@@ -91,8 +91,8 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 1.3 }}
           className="font-body text-[13px] text-muted text-center mt-6"
         >
-          Used by immigrants navigating Express Entry, H-1B, EB-2, and 40+
-          other pathways
+          Used by immigrants navigating Express Entry, PNP, spousal sponsorship,
+          and 40+ Canadian pathways
         </motion.p>
       </div>
 
