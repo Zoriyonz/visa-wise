@@ -11,6 +11,7 @@ export function PathwayCard({
   country,
   borderline = false,
 }: PathwayCardProps) {
+  const displayScore = Math.min(score, 100);
   const accent = borderline ? "#B8860B" : "#1A6B3C";
   const label = borderline ? "Close Match" : "Strong Match";
   const countryLabel = country === "CA" ? "CANADA" : "CANADA";
@@ -41,10 +42,10 @@ export function PathwayCard({
         <div className="h-1 bg-border rounded-full overflow-hidden">
           <div
             className="h-full bg-dark rounded-full"
-            style={{ width: `${score}%` }}
+            style={{ width: `${displayScore}%` }}
           />
         </div>
-        <p className="font-mono text-[11px] text-muted mt-2">{score} / 100</p>
+        <p className="font-mono text-[11px] text-muted mt-2">{displayScore} / 100</p>
       </div>
     </article>
   );
