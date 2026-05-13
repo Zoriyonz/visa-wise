@@ -91,7 +91,10 @@ export function ResultsDisplay({ answers }: ResultsDisplayProps) {
       ) : (
         <section className="mb-12">
           <header className="mb-8">
-            <h2 className="font-display text-[32px] text-dark">No matches yet — here&apos;s why</h2>
+            <h2 className="font-display text-[32px] text-dark">
+              We don&apos;t have enough pathway data for your situation yet — check back soon as
+              we expand our coverage.
+            </h2>
             <p className="font-body text-[15px] text-muted mt-3">
               {totalChecked} Canadian pathways analysed
             </p>

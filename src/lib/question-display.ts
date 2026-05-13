@@ -86,8 +86,9 @@ const OVERRIDE_RULES: Record<string, DisplayOverride | DisplayOverride[]> = {
       question: "You're already a citizen. What brings you here?",
       helpText: null,
       optionLabels: {
-        family_sponsorship: "I want to sponsor a family member",
-        explore: "Just gathering information",
+        permanent_residence: "Get permanent residency",
+        work_permit: "Get a work permit",
+        study_permit: "Study in Canada",
       },
     },
     {
@@ -95,9 +96,8 @@ const OVERRIDE_RULES: Record<string, DisplayOverride | DisplayOverride[]> = {
       question: "You already have permanent residency. What are you looking for?",
       helpText: null,
       optionLabels: {
-        citizenship: "I want to apply for citizenship",
-        family_sponsorship: "I want to sponsor a family member",
-        explore: "Just exploring",
+        work_permit: "Get a work permit",
+        study_permit: "Study in Canada",
       },
     },
     {
@@ -108,8 +108,6 @@ const OVERRIDE_RULES: Record<string, DisplayOverride | DisplayOverride[]> = {
         permanent_residence: "Get permanent residency",
         work_permit: "Get a work permit",
         study_permit: "Study in Canada",
-        family_sponsorship: "Bring a family member to Canada",
-        explore: "I'm just exploring my options",
       },
     },
   ],

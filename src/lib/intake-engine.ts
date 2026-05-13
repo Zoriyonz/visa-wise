@@ -76,6 +76,12 @@ function isAnswered(id: string, answers: TreeAnswersState): boolean {
 }
 
 function questionVisibleForEngine(question: IntakeQuestion, answers: TreeAnswersState): boolean {
+  if (
+    question.type === "single_select" &&
+    (!question.options || question.options.length === 0)
+  ) {
+    return false;
+  }
   const ignoreSkipIf = isBaselineQuestionId(question.id);
   return isQuestionVisible(question.show_if, question.skip_if, answers, {
     questionId: question.id,

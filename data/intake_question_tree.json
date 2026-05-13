@@ -80,16 +80,12 @@
     "type": "single_select",
     "options": [
       {
-        "value": "citizenship",
-        "label": "Apply for citizenship"
+        "value": "work_permit",
+        "label": "Get a work permit / work visa"
       },
       {
-        "value": "family_sponsorship",
-        "label": "Sponsor a family member"
-      },
-      {
-        "value": "explore",
-        "label": "Just exploring my options"
+        "value": "study_permit",
+        "label": "Get a student visa / study permit"
       }
     ],
     "show_if": [
@@ -115,12 +111,16 @@
     "type": "single_select",
     "options": [
       {
-        "value": "family_sponsorship",
-        "label": "I want to sponsor a family member"
+        "value": "permanent_residence",
+        "label": "Get permanent residence / a green card"
       },
       {
-        "value": "explore",
-        "label": "Just gathering information"
+        "value": "work_permit",
+        "label": "Get a work permit / work visa"
+      },
+      {
+        "value": "study_permit",
+        "label": "Get a student visa / study permit"
       }
     ],
     "show_if": [
@@ -156,14 +156,6 @@
       {
         "value": "study_permit",
         "label": "Get a student visa / study permit"
-      },
-      {
-        "value": "family_sponsorship",
-        "label": "Immigrate through family sponsorship"
-      },
-      {
-        "value": "explore",
-        "label": "I'm not sure yet \u2014 exploring my options"
       }
     ],
     "show_if": [],
@@ -294,7 +286,8 @@
         "operator": "in",
         "value": [
           "permanent_residence",
-          "family_sponsorship"
+          "work_permit",
+          "study_permit"
         ]
       }
     ],
@@ -341,8 +334,12 @@
       },
       {
         "field": "primary_goal",
-        "operator": "eq",
-        "value": "family_sponsorship"
+        "operator": "in",
+        "value": [
+          "permanent_residence",
+          "work_permit",
+          "study_permit"
+        ]
       }
     ],
     "skip_if": [],
@@ -393,13 +390,7 @@
       }
     ],
     "show_if": [],
-    "skip_if": [
-      {
-        "field": "primary_goal",
-        "operator": "eq",
-        "value": "explore"
-      }
-    ],
+    "skip_if": [],
     "auto_fill": null,
     "help_text": "Pick the highest credential you've actually completed and have documentation for. Programs you started but didn't finish don't count. If you have a 3-year bachelor's plus a 1-year diploma, that's 'two or more credentials.'",
     "lawyer_note": "Hard requirement for FSW (gte secondary), CEC (none), most US economic categories (EB-2 needs masters or bachelors+5yr, EB-3 skilled needs at least 2yr post-secondary, H-1B/TN/E-3 need bachelors+). Also major CRS soft factor."
@@ -430,14 +421,6 @@
         "value": [
           "less_than_secondary",
           "secondary"
-        ]
-      },
-      {
-        "field": "primary_goal",
-        "operator": "in",
-        "value": [
-          "citizenship",
-          "family_sponsorship"
         ]
       }
     ],
@@ -529,8 +512,6 @@
         "field": "primary_goal",
         "operator": "in",
         "value": [
-          "citizenship",
-          "family_sponsorship",
           "study_permit"
         ]
       },
@@ -558,8 +539,6 @@
         "field": "primary_goal",
         "operator": "in",
         "value": [
-          "citizenship",
-          "family_sponsorship",
           "study_permit"
         ]
       }
@@ -589,8 +568,6 @@
         "field": "primary_goal",
         "operator": "in",
         "value": [
-          "citizenship",
-          "family_sponsorship",
           "study_permit"
         ]
       },
@@ -656,8 +633,6 @@
         "field": "primary_goal",
         "operator": "in",
         "value": [
-          "citizenship",
-          "family_sponsorship",
           "study_permit"
         ]
       }
@@ -709,8 +684,6 @@
         "field": "primary_goal",
         "operator": "in",
         "value": [
-          "citizenship",
-          "family_sponsorship",
           "study_permit"
         ]
       }
@@ -748,16 +721,7 @@
         "value": "canada"
       }
     ],
-    "skip_if": [
-      {
-        "field": "primary_goal",
-        "operator": "in",
-        "value": [
-          "citizenship",
-          "family_sponsorship"
-        ]
-      }
-    ],
+    "skip_if": [],
     "auto_fill": {
       "field": "employer_type",
       "value": "none",
@@ -791,16 +755,7 @@
         "value": "us"
       }
     ],
-    "skip_if": [
-      {
-        "field": "primary_goal",
-        "operator": "in",
-        "value": [
-          "citizenship",
-          "family_sponsorship"
-        ]
-      }
-    ],
+    "skip_if": [],
     "auto_fill": {
       "field": "employer_type",
       "value": "none",
@@ -848,10 +803,7 @@
         "field": "primary_goal",
         "operator": "in",
         "value": [
-          "citizenship",
-          "family_sponsorship",
-          "study_permit",
-          "explore"
+          "study_permit"
         ]
       },
       {
@@ -938,17 +890,7 @@
         "value": "canada"
       }
     ],
-    "skip_if": [
-      {
-        "field": "primary_goal",
-        "operator": "in",
-        "value": [
-          "explore",
-          "citizenship",
-          "family_sponsorship"
-        ]
-      }
-    ],
+    "skip_if": [],
     "auto_fill": null,
     "help_text": "For Canadian PR, you'll need IELTS General Training or CELPIP \u2014 TOEFL is not accepted. For most US visas, English is assumed if your education was in English. If your test is over 2 years old, you'll need to retake it. Native English speakers from designated countries can sometimes skip this for US pathways.",
     "lawyer_note": "Required documentation for any Canadian Express Entry profile or PNP application. CELPIP is also valid for Canada but not in current schema enum \u2014 backend should map CELPIP to 'ielts' equivalent or extend schema."
@@ -1091,14 +1033,6 @@
         "field": "current_immigration_status",
         "operator": "not_eq",
         "value": "none"
-      },
-      {
-        "field": "primary_goal",
-        "operator": "in",
-        "value": [
-          "citizenship",
-          "family_sponsorship"
-        ]
       }
     ],
     "auto_fill": null,
