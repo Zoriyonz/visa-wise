@@ -34,19 +34,63 @@ function getFieldValue(field: string, answers: TreeAnswersState): unknown {
   return lookupAnswerKey(field, answers);
 }
 
+/** Free-text current_country vs ISO from $selected_country_iso (CA/US). */
+function currentCountryMatchesIso(left: unknown, iso: unknown): boolean {
+  if (iso !== "CA" && iso !== "US") {
+    return false;
+  }
+  if (typeof left !== "string") {
+    return left === iso;
+  }
+  const normalized = left.trim().toLowerCase();
+  if (iso === "CA") {
+    return normalized === "ca" || normalized === "canada";
+  }
+  return (
+    normalized === "us" ||
+    normalized === "usa" ||
+    normalized === "u.s." ||
+    normalized === "u.s.a." ||
+    normalized === "united states" ||
+    normalized === "united states of america"
+  );
+}
+
+function fieldEqualsNormalized(field: string, left: unknown, right: unknown): boolean {
+  if (left === right) {
+    return true;
+  }
+  if (field === "current_country" && (right === "CA" || right === "US")) {
+    return currentCountryMatchesIso(left, right);
+  }
+  return false;
+}
+
 export function evaluateCondition(condition: Condition, answers: TreeAnswersState): boolean {
   const left = getFieldValue(condition.field, answers);
   const right = resolveValue(condition.value as never, answers);
 
   switch (condition.operator) {
     case "eq":
-      return left === right;
+      return fieldEqualsNormalized(condition.field, left, right);
     case "not_eq":
-      return left !== right;
+      return !fieldEqualsNormalized(condition.field, left, right);
     case "in":
-      return Array.isArray(right) && right.includes(left as never);
+      if (!Array.isArray(right)) {
+        return false;
+      }
+      if (condition.field === "current_country") {
+        return right.some((item) => fieldEqualsNormalized(condition.field, left, item));
+      }
+      return right.includes(left as never);
     case "not_in":
-      return Array.isArray(right) && !right.includes(left as never);
+      if (!Array.isArray(right)) {
+        return false;
+      }
+      if (condition.field === "current_country") {
+        return !right.some((item) => fieldEqualsNormalized(condition.field, left, item));
+      }
+      return !right.includes(left as never);
     default:
       return false;
   }
