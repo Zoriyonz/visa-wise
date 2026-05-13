@@ -6,15 +6,32 @@ export function resolveSelectedCountryIso(answers: TreeAnswersState): "CA" | "US
   return answers.selected_country === "us" ? "US" : "CA";
 }
 
-function resolveValue(raw: string | number | boolean | (string | number | boolean)[], answers: TreeAnswersState): unknown {
-  if (Array.isArray(raw)) return raw.map((item) => resolveValue(item, answers));
-  if (raw === PLACEHOLDER) return resolveSelectedCountryIso(answers);
+function lookupAnswerKey(key: string, answers: TreeAnswersState): unknown {
+  if (!(key in answers)) return undefined;
+  const value = answers[key];
+  if (value === undefined || value === null) return undefined;
+  return value;
+}
+
+export function resolveValue(
+  raw: string | number | boolean | (string | number | boolean)[],
+  answers: TreeAnswersState,
+): unknown {
+  if (Array.isArray(raw)) {
+    return raw.map((item) => resolveValue(item as never, answers));
+  }
+  if (typeof raw === "string" && raw.startsWith("$")) {
+    if (raw === PLACEHOLDER) {
+      return lookupAnswerKey("selected_country_iso", answers) ?? resolveSelectedCountryIso(answers);
+    }
+    const key = raw.slice(1);
+    return lookupAnswerKey(key, answers);
+  }
   return raw;
 }
 
 function getFieldValue(field: string, answers: TreeAnswersState): unknown {
-  if (!(field in answers)) return undefined;
-  return answers[field];
+  return lookupAnswerKey(field, answers);
 }
 
 export function evaluateCondition(condition: Condition, answers: TreeAnswersState): boolean {
@@ -35,13 +52,38 @@ export function evaluateCondition(condition: Condition, answers: TreeAnswersStat
   }
 }
 
+/** Canada-only product: tree's "skip in Canada" flag was OR'd with real skip reasons and hid employer_type for every Canadian. */
+function effectiveSkipIf(questionId: string, skipIf: Condition[]): Condition[] {
+  if (questionId !== "employer_type") {
+    return skipIf;
+  }
+  return skipIf.filter(
+    (condition) =>
+      !(
+        condition.field === "selected_country" &&
+        condition.operator === "eq" &&
+        condition.value === "canada"
+      ),
+  );
+}
+
 export function isQuestionVisible(
   showIf: Condition[],
   skipIf: Condition[],
   answers: TreeAnswersState,
+  options?: { questionId?: string; ignoreSkipIf?: boolean },
 ): boolean {
-  if (!showIf.every((c) => evaluateCondition(c, answers))) return false;
-  if (skipIf.some((c) => evaluateCondition(c, answers))) return false;
+  if (!showIf.every((condition) => evaluateCondition(condition, answers))) {
+    return false;
+  }
+  const skipList = options?.ignoreSkipIf
+    ? []
+    : options?.questionId
+      ? effectiveSkipIf(options.questionId, skipIf)
+      : skipIf;
+  if (skipList.some((condition) => evaluateCondition(condition, answers))) {
+    return false;
+  }
   return true;
 }
 
@@ -51,7 +93,7 @@ export function evaluateAutoFillCondition(condition: string, answer: unknown): b
   if (inMatch) {
     const inner = inMatch[1];
     const parts = inner.match(/'([^']*)'/g) ?? [];
-    const list = parts.map((p) => p.slice(1, -1));
+    const list = parts.map((part) => part.slice(1, -1));
     return list.includes(String(answer));
   }
   const eqMatch = /^answer eq (.+)$/.exec(condition.trim());

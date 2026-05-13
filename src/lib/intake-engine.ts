@@ -18,6 +18,7 @@ type BaselineQuestionId = (typeof BASELINE_QUESTION_IDS)[number];
 
 export const INITIAL_ANSWERS: TreeAnswersState = {
   selected_country: "canada",
+  selected_country_iso: "CA",
 };
 
 function isBaselineQuestionId(id: string): id is BaselineQuestionId {
@@ -35,12 +36,51 @@ function isUsOnlyQuestion(question: IntakeQuestion): boolean {
   );
 }
 
-const QUESTIONS = (questionTreeJson as IntakeQuestion[]).filter(
+const FILTERED_TREE = (questionTreeJson as IntakeQuestion[]).filter(
   (question) => !isUsOnlyQuestion(question),
 );
 
+function findIndexAfterPrimaryGoalBlock(questions: readonly IntakeQuestion[]): number {
+  const start = questions.findIndex((question) => question.id === "primary_goal");
+  if (start < 0) {
+    return questions.length;
+  }
+  let end = start;
+  while (end < questions.length && questions[end].id === "primary_goal") {
+    end += 1;
+  }
+  return end;
+}
+
+/** Baselines run in fixed order right after the primary_goal variant block. */
+function buildCanonicalQuestionOrder(base: readonly IntakeQuestion[]): IntakeQuestion[] {
+  const baselineSet = new Set<string>(BASELINE_QUESTION_IDS);
+  const afterPrimary = findIndexAfterPrimaryGoalBlock(base);
+  const prefix = base.slice(0, afterPrimary);
+  const rest = base.slice(afterPrimary);
+  const middle: IntakeQuestion[] = [];
+  for (const baselineId of BASELINE_QUESTION_IDS) {
+    const row = base.find((question) => question.id === baselineId);
+    if (row) {
+      middle.push(row);
+    }
+  }
+  const suffix = rest.filter((question) => !baselineSet.has(question.id));
+  return [...prefix, ...middle, ...suffix];
+}
+
+const QUESTIONS = buildCanonicalQuestionOrder(FILTERED_TREE);
+
 function isAnswered(id: string, answers: TreeAnswersState): boolean {
   return Object.prototype.hasOwnProperty.call(answers, id);
+}
+
+function questionVisibleForEngine(question: IntakeQuestion, answers: TreeAnswersState): boolean {
+  const ignoreSkipIf = isBaselineQuestionId(question.id);
+  return isQuestionVisible(question.show_if, question.skip_if, answers, {
+    questionId: question.id,
+    ignoreSkipIf,
+  });
 }
 
 function findVisibleVariant(
@@ -48,9 +88,15 @@ function findVisibleVariant(
   answers: TreeAnswersState,
 ): IntakeQuestion | null {
   const id = QUESTIONS[startIndex].id;
-  for (let index = startIndex; index < QUESTIONS.length && QUESTIONS[index].id === id; index++) {
+  for (
+    let index = startIndex;
+    index < QUESTIONS.length && QUESTIONS[index].id === id;
+    index += 1
+  ) {
     const question = QUESTIONS[index];
-    if (isQuestionVisible(question.show_if, question.skip_if, answers)) return question;
+    if (questionVisibleForEngine(question, answers)) {
+      return question;
+    }
   }
   return null;
 }
@@ -58,7 +104,9 @@ function findVisibleVariant(
 function skipQuestionVariants(startIndex: number): number {
   const id = QUESTIONS[startIndex].id;
   let index = startIndex;
-  while (index < QUESTIONS.length && QUESTIONS[index].id === id) index++;
+  while (index < QUESTIONS.length && QUESTIONS[index].id === id) {
+    index += 1;
+  }
   return index;
 }
 
@@ -71,28 +119,30 @@ function getVisibleQuestionIdsFromTree(answers: TreeAnswersState): string[] {
       index = skipQuestionVariants(index);
       continue;
     }
-    if (findVisibleVariant(index, answers)) visibleIds.push(id);
+    if (findVisibleVariant(index, answers)) {
+      visibleIds.push(id);
+    }
     index = skipQuestionVariants(index);
   }
   return visibleIds;
 }
 
 function getVisibleQuestionIds(answers: TreeAnswersState): string[] {
-  const ordered = getVisibleQuestionIdsFromTree(answers);
-  for (const baselineId of BASELINE_QUESTION_IDS) {
-    if (!ordered.includes(baselineId) && !isAnswered(baselineId, answers)) {
-      ordered.push(baselineId);
-    }
-  }
-  return ordered;
+  return getVisibleQuestionIdsFromTree(answers);
 }
 
 function resolveQuestionById(id: string, answers: TreeAnswersState): IntakeQuestion | null {
   const startIndex = QUESTIONS.findIndex((question) => question.id === id);
-  if (startIndex < 0) return null;
+  if (startIndex < 0) {
+    return null;
+  }
   const visible = findVisibleVariant(startIndex, answers);
-  if (visible) return visible;
-  if (isBaselineQuestionId(id)) return QUESTIONS[startIndex];
+  if (visible) {
+    return visible;
+  }
+  if (isBaselineQuestionId(id)) {
+    return QUESTIONS[startIndex];
+  }
   return null;
 }
 
@@ -105,7 +155,9 @@ function getTreeNextQuestion(answers: TreeAnswersState): IntakeQuestion | null {
       continue;
     }
     const visible = findVisibleVariant(index, answers);
-    if (visible) return visible;
+    if (visible) {
+      return visible;
+    }
     index = skipQuestionVariants(index);
   }
   return null;
@@ -113,9 +165,13 @@ function getTreeNextQuestion(answers: TreeAnswersState): IntakeQuestion | null {
 
 export function getNextQuestion(answers: TreeAnswersState): IntakeQuestion | null {
   for (const id of getVisibleQuestionIds(answers)) {
-    if (isAnswered(id, answers)) continue;
+    if (isAnswered(id, answers)) {
+      continue;
+    }
     const question = resolveQuestionById(id, answers);
-    if (question) return question;
+    if (question) {
+      return question;
+    }
   }
   return null;
 }
@@ -126,20 +182,24 @@ export function applyAutoFill(
   answers: TreeAnswersState,
 ): TreeAnswersState {
   const rule = question.auto_fill;
-  if (!rule || !evaluateAutoFillCondition(rule.condition, answer)) return answers;
+  if (!rule || !evaluateAutoFillCondition(rule.condition, answer)) {
+    return answers;
+  }
   return { ...answers, [rule.field]: rule.value };
 }
 
 function neutralAnswer(question: IntakeQuestion): string | number | boolean {
-  if (question.type === "number") return 0;
-  if (question.type === "text") return "";
+  if (question.type === "number") {
+    return 0;
+  }
+  if (question.type === "text") {
+    return "";
+  }
   return question.options?.[0]?.value ?? "";
 }
 
 function countAnsweredQuestions(answers: TreeAnswersState): number {
-  return Object.keys(answers).filter((id) =>
-    QUESTIONS.some((question) => question.id === id),
-  ).length;
+  return Object.keys(answers).filter((id) => QUESTIONS.some((question) => question.id === id)).length;
 }
 
 function countVisibleQuestionIds(answers: TreeAnswersState): number {
@@ -150,7 +210,9 @@ function estimateTotalVisibleQuestions(answers: TreeAnswersState): number {
   const simulated = { ...answers };
   while (true) {
     const next = getNextQuestion(simulated);
-    if (!next) break;
+    if (!next) {
+      break;
+    }
     const answer = neutralAnswer(next);
     const nextState = { ...applyAutoFill(next, answer, simulated), [next.id]: answer };
     Object.assign(simulated, nextState);
@@ -161,7 +223,9 @@ function estimateTotalVisibleQuestions(answers: TreeAnswersState): number {
 export function getProgress(answers: TreeAnswersState): number {
   const answered = countAnsweredQuestions(answers);
   const total = estimateTotalVisibleQuestions(answers);
-  if (total === 0) return 0;
+  if (total === 0) {
+    return 0;
+  }
   return Math.min(100, Math.round((answered / total) * 100));
 }
 

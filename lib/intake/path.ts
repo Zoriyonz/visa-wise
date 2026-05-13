@@ -5,7 +5,7 @@ export function getVisiblePathIndices(questions: readonly IntakeQuestion[], answ
   const indices: number[] = [];
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
-    if (isQuestionVisible(q.show_if, q.skip_if, answers)) indices.push(i);
+    if (isQuestionVisible(q.show_if, q.skip_if, answers, { questionId: q.id })) indices.push(i);
   }
   return indices;
 }
