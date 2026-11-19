@@ -155,7 +155,21 @@ Output raw JSON only, no markdown.`;
   process.exit(0);
 }
 
+// Billing or auth problems on the API key are an account issue, not a code
+// failure. Surface them as a visible warning and skip the run, so the weekly
+// check stays green and honest. Any other error still fails the job.
+function isAccountError(err) {
+  const message = String(err?.error?.error?.message ?? err?.message ?? "");
+  return err?.status === 401 || err?.status === 403 || /credit balance/i.test(message);
+}
+
 main().catch((err) => {
+  if (isAccountError(err)) {
+    console.log(
+      "::warning title=Anthropic API unavailable::Skipped this run because the API key has no usable credit or access. Top up billing or rotate ANTHROPIC_API_KEY, then re-run.",
+    );
+    process.exit(0);
+  }
   console.error("Script failed:", err);
   process.exit(1);
 });
