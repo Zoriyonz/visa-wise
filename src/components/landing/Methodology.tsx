@@ -58,10 +58,7 @@ export function Methodology() {
             >
               {pillar.title}
             </h3>
-            <p
-              className="font-body text-[15px] text-muted"
-              style={{ lineHeight: 1.6 }}
-            >
+            <p className="font-body text-[15px] text-muted" style={{ lineHeight: 1.6 }}>
               {pillar.body}
             </p>
           </motion.article>

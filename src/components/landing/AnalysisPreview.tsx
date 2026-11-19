@@ -11,12 +11,7 @@ interface PathwayRowProps {
   scorePercent: number;
 }
 
-function PathwayRow({
-  name,
-  badgeLabel,
-  badgeColor,
-  scorePercent,
-}: PathwayRowProps) {
+function PathwayRow({ name, badgeLabel, badgeColor, scorePercent }: PathwayRowProps) {
   return (
     <div>
       <div className="flex items-center justify-between gap-3">
@@ -29,14 +24,9 @@ function PathwayRow({
         </span>
       </div>
       <div className="h-1 bg-dark-border rounded-full mt-4 overflow-hidden">
-        <div
-          className="h-full bg-cream rounded-full"
-          style={{ width: `${scorePercent}%` }}
-        />
+        <div className="h-full bg-cream rounded-full" style={{ width: `${scorePercent}%` }} />
       </div>
-      <p className="font-mono text-[11px] text-muted mt-2">
-        {scorePercent} / 100
-      </p>
+      <p className="font-mono text-[11px] text-muted mt-2">{scorePercent} / 100</p>
     </div>
   );
 }

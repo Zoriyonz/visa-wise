@@ -35,10 +35,7 @@ export function TrustBar() {
     <section className="bg-surface py-20">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 px-6 md:flex-row md:gap-0 lg:px-10">
         {STATS.map((stat, index) => (
-          <div
-            key={stat.label}
-            className="flex w-full items-center justify-center md:flex-1"
-          >
+          <div key={stat.label} className="flex w-full items-center justify-center md:flex-1">
             <TrustStat
               target={stat.target}
               format={stat.format}
@@ -47,10 +44,7 @@ export function TrustBar() {
               sublabel={stat.sublabel}
             />
             {index < STATS.length - 1 && (
-              <div
-                className="hidden h-16 w-px bg-border md:ml-12 md:block"
-                aria-hidden="true"
-              />
+              <div className="hidden h-16 w-px bg-border md:ml-12 md:block" aria-hidden="true" />
             )}
           </div>
         ))}

@@ -50,10 +50,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section
-      id="faq"
-      className="bg-surface py-20 md:py-[120px] px-6 lg:px-10"
-    >
+    <section id="faq" className="bg-surface py-20 md:py-[120px] px-6 lg:px-10">
       <div className="mx-auto mb-12 max-w-3xl md:mb-16">
         <SectionLabel>FAQ</SectionLabel>
         <h2 className="font-display font-light text-display-lg text-dark mt-6">
@@ -72,9 +69,7 @@ export function FAQ() {
                 className="flex w-full items-center justify-between py-6 text-left"
                 aria-expanded={isOpen}
               >
-                <span className="font-body font-semibold text-[17px] text-dark pr-6">
-                  {faq.q}
-                </span>
+                <span className="font-body font-semibold text-[17px] text-dark pr-6">{faq.q}</span>
                 <Chevron open={isOpen} />
               </button>
               <AnimatePresence initial={false}>

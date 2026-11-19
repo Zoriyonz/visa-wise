@@ -28,7 +28,8 @@ export function TrustStat({ target, format, label, prefix, sublabel }: TrustStat
         className="font-display font-light text-stat text-dark"
         style={{ fontVariantNumeric: "tabular-nums" }}
       >
-        {prefix}{formatValue(value, format)}
+        {prefix}
+        {formatValue(value, format)}
       </span>
       <span
         className="font-body uppercase text-[13px] text-muted mt-3"
@@ -37,10 +38,7 @@ export function TrustStat({ target, format, label, prefix, sublabel }: TrustStat
         {label}
       </span>
       {sublabel && (
-        <span
-          className="font-body text-[11px] text-muted mt-1"
-          style={{ letterSpacing: "0.05em" }}
-        >
+        <span className="font-body text-[11px] text-muted mt-1" style={{ letterSpacing: "0.05em" }}>
           {sublabel}
         </span>
       )}

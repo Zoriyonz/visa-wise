@@ -1,4 +1,4 @@
-import type { PathwayResult } from "@/../lib/eligibility/types";
+import type { PathwayResult } from "@/lib/eligibility/types";
 
 interface IneligiblePathwayCardProps {
   pathway: PathwayResult;
@@ -15,9 +15,7 @@ export function IneligiblePathwayCard({ pathway }: IneligiblePathwayCardProps) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="font-display text-xl text-dark">{pathway.pathway_name}</h3>
-          {topGap && (
-            <p className="font-body text-[14px] text-muted mt-2">{topGap}</p>
-          )}
+          {topGap && <p className="font-body text-[14px] text-muted mt-2">{topGap}</p>}
         </div>
         <span className="font-mono text-[10px] uppercase tracking-wider text-muted border border-border px-2 py-1 rounded shrink-0">
           Not yet eligible

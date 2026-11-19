@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import type { TreeAnswersState } from "@/../lib/intake/questionTreeTypes";
+import type { TreeAnswersState } from "@/lib/intake/questionTreeTypes";
 import { Logo } from "@/components/Logo";
 import { Wordmark } from "@/components/Wordmark";
 
@@ -37,11 +37,7 @@ export default async function ResultsPage({
     <main className="min-h-screen bg-cream py-16 px-6">
       <div className="max-w-3xl mx-auto">
         <header className="flex flex-col items-center text-center mb-16">
-          <Link
-            href="/"
-            aria-label="Visa-Wise home"
-            className="flex items-center gap-3"
-          >
+          <Link href="/" aria-label="Visa-Wise home" className="flex items-center gap-3">
             <Logo size={48} />
             <Wordmark className="!text-[24px]" />
           </Link>

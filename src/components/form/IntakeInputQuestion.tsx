@@ -1,6 +1,6 @@
 "use client";
 
-import type { IntakeQuestion } from "../../../lib/intake/questionTreeTypes";
+import type { IntakeQuestion } from "@/lib/intake/questionTreeTypes";
 
 interface IntakeInputQuestionProps {
   question: IntakeQuestion;
@@ -36,9 +36,7 @@ export function IntakeInputQuestion({
         {question.question}
       </h2>
       {question.help_text && (
-        <p className="font-body italic text-[14px] text-muted mt-2">
-          {question.help_text}
-        </p>
+        <p className="font-body italic text-[14px] text-muted mt-2">{question.help_text}</p>
       )}
       <form
         className="mt-8 space-y-3"

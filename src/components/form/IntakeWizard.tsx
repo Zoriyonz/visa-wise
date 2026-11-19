@@ -12,7 +12,7 @@ import {
   isComplete,
 } from "@/lib/intake-engine";
 import { applyDisplayOverrides } from "@/lib/question-display";
-import type { IntakeQuestion, TreeAnswersState } from "../../../lib/intake/questionTreeTypes";
+import type { IntakeQuestion, TreeAnswersState } from "@/lib/intake/questionTreeTypes";
 
 import { IntakeInputQuestion } from "./IntakeInputQuestion";
 import { ProgressBar } from "./ProgressBar";
@@ -41,8 +41,8 @@ function toQuestionCardProps(question: IntakeQuestion) {
 export function IntakeWizard() {
   const router = useRouter();
   const [answers, setAnswers] = useState<TreeAnswersState>(INITIAL_ANSWERS);
-  const [currentQuestion, setCurrentQuestion] = useState<IntakeQuestion | null>(
-    () => getNextQuestion(INITIAL_ANSWERS),
+  const [currentQuestion, setCurrentQuestion] = useState<IntakeQuestion | null>(() =>
+    getNextQuestion(INITIAL_ANSWERS),
   );
   const [history, setHistory] = useState<string[]>([]);
   const [direction, setDirection] = useState<Direction>(1);

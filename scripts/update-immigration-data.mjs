@@ -63,7 +63,7 @@ async function main() {
 
   console.log("Fetching source URLs...");
   const [expressEntryContent, crsContent, visaBulletinContent] = await Promise.all(
-    SOURCE_URLS.map(fetchUrl)
+    SOURCE_URLS.map(fetchUrl),
   );
 
   const currentMetadata = data.metadata;

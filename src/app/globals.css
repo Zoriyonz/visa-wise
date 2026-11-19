@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #F5F0E8;
-  --color-surface: #EDEAE0;
-  --color-dark: #0D0D0D;
-  --color-dark-surface: #1A1A1A;
-  --color-dark-border: #2A2A2A;
-  --color-muted: #6B6B6B;
-  --color-muted-dark: #9B9B9B;
-  --color-border: #D4CFC4;
-  --color-success: #1A6B3C;
-  --color-error: #C0392B;
-  --color-amber: #B8860B;
+  --color-cream: #f5f0e8;
+  --color-surface: #edeae0;
+  --color-dark: #0d0d0d;
+  --color-dark-surface: #1a1a1a;
+  --color-dark-border: #2a2a2a;
+  --color-muted: #6b6b6b;
+  --color-muted-dark: #9b9b9b;
+  --color-border: #d4cfc4;
+  --color-success: #1a6b3c;
+  --color-error: #c0392b;
+  --color-amber: #b8860b;
 
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -57,21 +57,21 @@ html {
 }
 
 body {
-  background: #F5F0E8;
-  color: #0D0D0D;
+  background: #f5f0e8;
+  color: #0d0d0d;
   line-height: 1.6;
 }
 
 /* Selection — cream on dark */
 ::selection {
-  background: #0D0D0D;
-  color: #F5F0E8;
+  background: #0d0d0d;
+  color: #f5f0e8;
 }
 
 /* Hairline horizontal rule used as section divider when needed */
 .hairline {
   height: 1px;
-  background: #D4CFC4;
+  background: #d4cfc4;
   width: 100%;
 }
 
@@ -81,7 +81,7 @@ body {
   isolation: isolate;
 }
 .noise-overlay::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -97,7 +97,9 @@ body {
 
 /* Reduced motion — kill all transitions, animations, and transforms */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -107,5 +109,7 @@ body {
 
 /* Display heading defaults */
 .font-display {
-  font-feature-settings: 'liga' 1, 'kern' 1;
+  font-feature-settings:
+    "liga" 1,
+    "kern" 1;
 }

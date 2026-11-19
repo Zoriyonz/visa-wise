@@ -1,7 +1,7 @@
 import jsPDF from "jspdf";
 
-import type { AnalysisResult } from "@/../lib/ai";
-import type { EligibilityReport } from "@/../lib/eligibility/types";
+import type { AnalysisResult } from "@/lib/ai";
+import type { EligibilityReport } from "@/lib/eligibility/types";
 
 export interface ReportData {
   id: string;
@@ -44,9 +44,7 @@ export function generateVisaWiseReport(data: ReportData): void {
   doc.text("Immigration Pathway Report", PAGE_W / 2, 128, { align: "center" });
 
   // Top pathway subheading
-  const top =
-    data.eligibility_report.qualifying[0] ??
-    data.eligibility_report.borderline[0];
+  const top = data.eligibility_report.qualifying[0] ?? data.eligibility_report.borderline[0];
   doc.setFont("helvetica", "normal");
   doc.setFontSize(13);
   doc.setTextColor(139, 148, 158);
@@ -63,11 +61,7 @@ export function generateVisaWiseReport(data: ReportData): void {
   doc.setFontSize(8);
   doc.setTextColor(139, 148, 158);
   doc.text(`Generated ${dateStr}`, MARGIN, 278);
-  doc.text(
-    "For informational purposes only. Not legal advice.",
-    MARGIN,
-    284,
-  );
+  doc.text("For informational purposes only. Not legal advice.", MARGIN, 284);
 
   // ── Page 2+: Content ───────────────────────────────────────────────────────
   doc.addPage();
@@ -111,15 +105,8 @@ export function generateVisaWiseReport(data: ReportData): void {
     y += 5;
   }
 
-  function pathwayBlock(
-    name: string,
-    score: number,
-    threshold: number,
-    detail: string | null,
-  ) {
-    const detailLines = detail
-      ? (doc.splitTextToSize(detail, CONTENT_W) as string[])
-      : [];
+  function pathwayBlock(name: string, score: number, threshold: number, detail: string | null) {
+    const detailLines = detail ? (doc.splitTextToSize(detail, CONTENT_W) as string[]) : [];
     checkBreak(10 + detailLines.length * 4.5);
 
     doc.setFont("helvetica", "bold");
@@ -174,8 +161,7 @@ export function generateVisaWiseReport(data: ReportData): void {
   if (data.eligibility_report.borderline.length > 0) {
     sectionTitle("Close Matches");
     for (const p of data.eligibility_report.borderline) {
-      const detail =
-        p.unmet_gaps[0] ?? p.failed_hard_requirements[0] ?? null;
+      const detail = p.unmet_gaps[0] ?? p.failed_hard_requirements[0] ?? null;
       pathwayBlock(p.pathway_name, p.score, p.threshold_qualifies, detail);
     }
     y += 4;

@@ -1,11 +1,21 @@
 import "server-only";
 
-import immigrationData from "@/../data/immigration_pathways.json";
+import immigrationData from "@data/immigration_pathways.json";
 
 import type { EligibilityReport, PathwayResult, UserAnswers } from "./types";
 
-type Requirement = { field: keyof UserAnswers; operator: string; value: unknown; error_message?: string };
-type SoftFactor = { field: keyof UserAnswers; weight: number; favorable_values: unknown[]; points: number };
+type Requirement = {
+  field: keyof UserAnswers;
+  operator: string;
+  value: unknown;
+  error_message?: string;
+};
+type SoftFactor = {
+  field: keyof UserAnswers;
+  weight: number;
+  favorable_values: unknown[];
+  points: number;
+};
 type Gap = { condition: string; gap_title: string };
 type Pathway = {
   id: string;
@@ -30,7 +40,8 @@ function compareValue(left: unknown, operator: string, right: unknown): boolean 
   if (operator === "gt") return Number(left) > Number(right);
   if (operator === "lt") return Number(left) < Number(right);
   if (operator === "in") return Array.isArray(right) && right.includes(left);
-  if (operator === "not_in" || operator === "not in") return Array.isArray(right) && !right.includes(left);
+  if (operator === "not_in" || operator === "not in")
+    return Array.isArray(right) && !right.includes(left);
   return false;
 }
 
@@ -51,14 +62,15 @@ function evaluateGapCondition(condition: string, answers: UserAnswers): boolean 
     const cleaned = rawValue.trim();
     const value =
       cleaned.startsWith("[") && cleaned.endsWith("]")
-        ? JSON.parse(cleaned.replace(/'/g, "\""))
+        ? JSON.parse(cleaned.replace(/'/g, '"'))
         : cleaned.startsWith("'") && cleaned.endsWith("'")
           ? cleaned.slice(1, -1)
           : Number.isNaN(Number(cleaned))
             ? cleaned
             : Number(cleaned);
     const current = compareValue(answers[field as keyof UserAnswers], operator, value);
-    result = result === null ? current : pendingJoin === "and" ? result && current : result || current;
+    result =
+      result === null ? current : pendingJoin === "and" ? result && current : result || current;
   }
   return result ?? false;
 }
@@ -70,7 +82,9 @@ function computePathway(pathway: Pathway, answers: UserAnswers): PathwayResult {
   const hardFailed = failedHard.length > 0;
   const matchedSoft = hardFailed
     ? []
-    : pathway.soft_factors.filter((factor) => factor.favorable_values.includes(answers[factor.field]));
+    : pathway.soft_factors.filter((factor) =>
+        factor.favorable_values.includes(answers[factor.field]),
+      );
   const score = hardFailed
     ? 0
     : Math.round(matchedSoft.reduce((total, factor) => total + factor.points * factor.weight, 0));
@@ -81,7 +95,9 @@ function computePathway(pathway: Pathway, answers: UserAnswers): PathwayResult {
       : score >= pathway.eligibility_score_threshold.close
         ? "close"
         : "not_yet";
-  const unmetGaps = (pathway.gaps ?? []).filter((gap) => evaluateGapCondition(gap.condition, answers)).map((gap) => gap.gap_title);
+  const unmetGaps = (pathway.gaps ?? [])
+    .filter((gap) => evaluateGapCondition(gap.condition, answers))
+    .map((gap) => gap.gap_title);
   return {
     pathway_id: pathway.id,
     pathway_name: pathway.name,
@@ -91,7 +107,9 @@ function computePathway(pathway: Pathway, answers: UserAnswers): PathwayResult {
     threshold_qualifies: pathway.eligibility_score_threshold.qualifies,
     threshold_close: pathway.eligibility_score_threshold.close,
     failed_hard_requirements: failedHard,
-    matched_soft_factors: matchedSoft.map((factor) => `${factor.field} (+${Math.round(factor.points * factor.weight)})`),
+    matched_soft_factors: matchedSoft.map(
+      (factor) => `${factor.field} (+${Math.round(factor.points * factor.weight)})`,
+    ),
     unmet_gaps: unmetGaps,
     action_steps: pathway.action_steps ?? [],
   };
@@ -105,7 +123,9 @@ export function computeEligibility(answers: UserAnswers): EligibilityReport {
   );
   const results = countryRules.pathways.map((pathway) => computePathway(pathway, answers));
   if (countryDisqualifiers.length > 0) {
-    const disqualifierMessages = countryDisqualifiers.map((item) => item.error_message ?? "Country-level disqualifier");
+    const disqualifierMessages = countryDisqualifiers.map(
+      (item) => item.error_message ?? "Country-level disqualifier",
+    );
     const disqualifiedResults = results.map((result) => ({
       ...result,
       status: "not_yet" as const,

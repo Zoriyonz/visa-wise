@@ -2,7 +2,7 @@
 
 import { type FormEvent, useState } from "react";
 
-import type { TreeAnswersState } from "@/../lib/intake/questionTreeTypes";
+import type { TreeAnswersState } from "@/lib/intake/questionTreeTypes";
 
 interface EmailCaptureProps {
   answers: TreeAnswersState;
@@ -53,10 +53,12 @@ export function EmailCapture({ answers }: EmailCaptureProps) {
         Get notified when rules change
       </h2>
       <p className="font-body text-[15px] text-muted text-center mt-3 max-w-md mx-auto">
-        Immigration rules update frequently. We&apos;ll email you if your
-        eligibility changes.
+        Immigration rules update frequently. We&apos;ll email you if your eligibility changes.
       </p>
-      <form onSubmit={handleSubmit} className="mt-6 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="mt-6 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
+      >
         <input
           type="email"
           required
@@ -73,9 +75,7 @@ export function EmailCapture({ answers }: EmailCaptureProps) {
           Save my results
         </button>
       </form>
-      {error && (
-        <p className="font-body text-[13px] text-red-700 text-center mt-3">{error}</p>
-      )}
+      {error && <p className="font-body text-[13px] text-red-700 text-center mt-3">{error}</p>}
     </section>
   );
 }

@@ -24,10 +24,7 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section
-      id="how-it-works"
-      className="bg-cream py-20 md:py-[120px] px-6 lg:px-10"
-    >
+    <section id="how-it-works" className="bg-cream py-20 md:py-[120px] px-6 lg:px-10">
       <div className="mx-auto mb-16 max-w-3xl md:mb-20">
         <SectionLabel>THE PROCESS</SectionLabel>
         <h2 className="font-display font-light text-display-lg text-dark mt-6 max-w-[600px]">
@@ -61,10 +58,7 @@ export function HowItWorks() {
             >
               {step.title}
             </h3>
-            <p
-              className="font-body text-[15px] text-muted"
-              style={{ lineHeight: 1.6 }}
-            >
+            <p className="font-body text-[15px] text-muted" style={{ lineHeight: 1.6 }}>
               {step.body}
             </p>
           </motion.article>

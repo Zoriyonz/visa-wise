@@ -30,10 +30,7 @@ export function DeliverableList() {
             transition={{ duration: 0.5, delay: index * 0.08 }}
             className="flex items-start gap-4"
           >
-            <Checkmark
-              className="w-5 h-5 mt-1 text-cream"
-              stroke="#F5F0E8"
-            />
+            <Checkmark className="w-5 h-5 mt-1 text-cream" stroke="#F5F0E8" />
             <span className="font-body text-[16px] text-cream">{item}</span>
           </motion.li>
         ))}

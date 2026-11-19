@@ -2,10 +2,10 @@ import { randomUUID } from "node:crypto";
 
 import { NextResponse } from "next/server";
 
-import { generateAnalysis } from "@/../lib/ai";
-import { computeEligibility } from "@/../lib/eligibility/engine";
-import type { UserAnswers } from "@/../lib/eligibility/types";
-import { supabase } from "@/../lib/supabase";
+import { generateAnalysis } from "@/lib/ai";
+import { computeEligibility } from "@/lib/eligibility/engine";
+import type { UserAnswers } from "@/lib/eligibility/types";
+import { supabase } from "@/lib/supabase";
 
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 const RATE_LIMIT_MAX = 3;
@@ -28,7 +28,10 @@ export async function POST(request: Request) {
   const forwarded = request.headers.get("x-forwarded-for");
   const ip = forwarded ? forwarded.split(",")[0].trim() : "unknown";
   if (!checkRateLimit(ip)) {
-    return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 },
+    );
   }
   try {
     const raw: unknown = await request.json();
@@ -48,7 +51,11 @@ export async function POST(request: Request) {
       try {
         const { data } = await supabase
           .from("intake_submissions")
-          .insert({ user_answers: answers, analysis_result: analysisResult, eligibility_report: eligibilityReport })
+          .insert({
+            user_answers: answers,
+            analysis_result: analysisResult,
+            eligibility_report: eligibilityReport,
+          })
           .select("id")
           .single();
         id = data?.id ?? fallbackId;
@@ -56,14 +63,26 @@ export async function POST(request: Request) {
         console.error("[analyze] Supabase insert failed — using fallback id:", dbError);
       }
     }
-    return NextResponse.json({ id, summary: analysisResult.summary, result: analysisResult, report: eligibilityReport });
+    return NextResponse.json({
+      id,
+      summary: analysisResult.summary,
+      result: analysisResult,
+      report: eligibilityReport,
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Analysis failed";
     const lower = message.toLowerCase();
-    if (lower.includes("credit balance") || lower.includes("insufficient") || lower.includes("billing")) {
+    if (
+      lower.includes("credit balance") ||
+      lower.includes("insufficient") ||
+      lower.includes("billing")
+    ) {
       return NextResponse.json(
-        { error: "Our analysis service is temporarily unavailable. Please try again in a few minutes." },
-        { status: 402 }
+        {
+          error:
+            "Our analysis service is temporarily unavailable. Please try again in a few minutes.",
+        },
+        { status: 402 },
       );
     }
     return NextResponse.json({ error: message }, { status: 500 });

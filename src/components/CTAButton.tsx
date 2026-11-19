@@ -24,8 +24,7 @@ const SIZE_CLASSES: Record<CTASize, string> = {
 };
 
 const VARIANT_CLASSES: Record<CTAVariant, string> = {
-  dark:
-    "bg-dark text-cream shadow-cta hover:shadow-cta-hover hover:brightness-[0.85] hover:scale-[1.02]",
+  dark: "bg-dark text-cream shadow-cta hover:shadow-cta-hover hover:brightness-[0.85] hover:scale-[1.02]",
   cream: "bg-cream text-dark hover:brightness-[0.95] hover:scale-[1.02]",
 };
 
@@ -44,7 +43,8 @@ export function CTAButton({
   ariaLabel,
 }: CTAButtonProps) {
   const widthClass = fullWidth ? "w-full" : "";
-  const composed = `${BASE_CLASSES} ${SIZE_CLASSES[size]} ${VARIANT_CLASSES[variant]} ${widthClass} ${className}`.trim();
+  const composed =
+    `${BASE_CLASSES} ${SIZE_CLASSES[size]} ${VARIANT_CLASSES[variant]} ${widthClass} ${className}`.trim();
 
   if (href) {
     return (
@@ -55,12 +55,7 @@ export function CTAButton({
   }
 
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={composed}
-      aria-label={ariaLabel}
-    >
+    <button type={type} onClick={onClick} className={composed} aria-label={ariaLabel}>
       {children}
     </button>
   );

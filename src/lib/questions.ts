@@ -79,8 +79,7 @@ export const questions: Question[] = [
     id: "english_level",
     type: "select",
     prompt: "How would you rate your English proficiency?",
-    helpText:
-      "CLB 7 ≈ IELTS 6.0 in all bands. CLB 9 ≈ IELTS 7.0+ in all bands.",
+    helpText: "CLB 7 ≈ IELTS 6.0 in all bands. CLB 9 ≈ IELTS 7.0+ in all bands.",
     options: [
       { value: "none", label: "None or very limited" },
       { value: "basic", label: "Basic (CLB 4–5)" },
@@ -159,8 +158,7 @@ export const questions: Question[] = [
     id: "spouse_status",
     type: "select",
     prompt: "What is your spouse's immigration status?",
-    helpText:
-      "A citizen or permanent-resident spouse opens family sponsorship pathways.",
+    helpText: "A citizen or permanent-resident spouse opens family sponsorship pathways.",
     options: [
       { value: "none", label: "Not applicable" },
       { value: "citizen_ca", label: "Canadian citizen" },

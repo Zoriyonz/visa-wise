@@ -2,7 +2,7 @@ export const runtime = "nodejs";
 
 import Stripe from "stripe";
 
-import { supabase } from "@/../lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 export async function POST(request: Request) {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
@@ -27,10 +27,7 @@ export async function POST(request: Request) {
     const session = event.data.object as Stripe.Checkout.Session;
     const analysisId = session.metadata?.analysisId;
     if (analysisId && supabase) {
-      await supabase
-        .from("intake_submissions")
-        .update({ paid: true })
-        .eq("id", analysisId);
+      await supabase.from("intake_submissions").update({ paid: true }).eq("id", analysisId);
     }
   }
 

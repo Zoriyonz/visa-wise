@@ -47,7 +47,10 @@ export async function generateAnalysis(report: EligibilityReport): Promise<Analy
   if (!content || content.type !== "text") {
     throw new Error("Claude returned no text output.");
   }
-  const raw = content.text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+  const raw = content.text
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/i, "")
+    .trim();
   const parsed = JSON.parse(raw) as AnalysisResult;
   return {
     summary: parsed.summary,

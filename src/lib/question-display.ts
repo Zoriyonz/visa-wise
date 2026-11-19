@@ -1,4 +1,4 @@
-import type { IntakeQuestion, IntakeQuestionOption } from "../../lib/intake/questionTreeTypes";
+import type { IntakeQuestion, IntakeQuestionOption } from "@/lib/intake/questionTreeTypes";
 
 interface DisplayOverride {
   match?: (question: IntakeQuestion) => boolean;
@@ -42,8 +42,7 @@ export function applyDisplayOverrides(question: IntakeQuestion): IntakeQuestion 
   return {
     ...question,
     question: override.question ?? question.question,
-    help_text:
-      override.helpText === null ? "" : (override.helpText ?? question.help_text),
+    help_text: override.helpText === null ? "" : (override.helpText ?? question.help_text),
     options: applyOptionLabels(question.options, override.optionLabels),
   };
 }
@@ -134,8 +133,7 @@ const OVERRIDE_RULES: Record<string, DisplayOverride | DisplayOverride[]> = {
   spouse_status: {
     match: (question) => question.question.includes("Canada"),
     question: "What's your spouse or partner's status in Canada?",
-    helpText:
-      "A Canadian citizen or PR spouse could open the fastest pathway to residency.",
+    helpText: "A Canadian citizen or PR spouse could open the fastest pathway to residency.",
     optionLabels: {
       citizen: "Canadian citizen",
       permanent_resident: "Canadian permanent resident",
@@ -258,8 +256,7 @@ const OVERRIDE_RULES: Record<string, DisplayOverride | DisplayOverride[]> = {
   },
   french_level: {
     question: "How well do you speak French?",
-    helpText:
-      "French speakers get bonus points and access to special draws with lower cutoffs.",
+    helpText: "French speakers get bonus points and access to special draws with lower cutoffs.",
     optionLabels: {
       none: "I don't speak French",
       basic: "Just a few words and phrases",
@@ -300,8 +297,7 @@ const OVERRIDE_RULES: Record<string, DisplayOverride | DisplayOverride[]> = {
   criminal_history: {
     question:
       "Have you ever been arrested, charged, or convicted of a crime — anywhere in the world?",
-    helpText:
-      "This includes minor offences. Many are solvable — but we need to know.",
+    helpText: "This includes minor offences. Many are solvable — but we need to know.",
     optionLabels: {
       true: "Yes",
       false: "No",

@@ -10,11 +10,7 @@ interface QuestionCardProps {
   onAnswer: (value: string) => void;
 }
 
-export function QuestionCard({
-  question,
-  stepLabel,
-  onAnswer,
-}: QuestionCardProps) {
+export function QuestionCard({ question, stepLabel, onAnswer }: QuestionCardProps) {
   return (
     <div>
       <p
@@ -30,9 +26,7 @@ export function QuestionCard({
         {question.prompt}
       </h2>
       {question.helpText && (
-        <p className="font-body italic text-[14px] text-muted mt-2">
-          {question.helpText}
-        </p>
+        <p className="font-body italic text-[14px] text-muted mt-2">{question.helpText}</p>
       )}
       <div className="mt-8 space-y-3">
         {question.options?.map((opt) => (

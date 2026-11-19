@@ -1,9 +1,6 @@
-import questionTreeJson from "../../data/intake_question_tree.json";
-import {
-  evaluateAutoFillCondition,
-  isQuestionVisible,
-} from "../../lib/intake/conditions";
-import type { Condition, IntakeQuestion, TreeAnswersState } from "../../lib/intake/questionTreeTypes";
+import questionTreeJson from "@data/intake_question_tree.json";
+import { evaluateAutoFillCondition, isQuestionVisible } from "@/lib/intake/conditions";
+import type { Condition, IntakeQuestion, TreeAnswersState } from "@/lib/intake/questionTreeTypes";
 
 const BASELINE_QUESTION_IDS = [
   "age",
@@ -76,10 +73,7 @@ function isAnswered(id: string, answers: TreeAnswersState): boolean {
 }
 
 function questionVisibleForEngine(question: IntakeQuestion, answers: TreeAnswersState): boolean {
-  if (
-    question.type === "single_select" &&
-    (!question.options || question.options.length === 0)
-  ) {
+  if (question.type === "single_select" && (!question.options || question.options.length === 0)) {
     return false;
   }
   const ignoreSkipIf = isBaselineQuestionId(question.id);
@@ -89,16 +83,9 @@ function questionVisibleForEngine(question: IntakeQuestion, answers: TreeAnswers
   });
 }
 
-function findVisibleVariant(
-  startIndex: number,
-  answers: TreeAnswersState,
-): IntakeQuestion | null {
+function findVisibleVariant(startIndex: number, answers: TreeAnswersState): IntakeQuestion | null {
   const id = QUESTIONS[startIndex].id;
-  for (
-    let index = startIndex;
-    index < QUESTIONS.length && QUESTIONS[index].id === id;
-    index += 1
-  ) {
+  for (let index = startIndex; index < QUESTIONS.length && QUESTIONS[index].id === id; index += 1) {
     const question = QUESTIONS[index];
     if (questionVisibleForEngine(question, answers)) {
       return question;
@@ -205,7 +192,8 @@ function neutralAnswer(question: IntakeQuestion): string | number | boolean {
 }
 
 function countAnsweredQuestions(answers: TreeAnswersState): number {
-  return Object.keys(answers).filter((id) => QUESTIONS.some((question) => question.id === id)).length;
+  return Object.keys(answers).filter((id) => QUESTIONS.some((question) => question.id === id))
+    .length;
 }
 
 function countVisibleQuestionIds(answers: TreeAnswersState): number {

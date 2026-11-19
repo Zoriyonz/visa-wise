@@ -2,8 +2,8 @@ import { randomUUID } from "node:crypto";
 
 import { NextResponse } from "next/server";
 
-import type { TreeAnswersState } from "@/../lib/intake/questionTreeTypes";
-import { supabase } from "@/../lib/supabase";
+import type { TreeAnswersState } from "@/lib/intake/questionTreeTypes";
+import { supabase } from "@/lib/supabase";
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

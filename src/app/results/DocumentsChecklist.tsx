@@ -8,9 +8,7 @@ export function DocumentsChecklist({ items }: DocumentsChecklistProps) {
   return (
     <section className="mt-12 rounded-[16px] border border-border bg-surface p-8">
       <h2 className="font-display text-[28px] text-dark">Documents & Steps Checklist</h2>
-      <p className="font-body text-[14px] text-muted mt-2">
-        Based on your matching pathways
-      </p>
+      <p className="font-body text-[14px] text-muted mt-2">Based on your matching pathways</p>
       <ul className="mt-6 space-y-4">
         {items.map((item) => (
           <li key={item} className="flex items-start gap-4">

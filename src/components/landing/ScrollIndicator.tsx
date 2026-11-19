@@ -7,10 +7,7 @@ import { useReducedMotion } from "@/lib/use-reduced-motion";
 export function ScrollIndicator() {
   const reduced = useReducedMotion();
   return (
-    <div
-      className="relative h-8 w-px bg-border overflow-hidden"
-      aria-hidden="true"
-    >
+    <div className="relative h-8 w-px bg-border overflow-hidden" aria-hidden="true">
       {!reduced && (
         <motion.div
           className="absolute left-0 top-0 h-3 w-px bg-dark"

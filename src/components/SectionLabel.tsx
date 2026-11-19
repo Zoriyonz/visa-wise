@@ -4,11 +4,7 @@ interface SectionLabelProps {
   className?: string;
 }
 
-export function SectionLabel({
-  children,
-  inverted = false,
-  className = "",
-}: SectionLabelProps) {
+export function SectionLabel({ children, inverted = false, className = "" }: SectionLabelProps) {
   const tone = inverted ? "text-muted-dark" : "text-muted";
   return (
     <span

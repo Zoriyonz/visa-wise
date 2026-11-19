@@ -5,12 +5,7 @@ interface PathwayCardProps {
   borderline?: boolean;
 }
 
-export function PathwayCard({
-  name,
-  score,
-  country,
-  borderline = false,
-}: PathwayCardProps) {
+export function PathwayCard({ name, score, country, borderline = false }: PathwayCardProps) {
   const displayScore = Math.min(score, 100);
   const accent = borderline ? "#B8860B" : "#1A6B3C";
   const label = borderline ? "Close Match" : "Strong Match";
@@ -40,10 +35,7 @@ export function PathwayCard({
       </header>
       <div className="mt-5">
         <div className="h-1 bg-border rounded-full overflow-hidden">
-          <div
-            className="h-full bg-dark rounded-full"
-            style={{ width: `${displayScore}%` }}
-          />
+          <div className="h-full bg-dark rounded-full" style={{ width: `${displayScore}%` }} />
         </div>
         <p className="font-mono text-[11px] text-muted mt-2">{displayScore} / 100</p>
       </div>

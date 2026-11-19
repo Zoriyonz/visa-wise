@@ -3,10 +3,7 @@ interface CheckmarkProps {
   stroke?: string;
 }
 
-export function Checkmark({
-  className = "w-4 h-4",
-  stroke = "currentColor",
-}: CheckmarkProps) {
+export function Checkmark({ className = "w-4 h-4", stroke = "currentColor" }: CheckmarkProps) {
   return (
     <svg
       viewBox="0 0 16 16"

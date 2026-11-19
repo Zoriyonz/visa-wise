@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import { computeEligibility } from "@/../lib/eligibility/engine";
-import type { PathwayResult } from "@/../lib/eligibility/types";
-import { mapTreeAnswersToUserAnswers } from "@/../lib/intake/mapUserAnswers";
-import type { TreeAnswersState } from "@/../lib/intake/questionTreeTypes";
+import { computeEligibility } from "@/lib/eligibility/engine";
+import type { PathwayResult } from "@/lib/eligibility/types";
+import { mapTreeAnswersToUserAnswers } from "@/lib/intake/mapUserAnswers";
+import type { TreeAnswersState } from "@/lib/intake/questionTreeTypes";
 
 import { DocumentsChecklist } from "./DocumentsChecklist";
 import { EmailCapture } from "./EmailCapture";
@@ -24,11 +24,7 @@ function collectTopGaps(pathways: PathwayResult[], limit: number): string[] {
 
 function SectionHeading({ title }: { title: string }) {
   return (
-    <h2
-      className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted mb-4"
-    >
-      {title}
-    </h2>
+    <h2 className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted mb-4">{title}</h2>
   );
 }
 
@@ -92,8 +88,8 @@ export function ResultsDisplay({ answers }: ResultsDisplayProps) {
         <section className="mb-12">
           <header className="mb-8">
             <h2 className="font-display text-[32px] text-dark">
-              We don&apos;t have enough pathway data for your situation yet — check back soon as
-              we expand our coverage.
+              We don&apos;t have enough pathway data for your situation yet — check back soon as we
+              expand our coverage.
             </h2>
             <p className="font-body text-[15px] text-muted mt-3">
               {totalChecked} Canadian pathways analysed

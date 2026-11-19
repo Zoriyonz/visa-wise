@@ -36,8 +36,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Visa-Wise",
-    description:
-      "Know your immigration pathway before you spend thousands on a lawyer.",
+    description: "Know your immigration pathway before you spend thousands on a lawyer.",
     type: "website",
   },
 };
@@ -55,14 +54,8 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   const fontVariables = `${cormorant.variable} ${inter.variable} ${jetbrains.variable}`;
   return (
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
-      className={fontVariables}
-    >
-      <body className="font-body bg-cream text-dark antialiased">
-        {children}
-      </body>
+    <html lang="en" data-scroll-behavior="smooth" className={fontVariables}>
+      <body className="font-body bg-cream text-dark antialiased">{children}</body>
     </html>
   );
 }

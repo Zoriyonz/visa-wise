@@ -43,10 +43,7 @@ export function Hero() {
       <div className="relative mx-auto max-w-[800px] text-center">
         <h1 className="font-display font-light text-dark text-center text-[44px] md:text-[56px] xl:text-display-xl mx-auto leading-[1.05] tracking-[-0.02em]">
           {HEADLINE_LINES.map((line, lineIndex) => (
-            <span
-              key={line}
-              style={{ display: "block", overflow: "hidden" }}
-            >
+            <span key={line} style={{ display: "block", overflow: "hidden" }}>
               <span
                 ref={(node) => {
                   lineRefs.current[lineIndex] = node;
@@ -70,8 +67,8 @@ export function Hero() {
           className="font-body text-muted text-center mt-8 text-[16px] md:text-[18px] max-w-[540px] mx-auto"
           style={{ lineHeight: 1.6 }}
         >
-          Answer a few targeted questions. Our engine checks 40+ Canadian
-          pathways against published IRCC guidelines — not AI guesswork.
+          Answer a few targeted questions. Our engine checks 40+ Canadian pathways against published
+          IRCC guidelines — not AI guesswork.
         </motion.p>
 
         <motion.div
@@ -91,8 +88,8 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 1.3 }}
           className="font-body text-[13px] text-muted text-center mt-6"
         >
-          Used by immigrants navigating Express Entry, PNP, spousal sponsorship,
-          and 40+ Canadian pathways
+          Used by immigrants navigating Express Entry, PNP, spousal sponsorship, and 40+ Canadian
+          pathways
         </motion.p>
       </div>
 
