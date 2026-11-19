@@ -2,17 +2,23 @@
   "name": "visa-wise",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "data:update": "node scripts/update-immigration-data.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.94.0",
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/jetbrains-mono": "^5.2.8",
-    "@fontsource/playfair-display": "^5.2.8",
     "@gsap/react": "^2.1.2",
     "@supabase/supabase-js": "^2.105.3",
     "framer-motion": "^12.38.0",
@@ -26,12 +32,14 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "prettier": "^3.6.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5.7.0",
+    "vitest": "^3.2.0"
   }
 }
